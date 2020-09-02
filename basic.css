@@ -1,0 +1,55 @@
+header {
+	height: 100%;
+	width: 20%;
+	display: block;
+	position: fixed;
+}
+header h1{
+	text-align: center;
+	font-family: Constantia, sans-serif;
+}
+
+#nav {
+	top: 20%;
+	margin-left: 3%;
+	position: fixed;
+}
+#nav ul {
+	font-family: calibri,consolas, sans-serif;
+	list-style-type: none;
+}
+#nav li {
+	font-size: 20px;
+	padding-bottom: 0.6em;
+}
+#nav a:link, #nav a:visited, #nav a:hover {
+	color: #444; 
+    display:block;
+    border-bottom:1px solid #666; 
+    text-decoration:none;
+}
+#text {
+	margin-left: 20%;
+	padding: 8em 10em 2em 5em;
+	font-family: corbel, sans-serif;
+}
+#text a:link, #text a:visited {
+	color:#444;
+	text-decoration:none;
+}
+#text a:hover {
+	font: 'Exo 2';
+	text-decoration:underline;
+	color:#888;
+}
+.heading {
+	font-family:Constantia,verdana, sans-serif;
+	font-style:bold;
+	font-size: 20px;
+	line-height: 2px;
+}
+.subh{
+	font-size: 12px;
+	font-family: 'PT Sans Narrow', Constantia,georgia;
+	text-decoration: underline;
+}

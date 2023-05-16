@@ -1,0 +1,106 @@
+---
+layout: article
+sidebar:
+  nav: "docs-en"
+---
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>nstep Bootstrapping - Git Page - Konark Karna </title>
+<meta charset="utf-8"/>
+<meta name="author" content="Konark Karna">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="Konark Karna, Konark Karna India, Konark Karna Northumbria University, Konark Karna Newcastle, Konark Karna Computer Science,Data Scientist, Machine Learning Engineer, MSc Advanced Computer Science, Northumbria University,
+			       Data Analysis, Data Visualization, Machine Learning, Neural Networks, Deep Learning, Natural Language Processing">
+<link rel="stylesheet" type="text/css" href="basic.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Exo+2:400' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Josefin+Sans&family=Balthazar&family=Ropa+Sans&display=swap" rel="stylesheet"> 
+</head>
+<!--- Adding Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154990580-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154990580-2');
+</script>
+<!-- End of Google Analytics Code -->
+<!-- Adding MathJAX -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script async="true" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=AM_CHTML"> </script>
+<!-- End of MathJAX -->
+
+
+
+<body>
+	<header>
+		<h1><a href="https://k-karna.github.io/">GitLog</a></h1>
+		<section id="nav">
+			<ul>
+				<li><a href="about.html">about</a></li>
+				<li><a href="resume.html">resume</a></li>
+				<li><a href="notes.html">AI note-book</a></li>
+				<li><a href="contact.html">contact</a></li>
+				<li class="b"><a href="https://www.konark.tumblr.com">weblog</a></li>
+			</ul>	
+		</section>
+	</header>
+	<section id="text">
+		<p class="heading">n-Step Bootstrapping</p>
+        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 03<sup>rd</sup> May 2022</p>
+		<section id = "page">
+		<p>With one-step TD or TD(0) the same time step determines how often the action can be changed and the time-interval over which bootstrapping is done.<br>
+		>> Ideally, Bootstrapping would work better if it is over a length of time in which a <i>significant and recongnisable state change</i> has occured. <u>n-step bootstrapping</u> enables it to occur over multiple time steps</p>
+        <p><b>n-step TD prediction</b></p>
+		<p>The methods that use n-step updates are still TD methods because they still change an earlier estimate based on how it differs from a later estimate. However, when these TD methods extends over n-step, it becomes <u>n-step TD methods</u></p>
+		<p>in one-step updates, the target is the first reward plus the discounted estimated value of the next state, here then, we have <u>one-step return</u> as :</p>
+		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t:t+1) &esdot; R_(t+1) + &gamma;V_(t)(S_(t+1))`</p>
+		<p><u>two-step return</u> as :</p>
+		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t:t+2) &esdot; R_(t+1) + &gamma;R_(t+2) +&gamma;^2V_(t+1)(S_(t+2))`</p>
+		<p><u>n-step return</u> as :</p>
+		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t:t+n) &esdot; R_(t+1) + &gamma;R_(t+2) + ...... + &gamma;^(n-1)R_(t+n) + &gamma;^nV_(t+n-1)(S_(t+n))`</p>
+		<p ><i>for all `n,t` such that `n&ge;1` and `0&le;t&lt;T-n`</i>. Psuedo Code for n-step TD is given below:</p>
+		&emsp;&emsp;<img src="images/nstep.png" alt="n-step" width="450" height="300" class="image_full"><br>
+		<p><u>Note :</u> <i>n-step</i> returns for `n&lt;1` involve future rewards and states that are not available at the time of tansition from `t` to `t+1`, but only after seeing `R_(t+n)` and computed `V_(t+n-1)`. 
+		<i>n-step</i> return uses the value function, `V_(t+n-1)` to correct for the missing rewards beyond `R_(t+n)`</p>
+		<p>The natural state-value learning algorithm for using <i>n-step</i> returns is thus :</p>
+		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`V_(t+n)(S_(t))&esdot;V_(t+n-1)(S_(t)) + &alpha;[G_(t:t+n) - V_(t+n-1)(S_(t))]`</p>
+		<p>while the values of all other states remain unchanged: `V_(t+n)(S) = V_(t+n-1)(S)`, for all `s != S_(t)` . This algorithm is called <i>n-step TD</i></p>
+		<p>An important aspect of <i>n-step</i> return is that their expectation is guaranteed to be a better estimate of `V_(&pi;)` than `V_(t+n-1)` is, in a worst-state sense. That is, worst error of the expected n-step return is guaranteed to be less than or equal to `&gamma;^n` times the worst error under `V_(t+n-1)`</p>
+		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`max_{x}[`&Eopf;<sub>`&pi;`</sub> `[G_(t:t+n) | S_(t)=s] - V_(&pi;)(s) &le;&gamma;^n max_{s}[V_(t+n-1)(s)-V_(&pi;)(s)]`</p>
+		<p>This is called <u>error reduction property</u> of n-step returns.</p>
+		<p><b>n-step SARSA</b></p>
+		<p>n-step of version of SARSA is called n-step SARSA. The main idea is to simply switch states for action (state-action pair) and then use `&isin;-greedy` policy. Here, we redefine n-step returns (update targets) in terms of estimated action-values</p>
+		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t:t+n)&esdot; R_(t+1) + &gamma;R_(t+2) + ..... + &gamma;^(n-1)R_(t+n) + &gamma;^n Q_(t+n-1)(S_(t+n),A_(t+n))`
+		</p>
+		<p>with `G_(t:t+n) &esdot; G_(t)` if `t+n &ge;T` . The natural algorithm is then :</p>
+		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q_(t+n)(S_(t), A_(t)) &esdot;Q_(t+n-1)(S_(t),A_(t)) + &alpha;[G_(t:t+n) - Q_(t+n-1)(S_(t),A_(t))]`</p>
+		<p>with the values of all other states remain unchanged: `Q_(t+n)(s,a) = Q_(t+n-1)(s,a)`. Pseudo Code for it is given below<br>
+		&emsp;&emsp;<img src="images/nstepsarsa.png" alt="n-stepSARSA" width="480" height="380" class="image_full">
+		</p>
+
+        
+		</section>
+
+	</section>
+
+	<footer>
+		<p> Follow On: </p>
+		<a href="https://www.linkedin.com/in/k-karna/"><img src="images/in.png" alt="linkedin" width="20" height="20"></a>
+		<a href= "https://www.github.com/k-karna"><img src="images/gt.png" alt="github" width="20" height="20"> </a>
+        <a href= "https://www.twitter.com/konarkkarna"><img src="images/twitter.png" alt="twitter" width="20" height="20"></a>
+		<p>Last Updated: May 03, 2022<br>
+	  </footer>
+</body>
+</html>

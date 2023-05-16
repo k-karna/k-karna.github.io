@@ -1,0 +1,115 @@
+---
+layout: article
+sidebar:
+  nav: "docs-en"
+---
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>Policies and Value Function - Git Page - Konark Karrna</title>
+<meta charset="utf-8"/>
+<meta name="author" content="Konark Karna">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="Reinforcement Learning Policies and Value Function Bellman Equation Optimal Policy Bellman Optimality Equation Konark Karna, Konark Karna India, Konark Karna Northumbria University, Konark Karna Newcastle, Konark Karna Computer Science,Data Scientist, Machine Learning Engineer, MSc Advanced Computer Science, Northumbria University,
+			       Data Analysis, Data Visualization, Machine Learning, Neural Networks, Deep Learning, Natural Language Processing">
+<link rel="stylesheet" type="text/css" href="basic.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Exo+2:400' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Josefin+Sans&family=Balthazar&family=Ropa+Sans&display=swap" rel="stylesheet"> 
+</head>
+<!--- Adding Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154990580-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154990580-2');
+</script>
+<!-- End of Google Analytics Code -->
+<!-- Adding MathJAX -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script async="true" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=AM_CHTML"> </script>
+<!-- End of MathJAX -->
+
+
+<body>
+	<header>
+		<h1><a href="https://k-karna.github.io/">GitLog</a></h1>
+		<section id="nav">
+			<ul>
+				<li><a href="about.html">about</a></li>
+				<li><a href="resume.html">resume</a></li>
+				<li><a href="notes.html">AI note-book</a></li>
+				<li><a href="contact.html">contact</a></li>
+				<li class="b"><a href="https://www.konark.tumblr.com">weblog</a></li>
+			</ul>	
+		</section>
+	</header>
+	<section id="text">
+		<p class="heading">Policies and Value Function</p>
+        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 30<sup>th</sup> Apr 2022</p>
+		<section id = "page">
+        <p><b>Value Function :</b> Function of states (or of state-action pair) that estimate how good it is for the agent to be in the state. <i>('how good' is in terms of future rewards or expected return)</i></p>
+        <p><b>Policy:</b> It is mapping from states to probabilities of selecting each possible actions. If agent is following policy `pi` at time `t` then `pi(a |s)` is the probability that `A_(t)=a` if `S_(t)=s`</p>
+        <p>Value function of a state under a policy `pi`, denoted `v_(pi)(s)` is the expected return when starting in `s` and following `pi` thereafter.<br>
+        For MDP,<br>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`v_(pi)(s)&esdot; `&Eopf;<sub>`pi`</sub>`&#91;G_(t) | S_(t)=s&#93; =`&Eopf;<sub>`pi`</sub>`&#91;\sum_{k=0}^&infin; &gamma;^k R_(t+k+1) | S_(t)=s&#93;` &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ..(1)</p>
+        <p> This eq(1) is <i><b>state-value function for policy `pi`</i></b></p>
+        <p>Similarly, value of taking action `a` in state `s` under a policy `pi`, denoted `q_(pi)(s,a)` as the expected return starting from `s`, can be written as:<br>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`q_(pi)(s,a)=`&Eopf;<sub>`pi`</sub>`&#91;G_(t) | S_(t)=s, A_(t)=a&#93;=`&Eopf;<sub>`pi`</sub>`&#91;\sum_{k=0}^&infin; &gamma;^k R_(t+k+1) | S_(t)=s, A_(t)=a&#93;`&emsp;&emsp;&emsp;...(2)</p>
+        <p>This eq(2) is <i><b>action-value function for policy `pi`</b></i></p>
+        <p>1.if an agent follows policy `pi` and maintains an average of the actual returns that followed each state encountered; then the average will converge to state's value `v_(pi)(s)` as no.of times state is encountered approaches &infin; <br>
+        2.If separate average are kept for each action taken in each state, then average will converge to <i>action-value `q_(pi)(s,a)`</i> These estimation method are called <i>Monte Carlo methods.</i></p>
+        <p>For any policy `pi` and any state `s`, the following consistency condition hold between the value of `s` and the value of its possible successor states:</p>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`v_(pi)(s) &esdot; `&Eopf;<sub>`pi`</sub>`&#91;G_(t) | S_(t)=s&#93;`<br>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`=`&Eopf;<sub>`pi`</sub>`&#91;R_(t+1) + &gamma;G_(t+1) | S_(t)=s&#93;`<br>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`=\sum_{a} pi(a|s)\sum_(s^')\sum_{r}p(s^',r |s,a)&#91;r +&gamma;`&Eopf;<sub>`pi`</sub>`&#91;G_(t+1) | S_(t+1)=s^'&#93;&#93;`<br>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`v_(pi)(s)=\sum_{a} pi(a|s)\sum_(s^',r)p(s^',r |s,a)&#91;r +&gamma;v_(pi)(s^')&#93;`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ........(3)
+        <p>This eq(3) is <i><b>Bellman Equation for `v_(pi)`</b></i>. It expresses a relationship between the value of state and the value of its successor states.</p>
+        <p><b><u>Optimal Policies and Optimal Value Functions :</u></b></p>
+
+        <p>A policy `pi` is defined to be better than or equal to policy `pi`' if its expected return is greater than or equal to that of `pi`' for all states i.e., `pi&ge; pi`' if and only if `v_(pi)(s)&ge;v_(pi)'`<br>
+        Threrfore, <i> Optimal Policy</i> is a policy that is better than or equal to all other policies. However, it can be more than one. We denote all these optimal policies with `pi_(&star;)`, and they all share same state-value function called <i>optimal state-value function, `v_(&star;)`,</i>defined by:<br>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`v_(&star;)(s) = \max_{pi}v_(pi)(s)`<br>
+        <p>Optimal policies also share same <i>optimal action-value function</i>, `q_(&star;)`, defined by:<br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`q_(&star;)(s,a) &esdot;\max_{pi}q_(pi)(s,a)`</p>
+        <p>For the state action pair `(s,a)` this function gives the expected return for taking action `a` in state `s` and thereafter following an optimal policy. Thus, we can write `q_(&star;)` in terms of `v_(&star;)` as follows:<br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`q_(&star;)(s,a) =` &Eopf;`&#91;R_(t+1) + &gamma;v_(&star;)(S_(t+1)) | S_(t)=s,A_(t)=a&#93;`</p>
+        <p><b><u>Bellman Optimality Equation :</b></u></p>
+        <p>It expresses the fact that the value of a state under an optimal policy must equal the expected return for the best action from the state. <i>Bellman Optimality Equation for `v_(&star;)`</i> therefore, is:</p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`v_(&star;)(s)=\max_{a&isin;A(s)}q_(pi&star;)(s,a)`<br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;`=\max_{a}`&Eopf;<sub>`pi_(&star;)`</sub>`&#91;G_(t) |S_(t)=s,A_(t)=a&#93;`<br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;`=\max_{a}`&Eopf;<sub>`pi_(&star;)`</sub>`&#91;R_(t+1) + &gamma;G_(t+1) | S_(t)=s, A_(t)=a&#93;`<br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`v_(&star;)(s)=\max_{a}`&Eopf;`&#91;R_(t+1) +&gamma;v_(&star;)(S_(t+1)) | S_(t)=s,A_(t)=a&#93;`<br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`v_(&star;)(s)=\max_{a}\sum_{s^'r}p(s',r |s,a)&#91;r +&gamma;v_(&star;)(s')&#93;`
+        </p>
+        <p>Similarly, <i>Bellman Optimality Equation for `q_(&star;)`</i>is: <br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`q_(&star;)(s,a)=`&Eopf;`&#91;R_(t+1) +&gamma;\max_{a'}q_(&star;)(s_(t+1),a')| S_(t)=s,A_(t)=a&#93;`<br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`=\sum_{s^'r}p(s',r |s,a)&#91;r + &gamma; \max_{a'}q_(&star;)(s',a')&#93;`
+        </p>
+
+        </p>
+		</section>
+
+	</section>
+
+	<footer>
+		<p> Follow On: </p>
+		<a href="https://www.linkedin.com/in/k-karna/"><img src="images/in.png" alt="linkedin" width="20" height="20"></a>
+		<a href= "https://www.github.com/k-karna"><img src="images/gt.png" alt="github" width="20" height="20"> </a>
+        <a href= "https://www.twitter.com/konarkkarna"><img src="images/twitter.png" alt="twitter" width="20" height="20"></a>
+
+		<p>Last Updated: Apr 30, 2022<br>
+	  </footer>
+</body>
+</html>

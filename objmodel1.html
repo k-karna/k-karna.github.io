@@ -1,0 +1,105 @@
+---
+layout: article
+sidebar:
+  nav: "docs-en"
+---
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>One-stage Detectors | Git Page - Konark Karna</title>
+<meta charset="utf-8"/>
+<meta name="author" content="Konark Karna">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="Convolution Neural Network Convolution Receptive Field Layer Pooling Max pooling Average Pooling Kernel Filter Fully-connected layer ReLU Konark Karna, Konark Karna India, Konark Karna Northumbria University, Konark Karna Newcastle, Konark Karna Computer Science,Data Scientist, Machine Learning Engineer, MSc Advanced Computer Science, Northumbria University,
+			       Data Analysis, Data Visualization, Machine Learning, Neural Networks, Deep Learning, Natural Language Processing">
+<link rel="stylesheet" type="text/css" href="basic.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Exo+2:400' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Josefin+Sans&family=Balthazar&family=Ropa+Sans&display=swap" rel="stylesheet"> 
+</head>
+<!--- Adding Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154990580-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154990580-2');
+</script>
+<!-- End of Google Analytics Code -->
+<!-- Adding MathJAX -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script async="true" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=AM_CHTML"> </script>
+<!-- End of MathJAX -->
+
+
+<body>
+	<header>
+		<h1><a href="https://k-karna.github.io/">GitLog</a></h1>
+		<section id="nav">
+			<ul>
+				<li><a href="about.html">about</a></li>
+				<li><a href="resume.html">resume</a></li>
+				<li><a href="notes.html">AI note-book</a></li>
+				<li><a href="contact.html">contact</a></li>
+				<li class="b"><a href="https://www.konark.tumblr.com">weblog</a></li>
+			</ul>	
+		</section>
+	</header>
+	<section id="text">
+        <p class="heading">Object Detection Models : 2</p>
+        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 12<sup>th</sup> Dec 2022</p>
+		<section id = "page">
+        <h1><a id="yolo">You Only Look Once (YOLO)</a></h1>
+        <p>YOLO is a single convolutional neural network based model, which unlike, <a href="objmodel.html#rc">R-CNN based models</a>, simultaneously, predicts multiple bounding boxes and its class probabilities of those boxes (Redmon et al., 2016).</p>
+        <p>Few advantages are:<br>
+        YOLO is extremely fast. As frame detection doesn't go into a complex pipeline, but taken as a regression problem, YOLO gets to process streaming video real-time with less than 25 milliseconds of latency.<br>
+        It, unlike sliding window and Region-proposal based technique, uses feature extracted from the entire image, to predict all bounding boxes and its classes.<br>
+        YOLO, also, gets to generalize well with unexpected input images/frames - just lags a bit with accuracy.</p>
+		<p><b>Detection :</b></p>
+		<p>YOLO system divides the input image into an `S&times;S` grid, where each grid cells preditcs `B` bounding boxes. <br>
+		Each bounding boxes consists of 5 predictions i.e, `x, y, w, h,` and confidence, where `(x,y)` represent the center of box relative to grid cell. `(w,h)` relative to the whole image.
+		Confidence is given by `Pr(Object) &lowast; IOU_(pred)^(truth)` and represent confidence of box containing object and its accuracy.<br>
+		Each grid cell also predicts `C` class probabilities `Pr(Class_i | Object)` This is probability of grid containing an object - it predict one class probability per grid cell.</p>
+		<p>At test time, both class probabilities gets multiplied 
+		`Pr(Class_i | Object) &lowast;Pr(Object) &lowast; IOU_(pred)^(truth)`, providing information on probability of object class in the box, and how well box fits the object.
+		</p>
+		<p><b>Network Architecture :</b></p>
+		<p>Architecture of YOLO is inspired by googLeNet. It has 24 convolutional layers, followed by 2 Fully-connected layers, and instead of inception blocks used in googLeNet, YOLO use `1&times;1` reduction
+		layer - to reduce the feature space from preceding layers, followed by `3&times;3` convolutional layer. Network architecture is as shown below:<br>
+		&emsp;&emsp;<img src="images/YOLO_arch.png" alt="YOLO Architecture" width="650" height="350" class="image_full"><br>
+		During training `224&times;224` resolution image is used, however during detection, `448&times;448` reolution is used for fine-grained visual information. Similarly, linear activation function is used in the final layer, whereas leaky ReLU is used in the layers prior to it.
+		</p>
+        
+
+        <p><b>References :</b></p>
+		<p>
+		<ul>
+			<li>[1] Redmon, J., Divvala, S., Girshick, R. and Farhadi, A., 2016. You only look once: Unified, real-time object detection. In <i>Proceedings of the IEEE conference on computer vision and pattern recognition </i>(pp. 779-788).</li>
+			<li>[2] </li>
+			<li>[3] </li>
+			<li>[4] </li>
+		</ul>
+		</p>
+		
+		</section>
+	</section>
+
+	<footer>
+		<p> Follow On: </p>
+		<a href="https://www.linkedin.com/in/k-karna/"><img src="images/in.png" alt="linkedin" width="20" height="20"></a>
+		<a href= "https://www.github.com/k-karna"><img src="images/gt.png" alt="github" width="20" height="20"> </a>
+        <a href= "https://www.twitter.com/konarkkarna"><img src="images/twitter.png" alt="twitter" width="20" height="20"></a>
+		<p>Last Updated: Dec 12, 2022<br>
+	  </footer>
+</body>
+</html>

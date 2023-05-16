@@ -1,52 +1,93 @@
 header:
   - titles:
       # @start locale config
-      en      : &EN       Archive
-      en-GB   : *EN
-      en-US   : *EN
-      en-CA   : *EN
-      en-AU   : *EN
-      zh-Hans : &ZH_HANS  归档
-      zh      : *ZH_HANS
-      zh-CN   : *ZH_HANS
-      zh-SG   : *ZH_HANS
-      zh-Hant : &ZH_HANT  歸檔
-      zh-TW   : *ZH_HANT
-      zh-HK   : *ZH_HANT
-      ko      : &KO       아카이브
-      ko-KR   : *KO
-      fr      : &FR       Archives
-      fr-BE   : *FR
-      fr-CA   : *FR
-      fr-CH   : *FR
-      fr-FR   : *FR
-      fr-LU   : *FR
-      tr      : &TR       Arşivdekiler
-      # @end locale config
-    url: /archive.html
-
-  - titles:
-      # @start locale config
       en      : &EN       About
       en-GB   : *EN
       en-US   : *EN
       en-CA   : *EN
       en-AU   : *EN
       zh-Hans : &ZH_HANS  关于
-      zh      : *ZH_HANS
-      zh-CN   : *ZH_HANS
-      zh-SG   : *ZH_HANS
       zh-Hant : &ZH_HANT  關於
       zh-TW   : *ZH_HANT
       zh-HK   : *ZH_HANT
       ko      : &KO       소개
       ko-KR   : *KO
       fr      : &FR       À propos
-      fr-BE   : *FR
-      fr-CA   : *FR
-      fr-CH   : *FR
-      fr-FR   : *FR
       fr-LU   : *FR
       tr      : &TR       Hakkında
       # @end locale config
     url: /about.html
+  - title: AI Notes
+    url: /notes.html
+  - title: Resume
+    url: /resume.html
+  - titles:
+      # @start locale config
+      en      : &EN       Archive
+      en-GB   : *EN
+      tr      : &TR       Arşivdekiler
+      # @end locale config
+    url: /archive.html
+    
+docs-en:
+  - title:      Statistics Essentials
+    children:
+      - title:  ML01 - Basic Statistics
+        url:    /stat.html
+      - title:  ML02 - Probability Distributions
+        url:    /stat1.html
+      - title:  ML03 - Statistical Tests
+        url:    /stat2.html
+
+  - title:      Deep Learning
+    children:
+      - title:  DL00 - The whole idea behind Convolutional Neural Networks (CNNs)
+        url:    /cnn.html
+      - title:  DL01 - Deeper CNN Variants and their Architecture
+        url:    /cnn_dp.html
+      - title:  DL02 - Recurrent Neural Networks(RNNs) and difficulty in training
+        url:    /rnn.html
+      - title:  DL03 - LSTM and GRU
+        url:    /lstm.html
+      - title:  DL04 - Encoder-Decoder, Attention Mechanism and Transformers
+        url:    /encdec.html
+      - title:  DL05 - Generative Adversarial Networks(GANs) and its variants
+        url:    /gan.html
+      - title:  DL06 - AutoEncoder and its variants
+        url:    /autoen.html
+
+  - title:      Computer Vision
+    children:
+      - title:  CV00 - Basics of Image Processing
+        url:    /ip.html
+      - title:  CV01 - Image Transformation
+        url:    /it.html
+      - title:  CV02 - Feature Detection and Matching
+        url:    /fd.html
+      - title:  CV03 - Object Detection Models - Two-stage Detectors (SS, RCNN based)
+        url:    /objmodel.html
+      - title:  CV04 - Object Detection Models - One-stage Dectectors (YOLO, RetinaNet)
+        url:    /objmodel1.html
+      - title:  CV05 - Evaluation Metrics used in CV problems
+        url:    /cvev.html
+
+  - title:      Reinforcement Learning
+    children:
+      - title:  RL00 - Markov Decision Process (MDP)
+        url:    /mdp.html
+      - title:  RL01 - Policies and Value Function
+        url:    /ploval.html
+      - title:  RL02 - Monte Carlo Methods and Control
+        url:    /mc.html
+      - title:  RL03 - Off-Policy via Importance Sampling
+        url:    /off_imp_samp.html
+      - title:  RL04 - TD Learning
+        url:    /td.html
+      - title:  RL05 - SARSA and Q-Learning
+        url:    /sarsaq.html
+      - title:  RL06 - n-step Bootstrapping
+        url:    /nstep.html
+      - title:  RL07 - Deep Q-Learning and Double Q-Learning
+        url:    /deepq.html
+      - title:  RL08 - Policy Gradient Methods & REINFORCE
+        url:    /pgrad.html

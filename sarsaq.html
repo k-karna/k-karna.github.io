@@ -1,0 +1,98 @@
+---
+layout: article
+sidebar:
+  nav: "docs-en"
+---
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>SARSA and Q-Learning - Git Page - Konark Karna</title>
+<meta charset="utf-8"/>
+<meta name="author" content="Konark Karna">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="Reinforcement Learning SARSA and Q-Learning Off-Policy TD Control Expected SARSA Konark Karna, Konark Karna India, Konark Karna Northumbria University, Konark Karna Newcastle, Konark Karna Computer Science,Data Scientist, Machine Learning Engineer, MSc Advanced Computer Science, Northumbria University,
+			       Data Analysis, Data Visualization, Machine Learning, Neural Networks, Deep Learning, Natural Language Processing">
+<link rel="stylesheet" type="text/css" href="basic.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Exo+2:400' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Josefin+Sans&family=Balthazar&family=Ropa+Sans&display=swap" rel="stylesheet"> 
+</head>
+<!--- Adding Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154990580-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154990580-2');
+</script>
+<!-- End of Google Analytics Code -->
+<!-- Adding MathJAX -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script async="true" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=AM_CHTML"> </script>
+<!-- End of MathJAX -->
+
+
+<body>
+	<header>
+		<h1><a href="https://k-karna.github.io/">GitLog</a></h1>
+		<section id="nav">
+			<ul>
+				<li><a href="about.html">about</a></li>
+				<li><a href="resume.html">resume</a></li>
+				<li><a href="notes.html">AI note-book</a></li>
+				<li><a href="contact.html">contact</a></li>
+				<li class="b"><a href="https://www.konark.tumblr.com">weblog</a></li>
+			</ul>	
+		</section>
+	</header>
+	<section id="text">
+		<p class="heading">SARSA and Q-Learning</p>
+        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 27<sup>th</sup> Apr 2022</p>
+		<section id = "page">
+            <p><b>SARSA : On-Policy TD Control</b></p>
+            <p>
+                In any on-policy control method, the first step is to learn an action-value function rather than a state-value function.<br>
+                Therefore, we must estimate `q_(pi)(s,a)` for current behavior policy `pi` and for all states `s` and action `a`.
+                Here, instead we consider transition from state-action pair to state-action pair, and learn the values of state-action pair.<br>
+                The theorem assuring the convergence of state value under TD(0) applies for action values too:</p>
+			<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q(S_(t),A_(t)) &larr;Q(S_(t),A_(t)) + &alpha; &#91;R_(t+1) + &gamma;Q(S_(t+1),A_(t+1)) -Q(S_(t),A_(t))&#93;`</p>
+			<p> The update is done after every transition from one state-action pair to the next, using quintuple of events `(S_(t),A_(t),R_(t+1),S_(t+1),A_(t+1))` => thus the name - <b>SARSA</b></p>
+			<p>Designing on-policy control algorithm based on SARSA is similar to designing any other on-policy method. Here, we continually estimate `q_(pi)` for the behaviour policy `pi`, and simultaneously change `pi` toward greediness with respect to `q_(pi)`. 
+			The convergence properties of the SARSA depends on the nature of the policy's dependence on Q. For example, one could use `&epsilon;-greedy` or `&epsilon;-soft` policies.</p>
+
+			<p><b>Q-Learning : Off-Policy TD Control </b></p>
+			<p>Q-Learning is defined by:</p>
+			<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q(S_(t),A_(t)) &larr;Q(S_(t),A_(t)) + &alpha;&#91;R_(t+1) + &gamma; max_{a}(S_(t+1),a) -Q(S_(t),A_(t))&#93;`</p>
+			<P>
+				Here, the learned action-value function, `Q`, directly approximates the optimal action-value `q_(&star;)`, independent of the policy being followed. The policy still has an effect as it determines which state-action pairs are visited and updated.
+				However, for correct convergence it is required that all pairs continue to be updated.<br>
+				Therefore, as each state-action pairs needs to be visited and updated, independent of the choice of policy being followed, this algorithm enable early convergence.
+			</P>
+			<p><b>Expected SARSA</b></p>
+			<p>It follows the schema of <i>Q-Learning</i>, but with the <i>update rule</i>. Instead of using maximum over state-action pair, it uses expected value, taking into account how likely each action is under the current policy.</p>
+			<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q(S_(t),A_(t)) &larr;Q(S_(t),A_(t)) + &alpha;&#91;R_(t+1) + &gamma;`&Eopf;<sub>&pi;</sub>`&#91;Q(S_(t+1),A_(t+1)) | S_(t+1)&#93;-Q(S_(t),A_(t))&#93;`<br>
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;`&larr;Q(S_(t),A_(t)) + &alpha;&#91;R_(t+1) + &gamma;&sum;_(a)&pi;(a | S_(t+1))Q(S_(t+1),a) - Q(S_(t),A_(t))&#93;`</p>
+			<p> Expected SARSA shows significant improvement over SARSA over a wide range of values over for the step-size parameter `&alpha;`. Expected SARSA has another advantage of having lower variance than seen in SARSA due to random selection of `A_(t+1)`. </p>
+		</section>
+
+	</section>
+
+	<footer>
+		<p> Follow On: </p>
+		<a href="https://www.linkedin.com/in/k-karna/"><img src="images/in.png" alt="linkedin" width="20" height="20"></a>
+		<a href= "https://www.github.com/k-karna"><img src="images/gt.png" alt="github" width="20" height="20"> </a>
+		<a href= "https://www.twitter.com/konarkkarna"><img src="images/twitter.png" alt="twitter" width="20" height="20"></a>
+
+		<p>Last Updated: Apr 27, 2022<br>
+	  </footer>
+</body>
+</html>

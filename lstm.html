@@ -1,0 +1,85 @@
+---
+layout: article
+sidebar:
+  nav: "docs-en"
+---
+<!DOCTYPE HTML>
+<html>
+
+
+<!--- Adding Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154990580-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154990580-2');
+</script>
+<!-- End of Google Analytics Code -->
+<!-- Adding MathJAX -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script async="true" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=AM_CHTML"> </script>
+<!-- End of MathJAX -->
+
+
+<body>
+	
+	<section id="text">
+		<p class="heading">LSTM and GRU</p>
+        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 26<sup>th</sup> Apr 2022</p>
+		<section id = "page">
+        <a href="lstm.html#ls">1. LSTM</a><br>
+        <a href="lstm.html#gr">2. GRU</a>
+        <h1><a id="ls">Long Short-Term Memory(LSTM) </a></h1>
+        <p>LSTM is developed to solve vanishing gradient problem.</p>
+        <img src="images/lstm.PNG" alt="LSTM Architecture" width="550" height="350" class="image_full"><br>
+        
+        <p>
+            In LSTM architecture, a concept of a memory cell has been introduced to act like an accumulator. 
+            After that, it has three inputs (first input is input at that time step, second from previous neuron, and third one from memory cell), and two outputs (one as output, one to be fed back into the system). 
+            Also, it has three gates – input gate, forget gate and output gate. Sigmoid function <i>(σ)</i> is used as gates activation function, whereas hyperbolic tangent <i>(tanh)</i> is used as input and output activation function (Greff et al., 2017).
+            LSTM can be understood better with equation as below:
+        </p>
+        <p>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`c_(t)=f_(t) &odot; c_(t-1) +i_(t) &odot;ctilde`<sub>t</sub><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`ctilde`<sub>t</sub> `=g(W_(c)x_(t) + U_(c)h_(t-1) +b_(c))`<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`h_(t)=o_(t)  &odot; g(c_(t))`
+        </p>
+        <p>where `c_(t)` is current memory cell, `f_(t)` is forget gate, `c_(t-1)` is memory cell at previous time step, `i_(t)` is input gate, `ctilde`<sub>t</sub> is an upcoming memory cell.
+        Also, `g` is element-wise function, `W`, `U`, `b` are weights and bias. `h_(t)` is hidden state at time `t` and `o_(t)` is the output gate.
+        </p>
+        <p>
+            LSTM architecture with RNN is proven to store long-term dependencies and thus to solve the vanishing gradient problem. 
+        </p>
+
+        <h1><a id = "gr">Gated Recurrent Units (GRUs)</a></h1>
+        <p>GRU is another architecture to solve the vanishing gradient problem of RNN.</p>
+        &emsp;&emsp;<img src="images/gru.PNG" alt="GRU Architecture" width="400" height="250" class="image_full"><br>
+        <p>In GRU architecture, there is no memory cell, and it has only two gates called update gate and reset gate. Update gate decides how much the unit updates its information or adds new. 
+        Reset gate decides how much the unit forgets previously computed information (Cho, Chung, Gulcehre and Bengio, 2014).  GRU can be represented with these equations:
+        </p>
+        <p>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`h_(t)= (1-z_(t) &odot; h_(t-1) + z_(t) &odot; htilde`<sub>t</sub>`)`<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`htilde`<sub>t</sub>`= g(W_(h)x_(t) + U_(h)(r_(t) &odot; h_(t-1)) + b_(h)`<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`z_(t) = &sigma;(W_(z)x_(t) + U_(z)h_(t-1) + b_(z))`<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`r_(t) = &sigma;(W_(r)x_(t) + U_(r)h_(t-1)+b_(r))`
+        </p>
+        <p>
+            Notations are similar to LSTM architecture. In addition, we have here `r` as reset gate and `z` as update gate. 
+            GRU is faster to train than LSTM, however, both are equally reliable in solving the vanishing gradient problem to get better predictions.
+        </p>
+        <p><b>References :</b></p>
+        Chung, J., Gulcehre, C., Cho, K. and Bengio, Y., 2014. Empirical evaluation of gated recurrent neural networks on sequence modeling. <i>arXiv preprint arXiv:1412.3555</i>.<br>
+        Greff, K., Srivastava, R., Koutnik, J., Steunebrink, B. and Schmidhuber, J., 2017. LSTM: A Search Space Odyssey. <i>IEEE Transactions on Neural Networks and Learning Systems,</i> 28(10), pp.2222-2232.
+		</section>
+
+	</section>
+
+	
+</body>
+</html>

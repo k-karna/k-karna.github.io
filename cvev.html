@@ -1,0 +1,86 @@
+---
+layout: article
+sidebar:
+  nav: "docs-en"
+---
+<!DOCTYPE HTML>
+<html>
+
+<!--- Adding Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154990580-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154990580-2');
+</script>
+<!-- End of Google Analytics Code -->
+<!-- Adding MathJAX -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script async="true" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=AM_CHTML"> </script>
+<!-- End of MathJAX -->
+
+
+<body>
+
+	<section id="text">
+        <p class="heading">Evaluation Metrics</p>
+        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 06<sup>th</sup> June 2022</p>
+		<section id = "page">
+        <a href="objmodel.html#iou">Intersection over Union (IoU)</a> and Generalized IoU are already discussed. Other few importants are discussed here.
+        <p><b>Top-1 and Top-5 Accuracy :</b></p>
+        In multi-class object detection problems, we get probability of each class for the predicted bounding-boxes.<br> <u>Top-1 Accuracy</u> checks if the top class (one with the highest probability)
+        is same as the target label. <br>
+        <u>Top-5 Accuracy</u> checks if the target label is within the top-5 predicted label/class (ones with highest probabilities)
+        
+        <p><b>Precision and Recall :</b></p>
+
+        <p>In object detection models, we are finding ground-truth bounding-boxes, where each resulting bounding-boxes must be first classified as :<br>
+          <ul>
+          <li>[1]True Positive (TP) : A correct detection of ground-truth bounding-box</li>
+          <li>[2]True Negative (TN) : A correct detection of non-existing spaces</li>
+          <li>[3]False Positive (FP) : An incorrect detection of non-existing spaces. non-existing spaces labeled as bounding-box.</li>
+          <li>[4]False Negative (FN) : An undetected ground-truth bounding-box. bounding-box labeled as non-existing object.</li>
+          </ul></p>
+
+        <p>Precision is the ability of a model to identify only relevant objects, whereas Recall is the ability to find all relevant cases (all ground-truth bounding-boxes).
+        If we have a dataset with `G` ground-truths and a model that outputs `N` detections, of which `S` are correct `(S&le;G)`, then Precision(P) and Recall(R) can be written as : 
+        </p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Precision(P) `= \frac{\sum_(n=1)^S TP_(n)}{\sum_(n=1)^S TP_(n) + \sum_(n=1)^(N-S) FP_(n)}`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...eq(1)</p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Recall(R) `= \frac{\sum_(n=1)^S TP_(n)}{\sum_(n=1)^S TP_(n) + \sum_(n=1)^(G-S) FN_(n)}`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...eq(2)</p>
+
+        <p><b>ROC and AUC :</b></p>
+        <p>An <u>ROC curve or Reciever Operating Characteristics Curve</u> is a graph showing the performance of a classification model at all classification thresholds. This curve plots two parameters : TPR and FPR<br>
+        True Positive Rate (TPR) &equiv; Recall `= \frac{TP}{TP + FN}`, &nbsp; whereas False Positive Rate (FPR) ` = \frac{FP}{FP + TN}`</p>
+        <p>With ROC, lowering the classification threshold classifies more items as positive, and thereby increasing both FP and TP. A typical ROC is shown below : <br>
+        <img src="images/roc.png" alt="ROC" width="640" height="230" class="image_full"></p><br>
+        <u>AUC</u> stands for <u>Area under the ROC Curve</u> It measures the entire 2D area underneath ROC Courve from `(0,0)` to `(1,1)`. AUC ranges in value from `0` to `1`. If a model is `100%` correct, it has AUC of `1.0`, and if `100%` incorrect, then AUC of `0.0`<br>
+        Two key things here :<br>
+        1. AUC is <i>scale-invariant. </i>It measures how well predictions are ranked, and not their absolute values.<br>
+        2. AUC is <i>classification-threshold-invariant .</i> It measures the quality of the models' prediction irrespective of what classfication threshold is chosen.<br>
+        <p><b>Average Precision :</b></p>
+        <p>We know that, a detection is considered positive only when it has IoU higher than certain threshold, &tau;. Otherwise negative. Now, eq(1) and eq(2) can be written as :</p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`P(&tau;) = \frac{TP(&tau;)}{TP(&tau;) + FP(&tau;)}` and `R(&tau;) = \frac{TP(&tau;)}{TP(&tau;) + FN(&tau;)}`</p>
+        <p>In the above presented equations, both `TP(&tau;)` and `FP(&tau;)` are decreasing function of `&tau;`, whereas `FN(&tau;)` is increasing function.<br>
+        Therefore, we can say that :<br>
+        `R(&tau;)` is a decreasing function of `&tau;` , wheras nothing can be said about `P(&tau;)`.<br>
+        Consequently, AUC under  `P(&tau;)&times;R(&tau;)` exhibit zig-zag pattern.</p>
+        <p>>> <u>Average Precision</u> is area under Precision&times;Recall, which has pre-processed to remove zig-zag pattern and monotonic. It is similar to AUC and ranges between 0 and 1.</p>
+        <p>To compute AP, first start collecting pairs of Precision and Recall, with different confidence values `&tau;(k)` where `k = 1,2, .. k`. These Precision can be written as `P(&tau;(k))` and Recall as `R(&tau;(k))`</p>
+        <p>Next, interpolation is applied to turn precision &times; recall into monotonic. Interpolation function, `P_(ip)(R)`, where `R` is a real value contained in the interval `[0,1]` is defined as :</p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`P_(ip)(R) = max_{k | R(&tau;(k))&ge;R} {P(&tau;(k))}` </p>
+        <p>Now, <u>Average Precision (AP)</u> can be calculated by sampling `P_(ip)(R)` at the `N` reference recall values `R_(r)` as :</p>
+        <p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`AP = \sum_{k=0}^k (R_(r)(k) - R_(r)(k+1))P_(ip)(R_(r)(k))`</p>
+        <p><b>Mean Average Precision (mAP) :</b> If we have many classes in the dataset, then mean average precision is just simply the average AP over all classes</p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`mAP = \frac{1}{C}\sum_{i=1}^C AP_(i)`<br>
+        where `AP_(i)` is the AP value for the i^th class and `C` is the total number of classes.</p>
+		</section>
+	</section>
+
+	</body>
+</html>

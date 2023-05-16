@@ -1,0 +1,126 @@
+---
+layout: article
+sidebar:
+  nav: "docs-en"
+---
+<!DOCTYPE HTML>
+<html>
+
+<!--- Adding Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154990580-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154990580-2');
+</script>
+<!-- End of Google Analytics Code -->
+
+<script>
+	MathJax = {
+	  TeX: {
+		inlineMath: [['$', '$'], ['\\(', '\\)']]
+	  }
+	};
+	</script>
+
+<!-- Adding MathJAX -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script async="true" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=AM_CHTML"> </script>
+<!-- End of MathJAX -->
+
+
+<body>
+	
+	<section id="text">
+		<p class="heading">GANs and its variants</p>
+        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 14<sup>th</sup> July 2022</p>
+		<section id = "page">
+		<h1>Generative Adversarial Networks (GANs)</h1>
+		<p>In GAN, we have two models in competition with each other - Generative and Discriminative. The Generative model generates data that looks like the real data whereas the Discriminative model attempts to distinguish generated data from the real data. 
+		This way Discriminative model adapts to the generated data, and in turn the generative model improves its data generation model. (Goodfellow et al., 2014)</p>
+		<p>The Generative model uses implicit density model i.e, it doesn't use maximum likelihood estimation (MLE) or approximation estimation or Markov Chain method, but produces data instances directly from the distribution without any explicit hypothesis, and utilizes the produced data to modify the model ahead.</p>
+		<p>In GANs, to generate data distribution&rarr; `P_(g)` over the data `x`, the generator first draws some parameter `p_(z)z` from noise and represents a mapping function to generated data space `G(z)`. The goal of the generator is to fool the discriminator to classify `G(z)` as true data. </p>
+		<p >The discriminator `D`, in GANs, is a binary classifier to distinguish if the input `x` is coming from the data or from `P_(g)`. `D(x)` represents this probability.</p>
+		<p>We train, `D` to maximize the probability of assigning the correct label to both real data and generated data from `G`. Simultaneously, we train G to minimize log`(1-D(G(z)))`. In other words, `D` and `G` plays a minimax game with value function `V(D,G)`. The objective function of GAN, therefore, is :</p>
+		<p></p>&emsp;&emsp;&emsp;&emsp;&emsp;`min_{G}max_{D}V(D,G) = E_(x~P_(data)(x))[log D(x)] + E_(z~p_(z)(z))[log(1-D(G(z)))]`</p>
+		<p><b>Non-Saturating Game situation :</b></p>
+		<p>It is possible that `G` is poor in early learning and cannot provide sufficient gradient for `G` making samples different from the training data. `D` in this case, can reject generated data with high confidence. To overcome it, we instead train `G` to maximize log`(D(G(z)))` rather than minimize log`(1-D(G(z)))`. The cost for the generator then becomes :</p>
+		<p>&emsp;&emsp;&emsp;&emsp;&emsp;`J^((G)) = E_(z~p_(z)(z))[-log(D(G(z)))]`<br>
+		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`=E_(x~P(g))[-log(D(x))]`</p>
+		<h1>GAN Variants</h1>
+		<p><b>Conditional GAN (cGAN)</b></p>
+		<p>In this variant of GAN, both the generator and discriminator model are conditioned on some extra information `y`. Here `y` can be class label or other modal data. The objective function of cGAN, therefore, becomes :</p>
+		<p>&emsp;&emsp;&emsp;&emsp;&emsp;`min_{G}max_{D}V(D,G) = E_(x~P_(data)(x))[log D(x | y)] + E_(z~p_(z)(z))[log(1-D(G(z | y)))]`</p>
+		<p>The key thing here is that `y` is encoded inside the generator and discriminator before being concatenated with encoded `z` and encoded `x`, this helps enhance cGAN discriminator ability to discriminate. Also, it helps cGAN handle multimodal datasets efficiently.</p>
+		<img src="images/cgan.png" width="400" height="240" class="image_full">
+		<p><b>InfoGAN</b></p>
+		<p>InfoGAN proposed instead of using a single noise vector `z`, we can decompose it into two parts i.e, `z` &rarr; the incompressible noise and `c` &rarr; the latent code.<br> `c` is used to target semantic structure on real data distribution. (Gui J. et al, 2021) The InfoGAN aims to solve :</p>
+		<p style="font-size: 19px;">&emsp;&emsp;&emsp;&emsp;&emsp;`min_{G}max_{D}V_(I)(D,G) = V(D,G) - &lambda; I (c;G(z,c))`</p>
+		<p>where,<br>`V(D,G)` is the original objective function of GAN<br>
+		`G(z,c)` is the generated sample<br>
+		`I` is the mutual information<br>
+		`&lambda;` is the tunable regularization parameter</p>
+		<img src="images/infogan.png" width="400" height="240" class="image_full">
+		<p>To make `c` contain as much as meaningful features of the real samples as possbile, we need to maximize `I(c;G(z,c))`. However, to optimize `I(c;G(z,c))` we need access to the posterior `P(c |x)` where `x` is the real data distribution.
+		But, we can have a lower bound of `I(c;G(z,c))` by defining a auxiliary distribution `Q(c |x)` to approximate `P(c |x)`. The final objective function of InfoGAN, therefore, is :</p>
+		<p style="font-size: 19px;">&emsp;&emsp;&emsp;&emsp;&emsp;`min_{G}max_{D}V_(I)(D,G) = V(D,G) - &lambda;L_(I)(c;Q)`</p>
+		<p>where, `L_(I)(c;Q)` is the lower bound of `I(c;G(z,c))`</p>
+		<p><b>Auxiliary Classifier GAN (AC-GAN)</b></p>
+		<p>AC-GAN contains an auxiliary classifier in its architecture, however it is similar to previously discussed cGAN and InfoGAN. In AC-GAN, each generated sample has a corresponding class label `c` in addition to noise vector `z`, The important thing is here `c` only refers to the class label unlike cGAN and InfoGAN where it can be domain data.(Wang et al, 2021)</p>
+		<img src="images/acgan.png" width="450" height="270" class="image_full">
+		<p>The discriminator in AC-GAN consists of a discriminator `D` (distinguishes real and fake samples) and a classifier `Q` (classifies real and fake samples), while sharing all weights except the last layer like InfoGAN. The loss function of AC-GAN can be constructed by considering the discriminator and classifier, as written below :</p>
+		<p>&emsp;&emsp;&emsp;`L_(S) = `&Eopf;<sub>`x~p_(r)`</sub>`log[D(x | c)] + `&Eopf;<sub>`z~p_(z)`</sub>`log[1-D(G(z | c))]`</p>
+		<p>&emsp;&emsp;&emsp;`L_(C) = `&Eopf;<sub>`x~p_(r)`</sub>`log[Q(x | c)] + `&Eopf;<sub>`z~p_(z)`</sub>`log[Q(G(z | c))]`</p>
+		<p>where `D` is trained to maximizing `L_(S) + L_(C)` and `G` is trained on maximizing `L_(C) - L_(S)`</p>
+		<p><b>Bi-Directional GAN (BiGAN)</b></p>
+		<p>BiGAN introduced the idea of learning from the inverse mapping i.e, by projecting data back into the latent space.
+		The overall architecture of BiGAN consists of an Encoder `(E)`, a generator `(G)` and a discriminator `(D)`. </p>
+		<img src="images/bigan.png" width="440" height="250" class="image_full">
+		<p>Here, `E` encodes real sample data into `E(x)` and `G` decodes `z` into `G(z)`, while `D` aims to evaluate the difference between each pair of `(E(x),x)` and `(G(z),z)`. 
+		The encoder and decoder must learn to invert one another to fool the discriminator.</p>
+		<p><b>Laplacian Pyramid of Adversarial Networks (LAPGAN)</b></p>
+		<p>LAPGAN is proposed to generate high resolution images from the lower-resolution input images. But let's first understand the Laplacian Pyramid.</p>
+		<p><b>Laplacian Pyramid (LP) :</b> <br>It is used to compact image representation, and consists of two basic steps :<br>
+		1. Covolve over the original image `I_(0)` with a lowpass filter `&upsilon;`&nbsp;(e.g, Gaussian filter) and subsample it by 2 to create a reduced lowpass version of the image `I_(1)`<br>
+		2. Upsample `I_(1)` by `u(&sdot;)` which inserts zeros in between each row and column and interpolating the missing values by convolving it with the same filter, `&upsilon;`, &nbsp;to create an expanded lowpass
+		image `u(I_(1))` which then gets subtracted pixel-by-pixel from the original image `I_(0)` to give the detail image - `h_(0)` where `h_(0) = I_(0) - u(I_(1))` (Pradham, Younan and King, 2008)</p>
+		<p>In order to compress now, `h_(0)` and `I_(1)` are encoded, because firstly, `I_(1)` is the lowpass version of the original image, and `h_(0)` is largely decorrelated. <br>
+		This step then gets performed recursively on the lowpass and subsampled image `I_(1)` a maximum number of `k` times if the original image is of `2^k&times;2^k`. 
+		This process then provides a number of detail images `h_(0),h_(1),..,h_(k)` and the lowpass image `I_(k)`.</p>
+		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`h_(k) = I_(k) - u(I_(k+1))`</p>
+		These recursively obtained image in the series is smaller in size by a factor of four compared to the previous image and its center frequency reduced by an octave.</p>
+		<p>We, however with <u>inverse transform</u> or <u>recurrence</u> can obtain the original image, `I_(0)` from the `k` detail images `h_(0), h_(1)...,h_(k)` and the lowpass image `I_(k)` with following steps :<br>
+		1. `I_(k)` is upsampled by `u(&sdot;)` which inserts zeros between the sample values and interpolating the missing values by convolving it with the filter `&upsilon;` to obtain the image `u(I_(k))`<br>
+		2. The image `u(I)` is added to the lowest level detail image `h_(k)` to obtain the approximation image at the next upper level: </p>
+		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`I_(k) = h_(k) + u(I_(k+1))`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;..eq(1)</p>
+		3. Step 1 and step 2 are repeated on the detailed images `h_(0),h_(1),...,h_(k-1)` to obtain the original image.</p>
+		<p><b>LAPGAN Architecture</b></p>
+		<p>LAPGAN combines conditional GAN (cGAN) with Laplacian Pyramid representation with a sampling procedure. Here, we first generate a set of generative convnet models i.e,`{G_(0),...,G_(k)}`.<br>
+		Each of these convnet models then captures the distribution of coefficients `h_(k)` for natural images at a different level of the Laplacian Pyramid. This is the sampling procedure earlier mentioned, and it is similar to <i>inverse transform</i> as in eq(1), except that the generative models are used here to produce `h_(k)`<br>
+		However, at each level of Laplacian Pyramid, these `h_(k)` are produced with stochastic choices <i>(with equal probability)</i> to either construct the `h_(k)` using standard procedure or generate them using `G_(k)`</p>
+		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`h_(k)^&tilde; = G_(k)(z_(k),u(I_(k+1)))`</p>
+		<p>Then, eq(1) can be re-written as :<br>
+		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`I_(k)^&tilde; = h_(k)^&tilde; + u(I_(k+1)^&tilde;)`</p>
+		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`=G_(k)(z_(k)u(I_(k+1))) + u(I_(k+1)^&tilde;)`</p>
+		<p>Recurrence starts by setting `I_(k+1)^&tilde; = 0` and using the model at the final level `G_(k)` to generate a residual image `I_(k)^&tilde;` using noise vector `z_(k)`, and it is repeated at all levels except the final.<br>
+		<img src="images/lapgan.png" width="800" height="300" alt="lapgan" class="image_full"><br>
+		The key thing to note here, is `G_(k)` is just the generative part of GAN here, we use `D_(k)` for discriminator that takes `h_(k)` or `h_(k)^&tilde;` along with the lowpass image `I_(k)`, explicitly added before the first convolutional layer, to predict if the image was real or generated. </p>
+	
+		<p><b>References :</b></p>
+		[1] Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., Courville, A. and Bengio, Y., 2014. Generative adversarial nets. <i>Advances in neural information processing systems,</i> 27.<br>
+		[2] Gui, J., Sun, Z., Wen, Y., Tao, D. and Ye, J., 2021. A review on generative adversarial networks: Algorithms, theory, and applications.<i> IEEE Transactions on Knowledge and Data Engineering.</i><br>
+		[3] Wang, Z., She, Q. and Ward, T.E., 2021. Generative adversarial networks in computer vision: A survey and taxonomy. <i>ACM Computing Surveys (CSUR), 54(2),</i> pp.1-38.<br>
+		[4] Pradham, P., Younan, N. and King, R., 2008. Concepts of image fusion in remote sensing applications. <i>Image Fusion</i>, pp.393-428
+	</section>
+
+	</section>
+
+
+</body>
+</html>

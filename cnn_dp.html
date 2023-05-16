@@ -1,0 +1,139 @@
+---
+layout: article
+sidebar:
+  nav: "docs-en"
+---
+
+<!DOCTYPE HTML>
+<html>
+
+
+<!--- Adding Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154990580-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154990580-2');
+</script>
+<!-- End of Google Analytics Code -->
+<!-- Adding MathJAX -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script async="true" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=AM_CHTML"> </script>
+<!-- End of MathJAX -->
+
+
+<body>
+	
+	<section id="text">
+        <p class="heading">Deeper CNN Variants and their Architecture</p>
+        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 13<sup>th</sup> May 2022</p>
+		  <section id = "page">
+        <a href="cnn_dp.html#an">1. AlexNet</a>, <a href="cnn_dp.html#vgg">2. VGG</a>, concept of <a href="cnn_dp.html#batch">Batch Normalization</a>, <a href="cnn_dp.html#rn">3. ResNet</a> and <a href="cnn_dp.html#dn">DenseNet</a><br>
+        <h1><a id="an">AlexNet</a></h1>
+        <p>
+        AlexNet is one of the earliest versions of Deeper CNN and won the 2012 ImageNet challenge. It was first to be deployed with two GPUs using cross-GPU parallelization, where both get to read from and write to another memory directly.<br>
+        Architecture of AlexNet consists of 8 learned layers - 5 convolutional layers, some of which are followed by pooling layer and 3 fully-connected layers, and for activation function, ReLU is preferred over <i>tanh</i> and <i>sigmoid</i> for being faster to train. </p>
+        <p>The first convolutional layer filters images with 96 kernels of shape `11 &times; 11 &times;3`. Second convolutional layers, afterwards, take the input <i>(response normalized with ReLU + max-pooled)</i> with 256 kernels of size `5 &times; 5 &times;48`. 
+        Third convolutional layer has 384 kernels of `3 &times;3&times;256` size. Fourth layer has 384 kernels of `3 &times;3&times;192` size, and lastly the fifth convolutional layer has 256 kernels of `3&times;3&times;192` size. [Krizhevsky et al., 2012].
+        Architecture of AlexNet can be seen in the image below :<br>
+        <img src="images/alexnet.png" alt="AlexNet" width="720" height="230" class="image_full"><br>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Source: [Krizhevsky et al., 2012]
+        <p>In AlexNet, to reduce test error, overlapping pooling is used i.e., `s &lt;z` (stride is less than pooling size) - `3&times;3` max pooling is used with stride of `2` wherever it was implemented after convolutional layers.
+        All three fully-connected layers, in AlexNet afterwards, each have 4096 neurons and to reduce overfitting, <i>dropout</i> is used with the first two <i>fully-connected</i> layers.</p>
+        <h1><a id="vgg">VGG</a></h1>
+        <p>
+        VGG is developed after AlexNet's success at Visual Geometry Group (VGG) Oxford University. 
+        It deployed more depth to the ConvNet architecture by adding more convolutional layers which has been made possible by using small `3&times;3` kernels in all layers.
+        </p>
+        <p>In essence, we can say VGG network consists of VGG Blocks where each block has convolutional layers with padding to maintain the resolution, a non-linearity - ReLU, and a pooling layer - max pooling.
+        In VGG, input image of `224&times;224` is first pre-processed by subtracting the mean of RGB values from each pixel in the image, and then passed into the stack of convolutional layers followed by max-pooled layers forming a block.</p>
+        <p>All different architectures tried and tested in original paper have 5 blocks in them where each convolutional layer has padding of 1 and all hidden layers equipped with ReLU function. In one of the architecture, VGG-11, Local Response Normalization (LRN) is used, and 
+        in one proposed VGG-16, convolutional filters of the last convolutional layers of later 3 blocks are of size `1&times;1`. Three major types of proposed architecture can be illustrated as below:<br>
+        <img src="images/s3.png" alt="vgg" widht="550" height="850" class="image_full">
+        </p>
+        <p>
+        VGG blocks, afterwards followed by three fully-connected layers with 4096 neurons in two of them, and 1000 for each different class in the last fully-connected layer, before SoftMax. VGG networks ran on four nvidia Titan GPUs and took 2-3 weeks for single training. However, for its simplicity, it is still widely used as pre-trained ConvNet model.
+        </p>
+        <h1><a id="batch">Batch Normalization</a></h1>
+        <p>
+        Batch Normalization is to solve the problem of <i>internal covariate shift</i> while training deep neural networks.</p>
+        <p>Internal covariate shift is one of the subset of dataset shift that measures the data quality for the performance of network.
+        Dataset Shift can be said to have three different kinds i.e,<br> <u>Covariate shift</u> -- Change in the independent variables, <br><u>Prior probability shift</u> -- Change in the target variables, and<br> <u>Concept Shift</u> -- change in the relationship between the independent and target variables. 
+        </p>
+        <p>
+        Internal covariate shift, thus, can be said as the change in the distribution of network activations due to the change in network parameters during training. One of the simplest way to solve it, is by using whitening -- i.e, linearly transforming the inputs to have zero means and unit variances, and decorrelated.<br>
+        However, in whitening, network does not always produces the same set of activations, but scales it up as the gradient descent step does not account for normalization. 
+        </p>
+        <p><u>Batch-Normalization</u> solves this problem with whitening using two essentials updates :<br>
+        <p>1. Instead of whitening input and output layers feature jointly, it normalizes them separately by making it have the mean of zero and variance of 1. For a layer with d-dimension input `x = (x^(1),..,x^(d))`, each dimension is normalized as :</p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`x&#770;^((k)) = \frac{x^((k)) - E[x^((k))]}{\sqrt(Var[x^((k))])}`</p>
+        <p>2. By introducing a pair of parameters to make sure transformation inserted in the network can represent the identity transform `&gamma;^((k))` and `&beta;^((k))`, which scale and shift the normalized value </p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`y^((k)) = &gamma;^((k))x&#770;^((k)) +  &beta;^((k))`</p>
+        <p>These paramters are learned along model parameters and restore the representation power of the network</p>
+        <p><u>Batch-Normalization Transform : </u> &nbsp;If we have a mini-batch `B` of size `m` i.e, `B = {x_(1), ... ,m}`, with normalized values be `x&#770;_(1) ... m` and their transformation be `y_(1)... m`, then Batch-Normalization Transform is as `BN_(&gamma;,&beta;) : x_(1)...m &rarr;y_(1)..m`</p>
+        <p>BN Algorithm can be written as :</p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&mu;_(B)&larr; \frac{1}{m}\sum_(i=1)^m&nbsp;x_(i)`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//mini-batch mean</p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&sigma;_(B)^2 &larr; \frac{1}{m}\sum_(i=1)^m&nbsp;(x_(i) - &mu;_(B))^2`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//mini-batch variance</p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`x&#770;_(i) &larr; \frac{x_(i) - &mu;_(B)}{\sqrt(&sigma;_(B)^2 + &isin;)}`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//normalize</p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`BN_(&gamma;,&beta;)(x_(i))&equiv;y_(i) &larr; &gamma;x&#770;_(i) + &beta;`&emsp;&emsp;&emsp;</p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;`=&gamma; &odot;\frac{x_(i) - &mu;_(B)}{\sqrt(&sigma;_(B)^2 + &isin;)} + &beta;`&emsp;&emsp;&emsp;//scale and shift</p>
+        <p>Here, small constant `&isin; &gt; 0` is added to ensure no division by made by `0`. Also, `&mu;_(B)` and `&sigma;_(B)^2` counteracts scaling with noisy mean and variance, which rather leads to faster training and reduce overfitting than being a problem. Also, suitable mini-batch size for Batch-Normalization is `50 ~ 100`.</p>
+        <h1><a id="rn">ResNet</a></h1>
+        <p>From the previous two discussions, it appears that <i>learning better network is as easy as stacking layers</i>, but it can lead to the problem of vanishing/exploding gradients which impedes convergence as the number of stacked layers start to increase manifold. Batch Normalization is a way to resolve it [Ioffe & Szegedy, 2015].<br>
+        However, when deep networks are able to start converging after batch normalization again, a new problem of <i>degradation</i> starts to emerge. Degradation is when with the increase of depth, network accuracy gets saturated and then sharply degrades.</p>
+        <p>ResNet or <i>Deep Residual Learning</i> is proposed to resolve this degradation problem. It introduced the idea of <i>Residual learning block</i> and <i>shortcut connections</i>.<br> Consider we have `x` inputs to the first layer and &Hfr;`(x)` as underlying mapping. 
+        Assuming input and output are of same dimensions, ResNet let stacked layers not directly learn underlying mapping &Hfr;`(x)` but a residual mapping &#401;`(x) &colone;`&Hfr;`(x) - x`. 
+        The original function then becomes `&#401;(x) + x`, and if <i>identity mapping</i> were optimal, it is easier to push residual to zero than to fit an identity mapping by a stack of layers.
+        Below given image is an example of <i>Residual block</i>
+        </p>
+        <img src="images/resnet.png" alt="resnet building block" width="200" height="160" class="image_full"><br>
+        <p>
+        In ResNet, we apply residual learning to each stacked layers, and if `x` and `y` are the input and output vectors of the layer considered, a residual block can be defined as:
+        </p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`y = &#401;(x, {W_(i)}) + x`</p>
+        <p>where function `&#401;(x, {W_(i)})` represents residual mapping to be learned.<br> In general, each residual block has two `3&times;3` convolutional layers with a <u>stride of 1</u>, and each convolutional layer is <u>without a pooling layer</u> but followed by a <u>batch normalization (batch-norm)</u> and a <u>ReLU activation function</u>. <br>
+        Afterwards, shortcut connection add the input directly before the final <i>ReLU</i> activation function.
+        It requires `x` and `&#401;` to be of same dimension. If `x` and `&#401;` are not of same dimension, we can perform a linear projection `W_(s)` by the
+        shortcut connections to match the dimensions : `y = &#401;(x, {W_(i)}) + w_(s)x`</p>
+        Overall, ResNet architecture can be seen as below :<br>
+        <img src="images/resnet_overall.png" alt="resnet_overall" width="550" height="350" class="image_full"><br>
+        <p>Key things to note: 1. Adding a shortcut connection doesn't add additional parameters, so not adding to computational complexity. 2. <u>Dropout function </u>is not essential to ResNet architecture 3. Even with higher (~10 times) depth, ResNet requires less computational power than VGG-16/VGG-19</p>
+
+        <h1><a id="dn">DenseNet</a></h1>
+        <p>
+        DenseNet is proposed to ensure maximum information flow between layers in the network by connecting all layers (with matching feature-map sizes) directly with each other.
+        Here, each layer obtains additional iputs from all preceding layers and passes on its own feature-maps to all subsequent layers.</p>
+        <p>
+        Contrary to ResNet, in DenseNet features are combined by concatenation before they are passed into a layer. In any `L`-layer network, each `l^(th)` layer has `l` inputs, consisting of the feature-maps of all preceding convolutional blocks, and its own feature-maps are getting passed onto all `L-l` subsequent layers.
+        This introduces `\frac{L(L+1)}{2}` connections in any `L`-layer network (Huang et al., 2017). Below given image is to illustrate DenseNet :<br>
+        <img src="images/DenseNet.png" alt="DenseNet" width="600" height="350" class="image_full">
+        </p>
+        <p><u><b>DenseNet Architecture :</u></b> If we have a single image `x_(0)`, then in DenseNet of `L`-layers, it will go through non-linear transformation `H_(l)(&sdot;)` in each layer. Here, `H_(l)(&sdot;)` is a composite function of <u>Batch-Normalization(BN)</u>, followed by a <u>Rectified Linear Unit(ReLU)</u> and a <u>3 &times; 3 convolutional kernel</u>
+        </p>
+        <p>Unlike conventional ConvNet that has layer transition, if `l` indexes the layer, as : `x_(l) = H_(l)(x_(l-1))` or ResNet that has `x_(l) = H_(l)(x_(l-1)) + x_(l-1)` where identity function and the output of `H_(l)` are combined by summation, here each `l^(th)` layer recieves the feature-maps from all the preceding layers `x_(0),...,x_(l-1)` as input:</p>
+        <p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`x_(l) = H_(l)([x_(0)`,&nbsp;`x_(1)`&nbsp;,&nbsp;...&nbsp;,&nbsp;`x_(l-1)])`</p>
+        <p>where `[x_(0),x_(1),...,x_(l-1)]` refers to the concatenation of the feature-maps produced in layers  `0,...,l-1`. Importantly, the concatenation in the above equation is not possible if the size of feature-maps are different, therefore we implement down-sampling layers, as in other ConvNet architectures, to change the size of feature-maps.<br>
+        Network is divided into multiple densely connected <u>dense blocks</u> and layers between these blocks are named as <u> transition layers</u> as shown in the image below :<br>
+        <img src="images/dblock.png" width="750" height="150" alt="Dense Block" class="image_full">
+        Each transition layers consists of <u>Batch-Normalization</u>, an `1&times;1` conventional layer and followed by `2&times;2` average pooling layer. </p>
+        <p>Last thing we need to know is - <u>Growth-rate .</u> If each function `H_(l)` produces `k` feature-maps, then each `l^(th)` layer has `k_(0) + k &times;(l-1)` input feature-maps, where `k_(0)` is the number of channels in the input layer. This hyper-parameter is referred as <i>Growth-rate</i> of the network, and notedly DenseNet can work effectively with growth-rate as low as `k = 12`</p>
+
+        <p><b>References :</b></p>
+        Krizhevsky, A., Sutskever, I., & Hinton, G. E. (2012). Imagenet classification with deep convolutional neural networks. 
+        <i>Advances in neural information processing systems</i> (pp. 1097–1105).<br>
+        Simonyan, K., & Zisserman, A. (2014). Very deep convolutional networks for large-scale image recognition. <i>arXiv preprint arXiv:1409.1556</i>.<br>
+        Ioffe, S., & Szegedy, C. (2015). Batch normalization: accelerating deep network training by reducing internal covariate shift. <i>arXiv preprint arXiv:1502.03167.</i><br>
+        Huang, G., Liu, Z., Van Der Maaten, L., & Weinberger, K. Q. (2017). Densely connected convolutional networks. <i>Proceedings of the IEEE conference on computer vision and pattern recognition </i>(pp. 4700–4708).
+
+		</section>
+	</section>
+
+
+</body>
+</html>

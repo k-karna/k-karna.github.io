@@ -30,10 +30,10 @@ sidebar:
 
 <body>
 
-	<section id="text">
+
 		<p class="heading">Policy Gradient Methods</p>
         <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 14<sup>th</sup> July 2022</p>
-		<section id = "page">
+	
         <p>Unlike other methods where we first learn the <i>value of actions</i> and then select action based on estimated <i>action-values</i>, here in Policy Gradient Methods, we use <i>parameterized policy</i> that can select actions without consulting a value function.</p>
         <p>If we use `&theta; &isin; &Ropf;^d` for the policy's parameter vector, and then probability for the action `a` is taken at time `t` given environment is in state `s` with parameter `&theta;` is given by :</p>
         <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&pi;(a | s,&theta;) = Pr{A_(t) = a | S_(t) = s, &theta;_(t) = &theta;}`</p>
@@ -90,10 +90,6 @@ sidebar:
 		<p>The policy gradient theorem with baseline in eq(5) can be used to derive an update rule using steps as in earlier discussion. New version of REINFORCE with update rule that includes baseline is as follows :</p>
 		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&theta;_(t+1)&esdot;+&alpha;(G_(t)-b(S_(t)))\frac{&nabla;&pi;(A_(t) | S_(t),&theta;_(t))}{&pi;(A_(t) | S_(t),&theta;_(t))}`</p>
 
-        
-		</section>
-
-	</section>
 
 
 </body>

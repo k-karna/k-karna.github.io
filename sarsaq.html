@@ -43,10 +43,10 @@ sidebar:
 
 <body>
 	
-	<section id="text">
+
 		<p class="heading">SARSA and Q-Learning</p>
         <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 27<sup>th</sup> Apr 2022</p>
-		<section id = "page">
+
             <p><b>SARSA : On-Policy TD Control</b></p>
             <p>
                 In any on-policy control method, the first step is to learn an action-value function rather than a state-value function.<br>
@@ -71,8 +71,6 @@ sidebar:
 			<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q(S_(t),A_(t)) &larr;Q(S_(t),A_(t)) + &alpha;&#91;R_(t+1) + &gamma;`&Eopf;<sub>&pi;</sub>`&#91;Q(S_(t+1),A_(t+1)) | S_(t+1)&#93;-Q(S_(t),A_(t))&#93;`<br>
 				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;`&larr;Q(S_(t),A_(t)) + &alpha;&#91;R_(t+1) + &gamma;&sum;_(a)&pi;(a | S_(t+1))Q(S_(t+1),a) - Q(S_(t),A_(t))&#93;`</p>
 			<p> Expected SARSA shows significant improvement over SARSA over a wide range of values over for the step-size parameter `&alpha;`. Expected SARSA has another advantage of having lower variance than seen in SARSA due to random selection of `A_(t+1)`. </p>
-		</section>
 
-	</section>
 </body>
 </html>

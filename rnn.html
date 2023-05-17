@@ -40,12 +40,12 @@ sidebar:
             <h1><a id="ar">RNN Architecture</a></h1>
 				<p>Architecture of RNNs makes it suitable to solve those problems. In RNNs, firstly, hidden layers are grouped together to form a node. 
                 Afterwards, to predict an output value, each node at its time step, not only take input at that time step, but also from the node at previous time step.</p>
-                <img src="images/RNN arch.png" alt="RNN Architecture" width="520" height="250" class="image_full">
+                <img src="assets/img/RNN arch.png" alt="RNN Architecture" width="520" height="250" class="image_full">
             <p>From the left side of image, we can understand that, both <b>H1</b>, and <b>H2</b> hidden unit of neural network gets grouped together and hidden under node <b><i>s</i></b> in RNN with value <b><i>s<sub>t</sub></i></b> at time <b><i>t</i></b> (LeCun, Bengio and Hinton, 2015). <br>
 				Also, we know that, each node in RNNs gets output from other neurons at the previous time step. It can be observed in the right side of the image that any output  <b><i>o<sub>(t+1)</sub></i></b>  at any time step <b><i>t+1</i></b>  is influenced by all input values <b><i>x<sub>t</sub> , x<sub>(t-1)</sub> .. x<sub>(t-n)</sub></i></b> from previous time steps. 
                 <br>However, it is not enforced to follow the architecture on the right side, rigorously. 
                 RNNs architecture are can be of many types. Few are illustrated below in images:</p>
-				<img src="images/rnn.png" alt="RNN Architecture" width="600" height="400" class="image_full"><br>
+				<img src="assets/img/rnn.png" alt="RNN Architecture" width="600" height="400" class="image_full"><br>
 			<p>
 				With these varied type of architecture RNNs get to learn long-term dependencies and becoming one of the efficient neural network and based on the problem at hand, one of RNNs architecture illustrated in images above can be used. 
 				For instance, in the case of music-generation problem, one-to-many architecture could be used. 

@@ -48,12 +48,12 @@ sidebar:
         <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 13<sup>th</sup> May 2022</p>
 		<section id = "page">
 		<p>Before, <a href="objmodel.html#ss">Selective Search</a>, <a href="objmodel.html#rc">R-CNN</a>, <a href="objmodel.html#frcnn">Fast R-CNN</a>, <a href="objmodel.html#ftr">Faster R-CNN</a> etc, it is essential to first understand the concepts of <a href="objmodel.html#ia">Image Augmentation</a>, <a href="objmodel.html#ft">Fine Tuning</a>, <a href="objmodel.html#ab">Anchor Boxes</a> and <a href="objmodel.html#iou">Intersection over Union(IoU)</a></p>
-		<h1><a id="ia">Image Augmentation</a></h1>
+		<h3><a id="ia">Image Augmentation</a></h3>
 		<p>Deep Neural Networks require a large dataset to train on, to get a good generalization ability. <u>Image Augmentation</u> is a technique for that, if the dataset is relatively small.
 		Image Augmentation tweaks existing images with few techniques to generate more training images.<br>
 		Few techniques are: 1. Flipping/Rotation 2. Cropping 3. Changing Color 4. Rescaling the image 5. Translation - moving image along `x` and `y` axes. 6. Adding <u>Guassian Noise</u> that has zero mean. 7. histogram Equalization etc.
 		Keras's <a href="https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator">ImageDataGenerator</a> is a good tool for this. </p>
-		<h1><a id="ft">Fine Tuning</a></h1>
+		<h3><a id="ft">Fine Tuning</a></h3>
 		<p>This is another way of solving the above discussed problem - of lacking more data to train. However, here instead of using more data by image augmentation we use <u>transfer learning</u> to transfer the knowledge of parameters learned on some pre-trained model such as ImageNet.
 		Pre-trained models are trained using larger datasets and can help extract image features such as edges, textures, shapes and object composition more effectively.</p>
 		<p>This technique is called <u>Fine Tuning</u> and comprised of following steps :<br>
@@ -62,7 +62,7 @@ sidebar:
 		3. Add an output layer to the target model, whose number of outputs is the number of categories needed and in the target dataset. Then randomly initialize model parameters of this layer.<br>
 		4. Train the target model on the target dataset, where the output layer will be trained from scratch <i>(larger learning rate can be used)</i> while all other parameters of previous layers are <i>fine tuned</i> based on the parameters of the source model.<br>
 		</p>
-		<h1><a id="ab">Anchor Boxes</a></h1>
+		<h3><a id="ab">Anchor Boxes</a></h3>
 		<p>Bounding Box, first! It describes the spatial location of an object. It is rectangular and determined by `x` and `y` coordinates of the upper-left corner and lower-right corner.</p>
 		<p><u>Anchor Boxes :</u> Object detection algorithms try to sample a large number of regions in an input image to get to as accurately as to <i>ground-truth bounding boxes</i>.
 		Every method generate different types of bounding boxes with varying scales and aspect ratios, these generated bounding boxes are called <i>Anchor Boxes</i></p>
@@ -71,9 +71,9 @@ sidebar:
 		In this case, width of anchor box will be -- `ws\sqrtr` and height -- `hs //\sqrtr`<br>
 		If we have series of scales `s_(1),....,s_(n)` and series of aspect ratio `r_(1),...,r_(n)` then, total number of anchor boxes for an input image will be `w&times;h&times;n&times;m` and number of anchor boex centered on a same pixel will be `n + m -1`
 		</p>
-		<h1><a id ="iou">Intersection over Union (IoU)</a></h1>
+		<h3><a id ="iou">Intersection over Union (IoU)</a></h3>
 		Similar to Jaccard Index that measures similarity between two sets `A` and `B` as `J(A,B) = \frac{A&cap;B}{A&cup;B}`, IoU measures similarity between the anchor box predicted and ground-truth bounding box as shown in (b) below :<br>
-		<img src="images/anchor.png" width="750" height="260" alt="anchor box" class="image_full"><br>
+		<img src="assets/img/anchor.png" width="750" height="260" alt="anchor box" class="image_full"><br>
 		IoU ranges between `0` and `1`, where `0` means no Intersection and `1` means complete
 		</p>
 		<p><b>Generalized Intersection over Union (GIoU) :</b></p>
@@ -102,13 +102,13 @@ sidebar:
 		</p>
 		
 		</p>
-		<h1><a id="ss">Selective Search for Object Recognition</a></h1>
+		<h2><a id="ss">Selective Search for Object Recognition</a></h2>
 		<p>
 		Selective Search method uses hierarchical grouping with a bottom up approach. It first calculates similarity between all neighbouring regions, and groups two most similar regions. Then, this process of finding similarity and grouping is repeated until the whole image becomes a single region.</p>
 		<p>Region of an image can not only be formed because of color, and texture, but lighting conditions such as intensity and shading as well contribute to regions.
 		Therefore, in the first step, the image is divided into many sub-segments based on color, texture, intensity, etc and then based on similarity measure, two similar regions start to group together until we get the whole image as a region.
 		</p>
-		<img src="images/ss.png" width="690" height="340" alt="selective search" class="image_full">
+		<img src="assets/img/ss.png" width="690" height="340" alt="selective search" class="image_full">
 		</p>
 		<p><b>Similarity Measures :</b></p>
 		<p>Similarity is decided with two-pronged approach, first we choose a <u>color space</u> that capture all color spaces with different invariants, and different responses to changes in color, then a similarity metric is choosen for color, texture, size and shape</p>
@@ -132,17 +132,17 @@ sidebar:
 		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`ABO = \frac{1}{|G^c|}\sum_(g_(i)^c &isin;G^c)&nbsp;max` Overlap`(g_(i)^c,l_(i))`<br>
 		where Overlap score measure the area of the intersection of two regions divided by its union :<br>
 		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Overlap`(g_(i)^c,l_(i)) = \frac{area(g_(i)^c)&cap;area(l_(j))}{area(g_(i)^c)&cup;area(l_(j))}`</p>
-		<h1><a id ="rc">R-CNN</a></h1>
+		<h2><a id ="rc">R-CNN</a></h2>
 		<p>R-CNN, first, extract the <u>region proposals</u> from the input image and label its class and bounding box, then a CNN is implemented to extract its feature. These features gets further used with Support Vector Machine (SVM) to finally predict its class and the bounding box (Girshick et al., 2014).
 		</p>
 		<p>Object detection modelling with R-CNN can be done in following steps : </p>
 		<p>1. Perform <a href="objmodel.html#ss">selective search</a> on images to extract multiple region proposals on input images. These are usually selected at multiple scale with different shapes and sizes. And, each region proposal will be labeled with a class and a ground-truth bounding box. (Girshick et al., 2014) extracted nearly 2000 region proposals.</p>
 		<p>2. Select a pre-train model such as <a href="cnn_dp.html#an">AlexNet</a>, and remove the output layer. Resize each region proposal to the input size required by the network, and output the extracted features for the region proposal through forward propagation.<br>
 		All region proposal with the `IoU &ge;0.5` is treated as positive whereas rest of region proposals are treated as negative, then SGD is used with learning rate of 0.001</p>
-		<img src="images/rcnn.png" width="590" height="190" alt="rcnn" class="image_full"><br>
+		<img src="assets/img/rcnn.png" width="590" height="190" alt="rcnn" class="image_full"><br>
 		<p>3. Next for each class, we determine with each extracted feature vector, using SVM trained for that class, if that region contain a specific class or not. For partial overlaps, a threshold of 0.3 is used, below which all are labeled negative, and as traning data is too large to fit in, a standard hard mining method is used to converge quickly.</p>
 		<p>4. Finally, a bounding box regressor is used to predict the ground-truth bounding boxes</p>
-		<h1><a id="frcnn">Fast R-CNN</a></h1>
+		<h2><a id="frcnn">Fast R-CNN</a></h2>
 		<p>
 		Fast R-CNN is comparatively faster to train and test than <a href="objmodel.html#rc">R-CNN</a> as it takes the entire image as input in the network (Girshick, 2015).</p>
 		<p><b>Fast R-CNN architecture consists of following steps :</b></p>
@@ -153,14 +153,14 @@ sidebar:
 		<p>RoI pooling layer is slightly different from conventional pooling layer, here we can directly specify the output shape `H&times;W`. It then uses max pooling to convert the feature inside a region of interest into a small feature map.<br>
 		Each RoI is defined by a four-tuple `(r,c,h,w)` that specifies its top-left corner `(r,c)` and its height and width `(h,w)`<br>
 		Afterwards, RoI max pooling works by dividing the `h&times;w` RoI window into an `H&times;W` grid of sub-windows of approximate size `h//H &times; w//W` and then max-pooling the values in each sub-window into the corresponding output grid cell.<br>
-		<img src="images/roi.png" width="430" height="130" alt="Region of Interest" class="image_full"><br>
+		<img src="assets/img/roi.png" width="430" height="130" alt="Region of Interest" class="image_full"><br>
 		Here, height and width of any subwindow gets rounded up and the largest element is used as the output<br>
 		</p>
 		<b>4.</b> Afterwards, any of the <a href="cnn_dp.html">pre-trained models</a> with `5` max pooling layer and between `5` and `13` conv layers is used with three changes : <br>
 		<b>(a) </b>The last max pooling layer is replaced with a RoI pooling layer by configuring `H&times;W` size is compatible with the pre-trained models first fully connected layer.<br>
 		<b>(b) </b>Pre-trained models last fully connected layer and softmax is replaced with two sibling layers, where <i>first</i> produces softmax probability estimates over `K` object classes plus a catch-all 'background', essentially `K+1` object classes, and the <i>second</i> layer produces four numbers for each of the `K` object classes. Each set of 4 values defines bounding-box position for each of the `K` classes except 'background'.<br>
 		<b>(c) </b>Pre-trained model is modified to take two data inputs : a list of images, and a list of RoIs in those images.<br>
-		<img src="images/frcnn.png" width="530" height="170" alt="Fast R-CNN architecture" class="image_full"><br>
+		<img src="assets/img/frcnn.png" width="530" height="170" alt="Fast R-CNN architecture" class="image_full"><br>
 		<b>Multi-Task Loss :</b> 
 		<p>A Fast R-CNN network produces two sibling output layers. One provides a discrete probability distribution (per RoI), `p = (p_(0), ... ,p_(k))` over `K+1` categories. Another layer provides bounding-box regression offstes, `t^(k) = (t_(x)^k, t_(y)^k, t_(w)^k, t_(h)^k)` where `t^k` specifies a scale-invariant translation and log-space height/width shift relative to region proposal.</p>
 		<p>If each training RoI is labeled with a ground-truth class `u` and a ground-truth bounding box regression target is `v`, then multi-task loss `L` on each labeled RoI is as :</p>
@@ -171,7 +171,7 @@ sidebar:
 		The second task loss,`L_(loc)` is defined over a tuple of true bounding-box regression targets for class `u, v = (v_(x), v_(y), v_(w), v_(h))` and a predicted tuple `t^u = (t_(x)^u, t_(y)^u, t_(w)^u, t_(h)^u)` again for class `u`. For bounding-box regression, we use the loss :</p>
 		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`L_(loc)(t^u, v) = \sum_{i&isin;x,y,w,h} smooth_(L_(1))(t_(i)^u - v_(i))`</p>
 		<p>where `smooth_(L_(1))(x) = 0.5x^2` if `|x| &lt;1` and `|x| - 0.5` otherwise</p>
-		<h1><a id="ftr">Faster R-CNN</a></h1>
+		<h3><a id="ftr">Faster R-CNN</a></h3>
 		<p>Faster R-CNN replaces selective search with a <i>Region Proposal Network (RPN)</i>. It helps reduce region proposals without loss in accuracy for object detection.(Ren et al., 2015)</p>
 		<p><b>Region Proposal Networks (RPNs) :</b></p>
 		<p>A RPN takes an input image and outputs a set of rectangular object proposals, each with an <i>objectness score</i>.
@@ -193,9 +193,6 @@ sidebar:
 			<li>[4] Ren, S., He, K., Girshick, R., & Sun, J. (2015). Faster r-cnn: towards real-time object detection with region proposal networks. <i>Advances in neural information processing systems</i> (pp. 91–99).</li>
 		</ul>
 		</p>
- 
-
-
 		</p>
 		</section>
 	</section>

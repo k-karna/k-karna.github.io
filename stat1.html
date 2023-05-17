@@ -32,7 +32,7 @@ sidebar:
 <body>
 	
 	<section id="text">
-		<h1>Probability Distribution</h1>
+		<h2>Probability Distribution</h2>
         <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 5<sup>th</sup> April 2023</p>
 		<section id = "page">
 		<p>Before proceeding to probability distribution such as: <a href="stat1.html#binom">Binomial</a>, <a href="stat1.html#beta">Beta Distribution</a>, <a href="stat1.html#pois">Poisson Distribution</a>,
@@ -59,7 +59,7 @@ sidebar:
 		<p>Continuous probability distributions are used to model variables that can take on any value within a range, such as time, and temperature. This is another difference, in discrete distribution, probablities are assigned to 
 			each possible outcomes, whereas in continuous distribution, probabilities are assigned to interval of values.
 		</p>
-		<h2><a id="binom">Binomial Distribution</a></h2>
+		<h3><a id="binom">Binomial Distribution</a></h3>
 		<p>It is a discrete probability distribution that describes the number of successes in fixed number of independent Bernoulli trails, where each trail has a Boolean-valued outcome: <br>success <i>(with probability `p`)</i> or failure <i>(with probability `q = 1-p`)</i></p>
 		<p>The Probability Mass Function (PMF) of Binomial distribution is given by :</p>
 		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`P(X=k) = `(n \choose k) `p^k(1-p)^(n-k)` <br>
@@ -70,7 +70,7 @@ sidebar:
 		<p>The mean of binomial is `μ = np` and the variance of binomial distribution is `\sigma^2 = np(1-p)`. In binomial distribution, As the number of trials n increases, it becomes more symmetrical and approaches a normal distribution.</p>
 
 
-		<h2><a id ="beta">Beta Distribution</a></h2>
+		<h3><a id ="beta">Beta Distribution</a></h3>
 		<p>The beta distribution is a <i>continuous probability distribution</i> that is often used to model the probability of success or failure in a binomial experiment. It is defined on the interval `[0,1]`, and has two parameters `\alpha` and `\beta`
 		which control its shape and location. The PDF of beta distribution is given by: </p>
 		<p>&emsp;&emsp;&emsp;&emsp;&emsp;`f(x:\alpha, \beta) = x^(\alpha-1)(1-x)^(\beta-1) \frac{1}{(B(\alpha,\beta))} `</p>
@@ -83,7 +83,7 @@ sidebar:
 		<p>The shape of the beta distribution depends on the values of the shape parameters `alpha` and `\beta`. When `α = β = 0`, the distribution is <b>uniform distribution</b>, with equal probability assigned to all values between 0 and 1. 
 		When `α \ge \beta`, the distribution is skewed towards the right, with a mode close to `1`. When `α \le \beta`, the distribution is skewed towards the left with a mode close to 0</p>
 
-		<h2><a id = "pois">Poisson Distribution</a></h2>
+		<h3><a id = "pois">Poisson Distribution</a></h3>
 		<p>The poisson distribution is a <i>discrete probability distribution</i> that describes the number of events that occur in a fixed interval of time or space, given the average rate of occurence. It is used to model a wide range of real-world phenomena, such as accident at a busy intersection in a day. 
 		It is particularly useful for situations where the events are rare or infrequent but can occur at any time.</p>
 		<p>The PMF of a poisson distribution is given by: <br>
@@ -94,7 +94,7 @@ sidebar:
 		<p>The Mean and Variance of the poisson distribution are both equal to `lambda`.<br> The key thing in poisson distribution is that the events are independent of each other, and occur at a constant rate over time and space. 
 		In other words, the probability of an event occuring does not depend on when and where the previous event occured. This is known as <b>Poisson Process</b></p>
 
-		<h2><a id = "exp">Exponential Distribution</a></h2>
+		<h3><a id = "exp">Exponential Distribution</a></h3>
 		<p>It is a continuous probability distribution that decribes the time between two consecutive events in a <b>Poisson Process</b>. The Exponential distribution is mostly used to model the lifetime of a product or the time until a failure occurs in a system.</p>
 		<p>The probability density function (PDF) of exponential distribution is given by :</p>
 		<p>&emsp;&emsp;&emsp;&emsp;`f(x) = \lambdae^(-\lambdax)`  &emsp;&emsp;&emsp;for `x \ge 0`<br>
@@ -143,7 +143,7 @@ sidebar:
 		<p>The probability density function (PDF) of Chi-Squared is given as: </p>
 		<p>&emsp;&emsp;&emsp;&emsp;&emsp;`f(x;k) = \frac{x^(k/2 -1)e^(-x/2)}{2^(k/2)&Gamma;(k/2)}`&emsp; for `x\gt0` and PDF is `0` otherwise</p>
 		
-        <h2><a id = "student">Student's t-distribution</a></h2>
+        <h3><a id = "student">Student's t-distribution</a></h3>
 		<p>It is another continuous probability distribution. It arises in statistics, when the mean of a normally distributed population in situations where the sample size is small and the populations standard deviation is unknown. It is used in assessing statistical significance, and creating confidence interval.</p>
 		<p> If we take a random sample of `n` observations from a normal distribution, then the t-distribution with `ν = n - 1` degrees of freedom can be defined as the distribution of the location of the sample mean in relation to the true mean, divided by the sample standard deviation, and then multiplied by the standardizing factor of `\sqrtn`. 
 		Using the t-distribution, then, allows us to create a confidence interval for the true mean.</p>
@@ -156,7 +156,7 @@ sidebar:
 			<img src="images/student.png" alt="Student t-distribution" width="650" height="500" class="image_full">
 		</p>
 
-		<h2><a id = "fdis">F-Distribution</a></h2>
+		<h3><a id = "fdis">F-Distribution</a></h3>
 		<p>F-Distribution is another continuous probability function, used in analysis of variance (ANOVA) and other F-tests. It is a ratio of two chi-squared distribution with degree of freedom as parameter given below: </p>
 		<p>&emsp;&emsp;&emsp;&emsp;`X = \frac{U_1//d_1}{U_2//d_2}`<br>
 		where `U_1`, and `U_2` are chi-squared distributions with `d_1` and `d_2` as their degree of freedom, respectively. Also, similar to <a href="stat1.html#student">student t-distribution</a> as degree to freedom start to increase, distribution starts to look like normal distribution.</p>

@@ -29,10 +29,10 @@ sidebar:
 
 <body>
 
-	<section id="text">
+
 		<p class="heading">n-Step Bootstrapping</p>
         <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 03<sup>rd</sup> May 2022</p>
-		<section id = "page">
+		
 		<p>With one-step TD or TD(0) the same time step determines how often the action can be changed and the time-interval over which bootstrapping is done.<br>
 		>> Ideally, Bootstrapping would work better if it is over a length of time in which a <i>significant and recongnisable state change</i> has occured. <u>n-step bootstrapping</u> enables it to occur over multiple time steps</p>
         <p><b>n-step TD prediction</b></p>
@@ -44,7 +44,7 @@ sidebar:
 		<p><u>n-step return</u> as :</p>
 		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t:t+n) &esdot; R_(t+1) + &gamma;R_(t+2) + ...... + &gamma;^(n-1)R_(t+n) + &gamma;^nV_(t+n-1)(S_(t+n))`</p>
 		<p ><i>for all `n,t` such that `n&ge;1` and `0&le;t&lt;T-n`</i>. Psuedo Code for n-step TD is given below:</p>
-		&emsp;&emsp;<img src="images/nstep.png" alt="n-step" width="450" height="300" class="image_full"><br>
+		&emsp;&emsp;<img src="assets/img/nstep.png" alt="n-step" width="450" height="300" class="image_full"><br>
 		<p><u>Note :</u> <i>n-step</i> returns for `n&lt;1` involve future rewards and states that are not available at the time of tansition from `t` to `t+1`, but only after seeing `R_(t+n)` and computed `V_(t+n-1)`. 
 		<i>n-step</i> return uses the value function, `V_(t+n-1)` to correct for the missing rewards beyond `R_(t+n)`</p>
 		<p>The natural state-value learning algorithm for using <i>n-step</i> returns is thus :</p>
@@ -60,10 +60,8 @@ sidebar:
 		<p>with `G_(t:t+n) &esdot; G_(t)` if `t+n &ge;T` . The natural algorithm is then :</p>
 		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q_(t+n)(S_(t), A_(t)) &esdot;Q_(t+n-1)(S_(t),A_(t)) + &alpha;[G_(t:t+n) - Q_(t+n-1)(S_(t),A_(t))]`</p>
 		<p>with the values of all other states remain unchanged: `Q_(t+n)(s,a) = Q_(t+n-1)(s,a)`. Pseudo Code for it is given below<br>
-		&emsp;&emsp;<img src="images/nstepsarsa.png" alt="n-stepSARSA" width="480" height="380" class="image_full">
+		&emsp;&emsp;<img src="assets/img/nstepsarsa.png" alt="n-stepSARSA" width="480" height="380" class="image_full">
 		</p> 
-		</section>
 
-	</section>
 </body>
 </html>

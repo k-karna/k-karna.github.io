@@ -29,11 +29,9 @@ sidebar:
 
 <body>
 	
-	<section id="text">
 		<p class="heading">Temporal-Difference (TD) Learning</p>
         <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 27<sup>th</sup> Apr 2022</p>
-		<section id = "page">
-            <p>
+                <p>
                 Temporal-Difference Learning is a combination of Monte Carlo (MC) ideas and Dynamic Programming (DP) ideas. <br>
                 MC method wait until the return following the visit is known, and then uses that return as a target for `V(S_(t))`. A single every-visit MC method suitable for non-stationary environments is: </p>
                 <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`V(S_(t)) &larr; V(S_(t)) + &alpha;&#91;G_(t)-V(S_(t))&#93;`<br>
@@ -91,8 +89,6 @@ sidebar:
                 In case of limited experience, we increment learning methods to present the exprience repeatedly until the method converges upon an answer.<br>
                 Aftetr approximating a value function, `V`, all the available exprience is processed again with the new value function to produce a new overall increment and so on, until the value function converges. This is called <b>batch updating</b><br>
                 Under batch updating, TD(0) converges deterministically to a single answer independent of the step size parameter, `&alpha;` as long as `&alpha;` is small.
-            </p>        
-		</section>
-	</section>
+            </p>
 </body>
 </html>

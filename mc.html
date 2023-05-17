@@ -1,0 +1,83 @@
+---
+layout: article
+sidebar:
+  nav: "docs-en"
+---
+<!DOCTYPE HTML>
+<html>
+
+<!--- Adding Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154990580-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154990580-2');
+</script>
+<!-- End of Google Analytics Code -->
+<!-- Adding MathJAX -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script async="true" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=AM_CHTML"> </script>
+<!-- End of MathJAX -->
+
+
+
+<body>
+
+	<section id="text">
+		<p class="heading">Monte Carlo Methods</p>
+        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 03<sup>rd</sup> May 2022</p>
+		<section id = "page">
+        <p><u>Monte Carlo (MC) method</u> doesn't require assumption of complete knowledge of the environment, it require only <i>experience</i>, i.e., sample sequences of state, actions and rewards from actual or simulated interaction with an environment.
+        Monte Carlo, then, solves RL problem by averaging sample returns. </p>
+        <p>MC methods sample and average returns for each state-action pair, where each of them are inter-related i.e, return after taking an action in one state depends on the cation taken in later states in same episode.</p>
+        <p>It thus, makes problem non-stationary. And, to handle non-stationarity, we use Geneeralized Policy Iteration (GPI), learning value-fuction from sample returns.</p>
+        <p style="font-size: 17px;"><b>Monte Carlo Predictions :</b></p>
+        <p>Value of a state is the expected return - expected cumulative future discounted reward - starting from that state.</p>
+        <p>In MC method, we simply average the returns observed after visits to that state. As more returns are observed, the average should converge to the expected value.</p>
+		<p>
+        >> Each occurence of state `s` in an episode is called a visit of `s`<br>
+        >> `s` maybe visited multiple times in the same episode. When `s` visited first time in an episode, it is called <i>first visit</i> to `s`.<br>
+        >> <u>First-visit MC method</u> estimate `V_(&pi;)(s)` as the average of the returns following first visit to `s`.<br>
+        >> <u>Every-visit MC method</u> averages returns from the all following visit to `s`.<br>
+        >> Both <u>first-visit</u> and <u>Every-visit</u> converge to `v_(&pi;)(s)` as the number of visits to `s` goes infinity.<br>
+        >> In MC method, the estimate for one state does not build upon the estimate of any other.<br>
+        >> Also, computational expense of estimating the value of a single state in independent of the number of states.
+        </p>
+        <p style="font-size: 17px;"><b>Monte Carlo Estimation of Action Value :</b></p>
+        <p>When a model is available, state-value are sufficient to determine a policy, choosing whichever action that leads to best combination of reward and next state. However, when model is not available, action values(the pair of state-action pair). 
+        Thus, primary goal of MC methods is to estimate `q_(&star;)` considering visit to <i>state-action pair</i> rather than to state. </p>
+        <p>The only complication is that many state-action pairs may never be visited. Following a deterministic policy `&pi;`, one can observe retruns only for one of the actions from each state, which may lead to not improve the Monte Carlo estimates. 
+        This is general problem of <u>maintaining exploration</u>, and to overcome this, we need to estimate the values from <i>all the action from each state.</i> assuring <u>continual exploration.</u></p>
+        <p>
+        >> First Approach -- By specifying episode <i>start in a state-action pair</i> and that every pair has a nonzero probability of being selected as the start. This guarantees that all state-action pairs will be visited infinite number of times in the limit of an infinite number of episodes. This assumption is called <u><b>Exploring Starts</u></b><br>
+        >> Second Approach -- is to consider only policies that are stochastic with a nonzero probability of selecting all actions in each state.
+        </p>
+        <p style="font-size: 17px;"><b>Monte Carlo Control :</b></p>
+        <p>In Geneeralized Policy Iteration (GPI) one maintains both an approximate policy and an approximate value function. In Monte Carlo version of GPI, we similarly perform alternative steps of <i>policy evaluation</i> and <i>policy improvement</i>, beginning with arbitrary policy `&pi;_(0)`
+        and ending with the optimal policy and optimal action-value function.
+        </p>
+        <p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&pi;_(0)&rarr;^E&rarr; q&pi;_(0)&rarr;^I&rarr;&pi;_(1)&rarr;^E&rarr;q&pi;_(2)&rarr;^I&rarr;&pi;_(2)&rarr;` </p>
+        where `E` denotes policy evaluation and `I` denotes policy improvement
+        <p>
+        If we assume that we observe an infinite number of episodes and episodes are generated with <b><u>Exploring Starts</b></u>, then MC method will compute `q_(&pi;_(k))` each for arbitrary `&pi;_(k)`
+        </p>
+        <p>Policy improvement is done by making the policy greedy with respect to the current value function. Then for any action-value function, `q`, the corresponding greedy policy is the one that, for each `s &isin; S` deterministically chooses an action with maximum action-value</p>
+        <p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&pi;_(s) &esdot; argmax_{a} q(s,a) `</p>
+        <p>
+        Policy improvement then can be done by constructing each `&pi;_(k+1)` as the greedy policy with respect to `q_(&pi;_(k))`. The policy improvement theorem tehn applies to `&pi;_(k)` and `&pi;_(k+1)` for all `s &isin;S` because
+        </p>
+        <p  style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`q_(&pi;_(k))(s,&pi;_(k+1)(s)) = q_(&pi;_(k)) (s, argmax_{a} q_(&pi;_(k))(s,a))`<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; `= max_{a} q_(&pi;_(k)) (s,a)` <br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&ge; q_(&pi;_(k)) (s, &pi;_(k)(s))`<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&ge; v_(&pi;_(k)(s))`
+        </p>
+		</section>
+	</section>
+</body>
+</html>

@@ -58,7 +58,7 @@ sidebar:
         <p>An <u>ROC curve or Reciever Operating Characteristics Curve</u> is a graph showing the performance of a classification model at all classification thresholds. This curve plots two parameters : TPR and FPR<br>
         True Positive Rate (TPR) &equiv; Recall `= \frac{TP}{TP + FN}`, &nbsp; whereas False Positive Rate (FPR) ` = \frac{FP}{FP + TN}`</p>
         <p>With ROC, lowering the classification threshold classifies more items as positive, and thereby increasing both FP and TP. A typical ROC is shown below : <br>
-        <img src="images/roc.png" alt="ROC" width="640" height="230" class="image_full"></p><br>
+        <img src="assets/img/roc.png" alt="ROC" width="640" height="230" class="image_full"></p><br>
         <u>AUC</u> stands for <u>Area under the ROC Curve</u> It measures the entire 2D area underneath ROC Courve from `(0,0)` to `(1,1)`. AUC ranges in value from `0` to `1`. If a model is `100%` correct, it has AUC of `1.0`, and if `100%` incorrect, then AUC of `0.0`<br>
         Two key things here :<br>
         1. AUC is <i>scale-invariant. </i>It measures how well predictions are ranked, and not their absolute values.<br>

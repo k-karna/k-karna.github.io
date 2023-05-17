@@ -56,7 +56,7 @@ sidebar:
 		<p>While training AutoEncoder, we try to find parameters `&theta; = {W,b_(h),b_(y)}` that minimizes the reconstruction error on a training set of examples `D_(n)`. Then, our objective function can be written as :</p>
 		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`J_(AE)(&theta;) = \sum_{x&isin;D_(n)} L(x,g(f(x)))`</p>
 		<p>where, `L` is the reconstruction error. Usually, it is `l_(2)` norm i.e, `L(x,y) = ||x-y||^2` in cases of linear reconstruction, and the cross-entropy loss when `s_(g)` is the sigmoid. A basic AutoEncoder Architecture can be seen below :</p>
-		<img src="images/autoen.png" width="450" height="160" class="image_full">
+		<img src="assets/img/autoen.png" width="450" height="160" class="image_full">
 		<h1>Regularized AutoEncoder</h1>
 		<p>As AutoEncoder are in a way a tool for feature extraction, and therefore, it is always better to have more and more features extracted from the input. If we leave hidden node with less than the size of node in input, it can overfit.<br>
 		On the other hand, if we add equal or greater number of nodes in the hidden layer than the input node, it will simply the learn and pass the input representation. This is the case, we call - <u>over-complete hidden layer</u><br>

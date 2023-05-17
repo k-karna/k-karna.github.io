@@ -70,7 +70,7 @@ sidebar:
 
 		<h1>Adaptive Histogram Equalization</h1>
 		<p>If the pixel intensity varies a lot throughout the image, making certain region of image significantly darker or lighter than the most of the image, it is preferable to divide the image into `M&times;M` block and perform seprate histogram equalization in each sub-block.<br>
-		<img src="images/ahe.png" width="700" height="190" alt="AHE" class="image_full"><br>
+		<img src="assets/img/ahe.png" width="700" height="190" alt="AHE" class="image_full"><br>
 		However, this kind of equalization can give rise to the visualization of sub-block borders as shown in the image above, and fails to sup1ress <i>noise in b1ckground</i>
 		To overcome this, a bilinear interpolation is carried out with below given mapping: </p>
 		<p style="color: rgb(81,81,94);">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`y = T(x) = round (\frac{L_(max)-1}{N&times;M}H_(c)k) &emsp;0&le;x&lt;L_(max)`</p>
@@ -149,7 +149,7 @@ sidebar:
 		<p>The median filter attenuates the loss of image sharpness and blurring level.</p>
 		<p>It stores every pixel with the value of the median pixel obtained after the pixels of the neighbourhood within window size `L&times;L` have been sorted in increasing order. The median pixel has the highest value of the first half of the pixels in neighbourhood, and the lowest value of the other half of the remaining pixels.</p>
 		<p>In general window dimension of `L&times;L`, the position of the median pixel is the `(L&times;L//2+1)-th`</p>
-		<p>&emsp;&emsp;&emsp;&emsp;<img src="images/med_filter.png", height="200" width="460" alt="median filter" class="image_full"></p>
+		<p>&emsp;&emsp;&emsp;&emsp;<img src="assets/img/med_filter.png", height="200" width="460" alt="median filter" class="image_full"></p>
 		<h1>Minimum and Maximum Filter</h1>
 		<p>These filters can collectively called <i>Rank Filtering</i> The approach here is same as in median filter,, and produce a sorted list in the selected vicinity of `L&times;L` window <br>
 		The minimum filters introduces an image darkening in the filtered image (moves the histogram of the levels towards the low value). Similarly, the maximum filter tends to lighten the image (moves the histogram of the levels towards the high value)</p>

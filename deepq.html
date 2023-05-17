@@ -69,7 +69,7 @@ sidebar:
         <P><b>Double Q-Learning</b> stores two `Q` functions: `Q^A` and `Q^B`. Each `Q` function is updated with a value from the other `Q` function for the next state. This way it can be considered an unbiased estimate for the value fo this action.
         For instance, the action `a^&lowast;` in eq(2) is the maximum value action in state `s'`, according to the value function `Q^A`. i.e, `Q^A(s',a^&lowast;) = max_{a}Q^A(s',a)`. However, we still use `Q^B(s',a^&lowast;)` to update `Q^A`</P>
         <p>Double Q-Learning converges to the optimal policy in the limit, and faster than Q-Learning, its algorithm is given below :</p>
-        <img src="images/doubleq.png" width="600" height="280" alt="double-q-learning" class="image_full">
+        <img src="assets/img/doubleq.png" width="600" height="280" alt="double-q-learning" class="image_full">
 
 		</section>
 

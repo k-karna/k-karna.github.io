@@ -54,13 +54,13 @@ sidebar:
             The loss layer, however, is not needed in the prediction task, and used only when we are trying to learn CNN parameters from training examples. General structure of CNN architecture can be seen below in Fig 1. and will be discussed ahead.
         </p>
         <p>
-        <img src="images/cnn_arch.png" alt="Receptive field" width="770" height="335" class="image_full"><br>
+        <img src="assets/img/cnn_arch.png" alt="Receptive field" width="770" height="335" class="image_full"><br>
         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i>Fig 1: A general structure of CNN architecture</i>
         </p>
         <p>The key thing with CNN is that we do not have pre-defined weights for the model here, each layer gets to learn their weights by processing data from the previous layer. Also, each layer process data only for its <i>receptive field.</i></p>
         <p><u>Receptive Field</u> : The restricted area of the previous layer from which a neuron recieves input, due to the principle of <i>locality</i>, is called receptive field. Generally, it is `3&times;3` neurons or `5&times;5` neurons, but in the case of fully-connected layer, the receptive field is the <i>entire previous layer</i>. 
         In the image below, given the kernel size of `2&times;2`, the receptive field of the shaded output element ie. 19 is the four elements in the shaded portion of the input.
-        <img src="images/rf.png" alt="receptive field" width="370" height="150" class="image_full"><br>
+        <img src="assets/img/rf.png" alt="receptive field" width="370" height="150" class="image_full"><br>
         &emsp;&emsp;&emsp;&emsp;&emsp;<i>Fig 2: Receptive Field</i>
         </p>
         <p>
@@ -132,7 +132,7 @@ sidebar:
         Also, since original information in any input image is always highly nonlinear mapping of pixels, which gets distorted slightly by the convolutional layer. We would want this non-linearity to be increased again. ReLU layer is applied to do that.
         ReLU function, `f(x) = max(0,x)` effectively removes negative values from an activation map by setting them to zero.
         </p>
-        <img src="images/asd.png" alt="relu" width="720" height="180" class="image_full"><br>
+        <img src="assets/img/asd.png" alt="relu" width="720" height="180" class="image_full"><br>
         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i>Fig 3: Activation function in ReLU layer</i>
         <p>Other activation function such as <i>tanH</i> or <i>sigmoid</i> can also be used and used to be used before the inception of <i>AlexNet</i>, however, after <i>AlexNet</i> implementation of ReLU, as it trains much faster, it has become new norm. Moreover, <i>softplus</i> function `f(x) = log(1 + e^x)` is sometimes used especially in the case of backprop while finding parameters. SoftPlus also trains much slower than ReLU</p>
 
@@ -145,7 +145,7 @@ sidebar:
         </p>
         <p>Operations with pooling layer can be of a few type ie., <i>maximum pooling</i> or <i>average pooling</i> or <i>general pooling</i>. Maximum <i>(or max)</i> pooling is the most common, and it returns the maximum value of the elements of pooling window. Similarly, <i>average pooling</i> returns the average of all values of the elements of pooling window as shown in the shaded section of Fig 3.
         <i>General Pooling</i> that uses `L1`/`L2` normalization are quite rare.</p>
-        <img src="images/pooling.png" alt="receptive field" width="720" height="200" class="image_full"><br>
+        <img src="assets/img/pooling.png" alt="receptive field" width="720" height="200" class="image_full"><br>
         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i>Fig 4: Pooling Layer - Max pooling & Average Pooling</i>
         <p>
         Pooling layer, thus get to reduce dimensionality, and coming back to example of <u>sensitivity in convolutional layer</u>

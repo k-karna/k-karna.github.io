@@ -76,7 +76,7 @@ docs-en:
       - title:  RL00 - Markov Decision Process (MDP)
         url:    /mdp.html
       - title:  RL01 - Policies and Value Function
-        url:    /ploval.html
+        url:    /polval.html
       - title:  RL02 - Monte Carlo Methods and Control
         url:    /mc.html
       - title:  RL03 - Off-Policy via Importance Sampling

@@ -1,0 +1,86 @@
+---
+layout: article
+sidebar:
+  nav: "docs-en"
+---
+
+<!DOCTYPE HTML>
+<html>
+
+<!--- Adding Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154990580-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154990580-2');
+</script>
+<!-- End of Google Analytics Code -->
+<!-- Adding MathJAX -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script async="true" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=AM_CHTML"> </script>
+<!-- End of MathJAX -->
+
+
+<body>
+		<section id="text">
+		<p class="heading">Markov Decision Processes (MDP)</p>
+        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 30<sup>th</sup> Apr 2022</p>
+		<section id = "page">
+			<p>Learner and Decision-maker &rarr; <i>agent</i><br>
+			Things it interacts with, outside agent &rarr; <i>environment</i></p>
+			<p>Here, in finite MDP
+			<ol>
+				<li>the agent and environment interact at each sequence of discrete time steps, `t=0,1,2,3,..`</li>
+				<li>At each time step, `t`, agent recieves some information of environment's state i.e., `S_(t)&isin;S`, and on that basis, select action, `A_(t)&isin;A(S)`</li>
+				<li>One time step later, agent recieves a numerical reward, `R_(t+1) &isin;&Rscr; &sub;&Ropf;`, and find itself in a new state, `S_(t+1)`</li>
+				<li>Sequence is like, `S_(0),A_(0),R_(1),S_(1),A_(1,),R_(2),S_(2),A_(2),R_(3),....`</li>
+			</ol>
+			</p>
+			<p>
+				In finite MDP, the random variable, `R_(t)`,`S_(t)` have their probability distribution dependent only on the preceding state & action<br>
+				i.e., if `s'&isin;S` and `r&isin;&Rscr;`, then<br>
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`P(s',r | s,a)&esdot; Pr{S_(t)=s',R_(t)=r | S_(t-1)=s,A_(t-1)=a}`
+			</p>
+			<p>The function <i>p</i> defines the <i>dynamics</i> of the MDP. Here, <i>p</i>`:S&times;R&times;S&times;A &rarr;[0,1]` is ordinary deterministic of four arguments and specifies a probability distribution for each choice of `s` and `a` i.e.,<br>
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`\sum_{s'&isin;S}\sum_{r&isin;R} p(s',r | s,a)=1` for all `s&isin;S, a&isin;A_(s)`
+			</p>
+			<p><b>Markov Decision Processes</b>, therefore, is a decision process in which the probability of each value for `S_(t)` and `R_(t)` depends only on the preceding state and action `S_(t-1)` and `A_(t-1)` and not on earlier state/action.<br>
+			In essence, if the state must include information about all aspects of the past agent environment interaction, then the state is said to have a <i>Markov Property</i>.</p>
+			<p> From earlier discussed, dynamic function, <i>p</i>, a few things can be computed such as <i>expected reward for state-action pair</i> `r:S&times;A&rarr;R`<br>
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`r(s,a) &esdot;`&Eopf;`&#91;R_(t) | S_(t-1)=s, A_(t-1)=a&#93;=\sum_{r&isin;R}r\sum_{s'&isin;S}p(s',r | s,a)`<br>
+			Similarly, `r:S&times;A&times;S&rarr;R` <i>expected reward for state-action-next state</i> can be computed as :<br>
+			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`r(s,a,s')&esdot;`&Eopf;`&#91;R_(t) | S_(t-1)=s,A_(t-1)=a,S_(t)=s'&#93;=\sum_{r&isin;R}r\frac{p(s',r | s,a)}{p(s' |s,a)}`
+			</p>
+			<p><b>Goals and Rewards :</b></p>
+			<p>In Reinforcement Learning, goal of the agent is to maximise the reward, `R` which can be stated as <i>reward hypothesis</i> below:</p>
+			<blockquote>That all of what we mean by goals and purposes can be well thought of as the maximization of the exptected value of the cumulative sum of a received scalar signal (called reward).</blockquote>
+			<p>Simply put, if exptected return &rarr;&nbsp;` G_(t)`<br>
+			Final time step &rarr; `T`<br>
+			Then, `G_(t)=R_(t+1) + R_(t+2) + R_(t+3) + R_(t+4) + ........ + R_(T)` and the objective is to maximise cumulative reward received at each time step, `R_(t+1), R_(t+2),..` thus maximising `G_(t)`</p>
+			<p>MPD task of maximising `G_(t)` can be classified in two ways, one where agent-environment breaks into subsection called <i>episodes</i> called <i><b>episodic task</b></i> ; and one that doesn't break into identifiable episodes and goes on continually without limit called <b><i>continuing task.</i></b><br>
+			In episodic task, each episode ends in a special state &rarr; <i>terminal state</i>  and followed by standard start/rest. Importantly, each episode is independent of how previous the episode ended.</p>
+			<p><b>Discounting :</b>
+			In this approach, the agent tries to select actions, `A_(t)` so that sum of discounted return, `G_(t)` over the future is maximised<br>
+			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t)&esdot; R_(t+1) + &gamma; R_(t+2) +&gamma;^2R_(t+3) + ....  = \sum_{k=0}^&infin;&gamma;^k R_(t+k+1)` &emsp;&emsp;&emsp;..(1)<br>
+			Here, `&gamma;` is <i>Discount Rate</i> and `0&le;&gamma;&le;1`<br>
+			Importantly, if `&gamma;=0`, the agent is concerned only with maximizing immediate reward as `&gamma; R_(t+2) +&gamma;^2R_(t+3) + ....` = 0<br>
+			Similarly, if `&gamma;&sime;1`, the agent's return objective takes future reward into account more strongly.
+			</p>
+			<p>Futhermore, if we look more closely into eq(1), we can observe that returns on successive time steps are related to each other as: </p>
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t)&esdot; R_(t+1) + &gamma; R_(t+2) +&gamma;^2R_(t+3) + &gamma;^3R_(t+4) + ....`<br>
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`= R_(t+1) + &gamma;(R_(t+2) +&gamma;R_(t+3) + &gamma;^2R_(t+4) + ....)`<br>
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`= R_(t+1) + &gamma;G_(t+1)`<br>
+			<p>Note that it works for all time steps `t&lt;T` , even if termination occurs at `t+1`. Also, if `G_(t)` is expected of consisting infinite terms where reward is non-zero and constant `&gamma;&lt;1`, we can write `G_(t)` as:</p>
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t)=\sum_{k=0}^&infin; &gamma;^k = \frac{1}{1-&gamma;}`
+
+		</section>
+
+	</section>
+</body>
+</html>

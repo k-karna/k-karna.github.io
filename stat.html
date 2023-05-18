@@ -5,7 +5,7 @@ sidebar:
   nav: "docs-en"
 ---
 <head>
-  <body>
+<body>
 
 <b>>> Population</b> is a set of similar items or events that is of interest for some statistical problem. It can be a group of existing object or a hypothetical or potentially infinite group of items.<br>
 <b>>> Sample</b> is a selection of individual, events or objects taken from a well-defined population. Thus sample is a subset of population.<br>
@@ -16,60 +16,62 @@ sidebar:
 <b>>> Mean</b> is the arithmetic average of numbers in a data set i.e, sum of numbers divided by the total<br>
 <b>>> Median</b> is the middle score found by arranging a set of numbers from the smallest to the largest (or from largest to smallest). If even number in data point, then median is the average of two middle values. <br>
 <b>>> Range</b> is the difference between the smallest and the largest data value.<br>
-<b>>> Variance</b> is the average squared deviation of the data values from their mean. <br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; variance `(&sigma;^2) = \frac{\sum{x - &mu;}^2}{N}` <br>
+<b>>> Variance</b> is the average squared deviation of the data values from their mean. </p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; variance `(&sigma;^2) = \frac{\sum{x - &mu;}^2}{N}` <br>
 where `x` is an individual data value, `&mu;` is the mean of all data values, and `N` is the number of data values<br>
 </p>
 <p>
-		<b>>> Covariance</b> between two random vairable, `x` and `y` measures how two variables are related. Positive covariance means the two variables are positively related, and they move in the same direction.
-		Negative covariance means that the variables are inversely related, or that they move in opposite directions.<br>
-		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;COV `(x,y) = \frac{\sum_{i=1}^n (x-&mu;_x)(y-&mu;_y)}{n-1}`<br>
-		where `&mu;_x` is mean of `x` and `&mu;_y` is mean of `y` and `n` is the total number of data values.</p>
-		<p>
-		<b>>> Standard Deviation</b> is the square root of the variance<br>
-		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;s.d.`=\sqrtvariance (&sigma;^2) = \sqrt\frac{\sum{x - &mu;}^2}{N}`<br>
-		Standard Deviation provides a measure in standard units of how far the data values fall from the sample mean. In a <b>normal distribution</b>, 68% of the data values fall apprx one standard deviation (1 SD) on either side of the mean. 95% fall two standard deviation (2 SD) on either side of the mean, and 99% of the data values fall approximately three standard deviation (3 SD) on either side of the mean.
-		</p>
-		<p>
-		<b>>> Normal Distribution</b> Normal or Gaussian Distribution is a probability distribution of data symmetric about the mean, (and resembles bell-curve) implying data near the mean are more frequent in occurrence than data far from the mean. <i>Coefficient of skewness</i> and <i>Coefficient of Kurtosis</i> are 0 for normal distribution. It can represented as below: <br>
-		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`f(x) = \frac{1}{&sigma;\sqrt2&pi;}e^(-1/2(\frac{x-&mu;}{&sigma;})^2)`</p>
-		</p>
-		<p>
-		<b>>>Tchebysheff Inequality Theorem</b> It helps determine proportion of observation expected within a certain number of standard deviation from the mean, even if data is not <i>normally distributed</i>.<br>
-		Given a number `k &ge;1`, and set of `n` measurements, at least, `1 -\frac{1}{k^2}` of the measurements will lie within `k` standard deviation of their mean, and following deduction can be made : <br>
-		Lower limit = mean - `k &times;` s.d.<br>
-		Upper limit = mean - `k &times;` s.d.<br>
-		</p>
-		<p>
-		<b>>> (Standardized) Moments</b> Moments are a set of parameters to measure a distribution. Four moments are: 1st moment -> Mean 2nd Moment -> Variance 3rd Moment - Skewness 4th Moment -> Kurtosis <br>
-		<b>>> 3rd Moment -> Skewness</b> is a measure of the asymmetry of the probability distribution of data and defined as:<br>
-		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&gamma; = \frac{1}{N&sigma;^3}\sum_{i=1}^n (x_(i)- &mu;)^3`<br>
-		Generally, If `Mean &gt; Mode`, the skewness is positive having <i>tail</i> on the right side, and if `Mean &lt; Mode`, the skewness is negative, with  <i>tail</i> on the left side of the distribution. <br>
-		<img src="images/skew.png" alt="skewness" width="650" height="180" class="image_full"><br>
-		</p>
-		<p>Pearson Skewness Coefficient (based on Mode) is defined as: `\frac{Mean - Mode}{s.d.}` and based on Median, it is `\frac {3 (Mean - Median)}{s.d.}`
-		</p>
-		<p><b>>> Kurtosis</b> refers to the degree of peakedness of a frequency curve. It tell how tall and sharp the cenral peak is, relative to a standard bell curve of normal distribution.<br>
-		Kurtosis can be described in the following ways:
-		<ul>
-			<li>Playkurtic : When Kurtosis `&lt; 0`. The curve is more flat and wide.</li>
-			<li>Leptokurtic : When Kurtosis `&gt; 0`. The curve is more peaked.</li>
-			<li>Mesokurtic : When the Kurtosis `= 0` (<i>normal</i> in shape)</li>
-		</ul>
-		<img src="images/kurt.png" alt="kurtosis" width="480" height="200" class="image_full">
-		</p>
-		<p>
+<b>>> Covariance</b> between two random vairable, `x` and `y` measures how two variables are related. Positive covariance means the two variables are positively related, and they move in the same direction.
+Negative covariance means that the variables are inversely related, or that they move in opposite directions.</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;COV `(x,y) = \frac{\sum_{i=1}^n (x-&mu;_x)(y-&mu;_y)}{n-1}`<br>
+where `&mu;_x` is mean of `x` and `&mu;_y` is mean of `y` and `n` is the total number of data values.</p>
+<p>
+<b>>> Standard Deviation</b> is the square root of the variance</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;s.d.`=\sqrtvariance (&sigma;^2) = \sqrt\frac{\sum{x - &mu;}^2}{N}`<br>
+Standard Deviation provides a measure in standard units of how far the data values fall from the sample mean. In a <b>normal distribution</b>, 68% of the data values fall apprx one standard deviation (1 SD) on either side of the mean. 
+95% fall two standard deviation (2 SD) on either side of the mean, and 99% of the data values fall approximately three standard deviation (3 SD) on either side of the mean.
+</p>
+<p>
+<b>>> Normal Distribution</b> Normal or Gaussian Distribution is a probability distribution of data symmetric about the mean, (and resembles bell-curve) implying data near the mean are more frequent in occurrence than data far from the mean. 
+<i>Coefficient of skewness</i> and <i>Coefficient of Kurtosis</i> are 0 for normal distribution. It can represented as below: </p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`f(x) = \frac{1}{&sigma;\sqrt2&pi;}e^(-1/2(\frac{x-&mu;}{&sigma;})^2)`</p>
+<p>
+<b>>>Tchebysheff Inequality Theorem</b> It helps determine proportion of observation expected within a certain number of standard deviation from the mean, even if data is not <i>normally distributed</i>.<br>
+Given a number `k &ge;1`, and set of `n` measurements, at least, `1 -\frac{1}{k^2}` of the measurements will lie within `k` standard deviation of their mean, and following deduction can be made : <br>
+Lower limit = mean - `k &times;` s.d.<br>
+Upper limit = mean - `k &times;` s.d.<br>
+</p>
+<p>
+<b>>> (Standardized) Moments</b> Moments are a set of parameters to measure a distribution. Four moments are: 1st moment -> Mean 2nd Moment -> Variance 3rd Moment - Skewness 4th Moment -> Kurtosis <br>
+<b>>> 3rd Moment -> Skewness</b> is a measure of the asymmetry of the probability distribution of data and defined as:</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&gamma; = \frac{1}{N&sigma;^3}\sum_{i=1}^n (x_(i)- &mu;)^3`<br>
+Generally, If `Mean &gt; Mode`, the skewness is positive having <i>tail</i> on the right side, and if `Mean &lt; Mode`, the skewness is negative, with  <i>tail</i> on the left side of the distribution. <br>
+<img src="assets/img/skew.png" alt="skewness" width="650" height="180" class="image_full"><br>
+</p>
+<p>Pearson Skewness Coefficient (based on Mode) is defined as: `\frac{Mean - Mode}{s.d.}` <br>and based on Median, it is `\frac {3 (Mean - Median)}{s.d.}`
+</p>
+<p>
+<b>>> Kurtosis</b> refers to the degree of peakedness of a frequency curve. It tell how tall and sharp the cenral peak is, relative to a standard bell curve of normal distribution.<br>
+Kurtosis can be described in the following ways:
+<ul>
+	<li>Playkurtic : When Kurtosis `&lt; 0`. The curve is more flat and wide.</li>
+	<li>Leptokurtic : When Kurtosis `&gt; 0`. The curve is more peaked.</li>
+	<li>Mesokurtic : When the Kurtosis `= 0` (<i>normal</i> in shape)</li>
+</ul>
+<img src="assets/img/kurt.png" alt="kurtosis" width="480" height="200" class="image_full">
+</p>
+<p>
 		<b>>> Correlation</b> It measures the interdependence between two variables and illustrate how closely two variables move together. Correlation value range between -1.0 and 1.0
 		A correlation value of -1.0 represents negative correlation between said variables and they move in opposite direction. A correlation value of 0 means no linear relationship at all. A perfect positive correlation value is 1. below given image is to illustrate it.
-		<img src="images/Corr_coeff.png" alt="correlation coefficient" width="520" height="250" class="image_full">
+		<img src="assets/img/Corr_coeff.png" alt="correlation coefficient" width="520" height="250" class="image_full">
 		</p>
 		<p>
 		<b>>> Pearson Correlation Coefficient</b> It is between two <i>linearly</i> related variables, and required three assumption to be true i.e, 1. interval or ratio level, 2. Bivariable normally distributed 3. Linearly related. <br> For sample, it is defined as : </p>
 		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&rho;=\frac{\sum(x_(i)-x&#772;)(y_(i)-y&#772;)}{\sqrt(\sum(x_(i)-x&#772;)^2\sum(y_(i)-y&#772;)^2)}`
 		</p>
-		where `&rho;=` correlation coefficient,&emsp;`x_(i) = `values of the x-variable in sample &emsp; `x&#772;=` mean of the values of the x-variable &emsp;&emsp;&emsp; `y_(i) = ` valus of the y-variable in a sample &emsp; `y&#772;=` mean of the values of the y-variable
-		<p>For a population, correlation coefficient is defined as:<br>
-		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&rho;_(X,Y)=\frac{cov(X,Y)}{&sigma;_(x)&sigma;_(Y)}` <br>where `cov(x,y) = ` covariance between `x` and `y` &emsp; `&sigma;_(x)=` standard deviation of `X` &emsp;&emsp; `&sigma;_(Y) =` standard deviation of `Y`
+		where `&rho;=` correlation coefficient,<br>`x_(i) = `values of the x-variable in sample <br> `x&#772;=` mean of the values of the x-variable <br> `y_(i) = ` valus of the y-variable in a sample <br> `y&#772;=` mean of the values of the y-variable
+		<p>For a population, correlation coefficient is defined as:</p>
+		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&rho;_(X,Y)=\frac{cov(X,Y)}{&sigma;_(x)&sigma;_(Y)}` <br>where `cov(x,y) = ` covariance between `x` and `y` &emsp; `&sigma;_(x)=` standard deviation of `X` &emsp;&emsp; `&sigma;_(Y) =` standard deviation of `Y`
 		</p>
 		<p>
 		<b>>> Spearman's Rank Correlation Coefficient</b> It requires two assumption to be true i.e, 1. interval or ratio level or ordinal(categorical data) 2. monotonically related. A monotonic function is one that either never increases or never decreases as its independent variable increases. Below given image is to demonstrate that  <br>

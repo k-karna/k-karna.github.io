@@ -65,7 +65,7 @@ docs-en:
       - title:  CV02 - Feature Detection and Matching
         url:    /fd.html
       - title:  CV03 - Object Detection Models - Two-stage Detectors (SS, RCNN based)
-        url:    /2022-05-23-object.md
+        url:    /objmodel.html
       - title:  CV04 - Object Detection Models - One-stage Dectectors (YOLO, RetinaNet)
         url:    /objmodel1.html
       - title:  CV05 - Evaluation Metrics used in CV problems

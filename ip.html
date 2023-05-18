@@ -34,7 +34,7 @@ sidebar:
         <p>Date: 13<sup>th</sup> May 2022</p>
 
 		<p><u>Point Processes</u> are those processes where each output pixel value depends on only the corresponding input pixel values. It can be pixel transform, color and brightness correction or other transformations.</p>
-		<h1><a id="pt">Pixel Transformer</a></h1>
+		<h2><a id="pt">Pixel Transformer</a></h2>
 		<p>A general pixel transformer is a function that takes one or more input images and produces an output image. It can be defined as: </p>
 		<p style="color: rgb(81, 81, 94);">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`g(X) = h(f(X))` &emsp; or &emsp; `g(X) = h(f_(0)(X), ... ,f_(n)(X))`</p>
 		<p>where `X` is D-dimensional (usually D=2 for images). For discrete images, the domain consists of a finite number of <i>pixel location, `x = (i,j)`</i>. The above equation can be written as : </p>
@@ -48,7 +48,8 @@ sidebar:
 		<p style="color: rgb(81, 81, 94);">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`g(X) = (1 - &alpha;)f_(0)(X) + &alpha;f_(1)(X)`</p>
 		<p>>> <u>Gamma Correction :</u> This highly used non-linear transform is used to remove the non-linear mapping between input raidnace nd qunatizex pixel values. To invert the gamma mapping applied by the sensor, we use :</p>
 		<p style="color: rgb(81, 81, 94);">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`g(X) = [f(X)]^(1/&gamma;)` &emsp;&emsp;&emsp;&emsp; where a gamma value of `&gamma; &asymp; 2.2` is a reasonable fit. </p>
-		<h1><a id="cm">Compositing and Matting</a></h1>
+		
+		<h2><a id="cm">Compositing and Matting</a></h2>
 		<p><u>Matting :</u> In photo/video applications, when an object need to cut out from place and put it on top of another, <i>matting</i> is the process of extracting the object from the original image.<br>
 		<u>Compositing :</u> It is process inserting an object into another image.</p>
 		<p>The intermediate representation used for the foreground object between these two stages is called an <u>alpha-matted color image</u>. This <i>alpha-matted color image</i> contains a fourth <i>alpha</i> channel `&alpha;` making channel RGBA. It describes the relative amount of <i>opacity </i> at each pixel.<br>
@@ -56,7 +57,8 @@ sidebar:
 		To Composite a new (or foreground) image op top of an old image, the <u>over operator</u> is used :</p>
 		<p style="color: rgb(81, 81, 94);">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`C = (1 - &alpha;)B + &alpha;F`</p>
 		This operator attentuates the influence of the background image, `B` by a factor of `(1 - &alpha;)` and then in the color (and opacity) values corresponding to foreground image, `F`.
-		<h1>Histogram Equalization</h1>
+		
+		<h2>Histogram Equalization</h2>
 		<p>Making Histogram of an image is to plot the individual color channels and luminance values within the image. From Histogram, we can compute relevant statistics lik maximum, minimum, and average intensity values. 
 		If we need to improve brightness and gain control of an image in a way that automatically determines their best value, we need to have flat Histogram.</p>
 		<p><u>Histogram Equalization</u> is the way to do it, it helps to find an intensity mapping function `f(I)` such that the resulting histogram is flat. 
@@ -66,14 +68,14 @@ sidebar:
 		However, the resulting image, then, lacks contrast, and muddy-looking which can be compensated by applying mapping function as :
 		<p style="color: rgb(81, 81, 94);">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`f(I) = &alpha;c(I) + (1-&alpha;)I`</p>
 
-		<h1>Adaptive Histogram Equalization</h1>
+		<h2>Adaptive Histogram Equalization</h2>
 		<p>If the pixel intensity varies a lot throughout the image, making certain region of image significantly darker or lighter than the most of the image, it is preferable to divide the image into `M&times;M` block and perform seprate histogram equalization in each sub-block.<br>
 		<img src="assets/img/ahe.png" width="700" height="190" alt="AHE" class="image_full"><br>
 		However, this kind of equalization can give rise to the visualization of sub-block borders as shown in the image above, and fails to sup1ress <i>noise in b1ckground</i>
 		To overcome this, a bilinear interpolation is carried out with below given mapping: </p>
 		<p style="color: rgb(81,81,94);">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`y = T(x) = round (\frac{L_(max)-1}{N&times;M}H_(c)k) &emsp;0&le;x&lt;L_(max)`</p>
 		<p>where `y=T(x)` is transformation function, `N&times;M` is input image, `L_(max)` is maximum gray level, `H_(c)` cumulative histogram</p>
-		<h1>Contrast Limited Adaptive Histogram Equalization (CLAHE) </h1>
+		<h2>Contrast Limited Adaptive Histogram Equalization (CLAHE) </h2>
 		<p>
 		CLAHE solves the noise problem, by limiting the improvement of the contrast. The slope associated with the gray level assignment gets 1imited by cutting <i>1contrast factor)</i> the local histogram over a certain value.<br>
 		With a low factor, the maximum slope of the local histogram will be low resulting in poor improvement. For example, contrast factor value of 1 keeps it at original image value essentially, whereas high factor such as `100` makes it AHE.</p>
@@ -81,7 +83,7 @@ sidebar:
 		<p style="color: rgb(81, 81, 94)">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&beta; = \frac{N&times;M}{L_(max)}(1 + \frac{&alpha;}{100}(s_(max)-1))`</p>
 		<p>where `S_(max)` is the maximum possible slope value, and as `&alpha;` values varies between `0` and `100`, maximum slope gets decided.</p>
 
-		<h1>Numerical Spatial Filtering</h1>
+		<h2>Numerical Spatial Filtering</h2>
 
 		<p><u><b>Principle of Superimposition : </b></u>If the input to the system consists of a weighted sum of different images, the system's response is the Superimposition (that is weighted sum) of the responses to the individual input images.</p>
 		<p><u><b>Linearity :</u></b> For example, If `I_(1)(i,j)` and `I_(2)(i,j)` are two images with `a` and `b` arbitary constants, and &Theta; represents an operator that transforms an image into another with the same dimenions, then it can be said that operator &Theta; is linear, if and only if it follows the Principle of Superimposition</p>
@@ -89,7 +91,7 @@ sidebar:
 		<p><u><b>Homogeneity Property :</b></u> By multiplying the input image `I_(1)` by a constant &alpha;, the linear system responds with the appropriate value corresponding to the input image multiplied by the same constant &alpha;</p>
 		<p style="color: rgb(81, 81, 94)">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&Theta;{&alpha;&sdot;I_(1)(i,j)} = &alpha; &sdot;&Theta;{I_(1h1(i,j)}`</p>
 
-		<h1>Impulse Response and Point Spread Function :</h1>
+		<h2>Impulse Response and Point Spread Function :</h2>
 		<p>Following Superimposition principle, we can derive the nature of operator applied to an image just by observing only the output image. This is achieved as follow :<br>
 		1. <i>Decomposing</i> the input image `I(i,j)` into elementary components<br>
 		2. <i>Evaluate</i> the system's response to each elementary components.<br>
@@ -108,7 +110,7 @@ sidebar:
 		<p>where the <i>impulse response</i> -- `h(i,j;l,k)` is the operator's response `&Theta;` at the input pixel at position `(i,j)` of the input image. This <i>impulse response</i> is also <u>Point Spread Function (PSF)</u> of the system.</p>
 		<p>This suggests that if the operator's response &Theta; to a pulse is known, by using eq(2) the response to any pixel `(i,j)` can be calculated, and operator's PSF represents what we get if we apply the operator on a point source : </p>
 		<p style="color: rgb(81, 81, 94)">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&Theta;`[point_source]` = PSF` or &emsp;`&Theta;{&delta;(i-l,j-k)} = h(i,j;l,k)` </p>
-		<h1>Spatial Invariance</h1>
+		<h2>Spatial Invariance</h2>
 		<p>The linear operator &Theta; is called spatially invariant or <i>shift invariant</i> if the response of the operator does not depend explicitly on the position `(i,j)` in the image. i.e, an input translation also causes an appropriate translation into output.</p>
 		<p>From eq(2), if we consider the input impluse at the origin `(l,k)=0` , then :</p>
 		<p style="color: rgb(81, 81, 94)">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`h(i,j;l,k) = &Theta;{&delta;(i-l,j-k)}`<br>
@@ -116,22 +118,22 @@ sidebar:
 			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`= h(i-l,j-k)`</p>
 		<p>From the above eqation we can observe that &Theta; is spatially invariant if the operation performed on the input pixel depends only on the two translations `(i-l)` and `(j-k)` and not on the position `(i,j)`. Also, if eq(3) is not satisfied, &Theta; is called <i>spatial variant</i>.</p>
 
-		<h1>Local Operator : Smoothing</h1>
+		<h2>Local Operator : Smoothing</h2>
 		<p>Local operators using smoothing algorithms intend to eliminate or attentuate the noise present in image without althering the significant structures of the image itself. These can be linear or non-linear operators</p>
-		<h1>Arithmetic Average</h1>
+		<h2>Arithmetic Average</h2>
 		<p>If we have `n` images, with stochastic noise of value `V` in each pixel, then with this operator result is the arithmetic mean of th values pixel-by-pixel for `n` images `I_(1),I_(2),...,I_(n)` with corresponding noise `V_(1),V_(2),..,V_(n)`. The following expression :</p>
 		<p style = "color:rgb(81,81,94)">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`\frac{I_(1) +I_(2) +...+ I_(n)}{n} + \frac{V_(1) + V_(2) +... + V_(n)}{n}`</p>
 		<p>indicates with the first term the value of the image average, given by :</p>
 		<p style = "color:rgb(81,81,94)">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`I_(m)(i,j) = \frac{1}{n}\sum_{k=1}^n I_(k)(i,j)`</p>
 		<p>The second term  is the additive noise of the image after arithmetic average operator which has mean of zero and standard deviation `&sigma;//\sqrtn` value and therefore the noise is readuced by a factor `\sqrtn`</p>
 
-		<h1>Average Filter</h1>
+		<h2>Average Filter</h2>
 		<p>when only one image is available, this operator is used where each pixel of the image is stored with the average value of the neighboring pixels :</p>
 		<p style="color:rgb(81,81,94)">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`g(i,j) = \frac{1}{M} \sum_{l,k&isin;W_(ij)} f(l,k)` &emsp; `i,j = 0,1,...,N-1`</p>
 		<p>where `W_(ij)` indicates the set of pixels in the vicinity of the pixel `(i,j)` including the same pixel `(i,j)` involved in the calculation of the local average, and `M` is the total number of pixels included in the window `W_(ij)`. If the window considered is `3&times;3`, we have `M=9`.</p>
 		<p>Average Filter attentuate the noise present in the system, and with larger mask (or kernel), blurring effect and loss of detail start to become more evident.</p>
 		
-		<h1>Nonlinear Filters</h1>
+		<h2>Nonlinear Filters</h2>
 		<p>Nonlinear filters reduce the noise, leveling the image in the region with homogeneous gray levels, and ignoring the areas where there are strong variations. Therefore, the coefficients of the convolutional mask must vary from region to region, and chosen small. Few types of Nonlinear filters based on absolute  value are expressed as following : </p>
 		<p style="color:rgb(81,81,94)">(a)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`h(l,k) = 1 &emsp;&emsp;&emsp;if f|f(i,j) - f(l,k)|&lt;T` <br>
 			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`h(l,k) = 0 &emsp;&emsp;&emsp;otherwise`<br>where `T`is an experimental defined threshold value</p>
@@ -143,16 +145,16 @@ sidebar:
 		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`f(i,j) = f(i,j)`&emsp;&emsp;&emsp;otherwise</p>
 		<p style="color:rgb(81,81,94)">(d)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`f(i,j) = min_{(m,n &isin;L&times;L)}{|f(m,n) - \frac{1}{L&times;L}\sum_{l}\sum_{k}f(l,k)|}`<br>
 		in this case, the strong transitions are not always leveled.</p>
-		<h1>Median Filter</h1>
+		<h2>Median Filter</h2>
 		<p>The median filter attenuates the loss of image sharpness and blurring level.</p>
 		<p>It stores every pixel with the value of the median pixel obtained after the pixels of the neighbourhood within window size `L&times;L` have been sorted in increasing order. The median pixel has the highest value of the first half of the pixels in neighbourhood, and the lowest value of the other half of the remaining pixels.</p>
 		<p>In general window dimension of `L&times;L`, the position of the median pixel is the `(L&times;L//2+1)-th`</p>
 		<p>&emsp;&emsp;&emsp;&emsp;<img src="assets/img/med_filter.png", height="200" width="460" alt="median filter" class="image_full"></p>
-		<h1>Minimum and Maximum Filter</h1>
+		<h2>Minimum and Maximum Filter</h2>
 		<p>These filters can collectively called <i>Rank Filtering</i> The approach here is same as in median filter,, and produce a sorted list in the selected vicinity of `L&times;L` window <br>
 		The minimum filters introduces an image darkening in the filtered image (moves the histogram of the levels towards the low value). Similarly, the maximum filter tends to lighten the image (moves the histogram of the levels towards the high value)</p>
 		<p>While, median filter removes the impulsive noise, the minimum filter tends to remove the isolated white dots, and maximum filter tends to remove the isolated black dots.</p>
-		<h1>Gaussian Smoothing Filter</h1>
+		<h2>Gaussian Smoothing Filter</h2>
 		<p>These filters define the coefficient of the Convolution mask according to Gaussian function, and are effective for attenuating Gaussian noise in the image. The impulse response function `h(l,k)`, modeled by the discrete Gaussian fuction with zero mean, is given by :</p>
 		<p style="color:rgb(81,81,94); font-size:20px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`h(l,k) = c&sdot;e^(-\frac{l^2 + k^2}{2&sigma;^2})`</p>
 		<p>where `&sigma;` is the standard deviation of the associated probability distribution, `c` is the normalization factor which is assumed to be equal to `1`</p>

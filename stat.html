@@ -44,10 +44,9 @@ Upper limit = mean - `k &times;` s.d.<br>
 <p>
 <b>>> (Standardized) Moments</b> Moments are a set of parameters to measure a distribution. Four moments are: 1st moment -> Mean 2nd Moment -> Variance 3rd Moment - Skewness 4th Moment -> Kurtosis <br>
 <b>>> 3rd Moment -> Skewness</b> is a measure of the asymmetry of the probability distribution of data and defined as:</p>
-<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&gamma; = \frac{1}{N&sigma;^3}\sum_{i=1}^n (x_(i)- &mu;)^3`<br>
-Generally, If `Mean &gt; Mode`, the skewness is positive having <i>tail</i> on the right side, and if `Mean &lt; Mode`, the skewness is negative, with  <i>tail</i> on the left side of the distribution. <br>
-<img src="assets/img/skew.png" alt="skewness" width="650" height="180" class="image_full"><br>
-</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&gamma; = \frac{1}{N&sigma;^3}\sum_{i=1}^n (x_(i)- &mu;)^3`</p>
+<p>Generally, If `Mean &gt; Mode`, the skewness is positive having <i>tail</i> on the right side, and if `Mean &lt; Mode`, the skewness is negative, with  <i>tail</i> on the left side of the distribution. </p>
+<p><img src="assets/img/skew.png" alt="skewness" width="650" height="180" class="image_full"></p>
 <p>Pearson Skewness Coefficient (based on Mode) is defined as: `\frac{Mean - Mode}{s.d.}` <br>and based on Median, it is `\frac {3 (Mean - Median)}{s.d.}`
 </p>
 <p>
@@ -69,9 +68,9 @@ Kurtosis can be described in the following ways:
 		<b>>> Pearson Correlation Coefficient</b> It is between two <i>linearly</i> related variables, and required three assumption to be true i.e, 1. interval or ratio level, 2. Bivariable normally distributed 3. Linearly related. <br> For sample, it is defined as : </p>
 		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&rho;=\frac{\sum(x_(i)-x&#772;)(y_(i)-y&#772;)}{\sqrt(\sum(x_(i)-x&#772;)^2\sum(y_(i)-y&#772;)^2)}`
 		</p>
-		where `&rho;=` correlation coefficient,<br>`x_(i) = `values of the x-variable in sample <br> `x&#772;=` mean of the values of the x-variable <br> `y_(i) = ` valus of the y-variable in a sample <br> `y&#772;=` mean of the values of the y-variable
+		where,<br> `&rho;=` correlation coefficient,<br>`x_(i) = `values of the x-variable in sample <br> `x&#772;=` mean of the values of the x-variable <br> `y_(i) = ` valus of the y-variable in a sample <br> `y&#772;=` mean of the values of the y-variable
 		<p>For a population, correlation coefficient is defined as:</p>
-		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&rho;_(X,Y)=\frac{cov(X,Y)}{&sigma;_(x)&sigma;_(Y)}` <br>where `cov(x,y) = ` covariance between `x` and `y` &emsp; `&sigma;_(x)=` standard deviation of `X` &emsp;&emsp; `&sigma;_(Y) =` standard deviation of `Y`
+		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&rho;_(X,Y)=\frac{cov(X,Y)}{&sigma;_(x)&sigma;_(Y)}` <br>where,<br> `cov(x,y) = ` covariance between `x` and `y`<br>`&sigma;_(x)=` standard deviation of `X`<br>`&sigma;_(Y) =` standard deviation of `Y`
 		</p>
 		<p>
 		<b>>> Spearman's Rank Correlation Coefficient</b> It requires two assumption to be true i.e, 1. interval or ratio level or ordinal(categorical data) 2. monotonically related. A monotonic function is one that either never increases or never decreases as its independent variable increases. Below given image is to demonstrate that  <br>
@@ -81,8 +80,7 @@ Kurtosis can be described in the following ways:
 		<p style="font-size: 18px;">
 		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`r_(s) = &rho;_(R(X),R(Y)) = \frac{cov(R(X),R(Y))}{&sigma;_(R(x))&sigma;_(R(Y))}` 
 		</p>
-		where `&rho;` denotes <i>Pearson Correlation Coefficient</i> of rank variables,&emsp;`
-		cov(R(X),R(Y))` is covariance of rank variables &emsp;&emsp;`&sigma;_(R(X))` and `&sigma;_(R(Y))` are standard deviations of rank variables.<br>
+		where,<br> `&rho;` denotes <i>Pearson Correlation Coefficient</i> of rank variables,<br>`cov(R(X),R(Y))` is covariance of rank variables <br>`&sigma;_(R(X))` and `&sigma;_(R(Y))` are standard deviations of rank variables.<br>
 		<b>>> </b>If all `n` ranks are <i>distinct integers</i>, it can be computed as:
 		<p style="font-size: 18px;">
 		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`r_(s)= 1 - \frac{6 \sumd_{i}^2}{n(n^2 - 1)}`

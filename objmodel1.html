@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Object Detection Models : 2
+title: Object Detection Models - 2
 sidebar:
   nav: "docs-en"
 ---
@@ -28,42 +28,35 @@ sidebar:
 
 
 <body>
+	<p>Date: 12<sup>th</sup> Dec 2022</p>
+	<h2>You Only Look Once (YOLO)</h2>
+	<p>YOLO is a single convolutional neural network based model, which unlike, <a href="objmodel.html#rc">R-CNN based models</a>, simultaneously, predicts multiple bounding boxes and its class probabilities of those boxes (Redmon et al., 2016).</p>
+	<p>Few advantages are:<br>
+	YOLO is extremely fast. As frame detection doesn't go into a complex pipeline, but taken as a regression problem, YOLO gets to process streaming video real-time with less than 25 milliseconds of latency.<br>
+	It, unlike sliding window and Region-proposal based technique, uses feature extracted from the entire image, to predict all bounding boxes and its classes.<br>
+	YOLO, also, gets to generalize well with unexpected input images/frames - just lags a bit with accuracy.</p>
+	<p><b>Detection :</b></p>
+	<p>YOLO system divides the input image into an `S&times;S` grid, where each grid cells preditcs `B` bounding boxes. <br>
+	Each bounding boxes consists of 5 predictions i.e, `x, y, w, h,` and confidence, where `(x,y)` represent the center of box relative to grid cell. `(w,h)` relative to the whole image.
+	Confidence is given by `Pr(Object) &lowast; IOU_(pred)^(truth)` and represent confidence of box containing object and its accuracy.<br>
+	Each grid cell also predicts `C` class probabilities `Pr(Class_i | Object)` This is probability of grid containing an object - it predict one class probability per grid cell.</p>
+	<p>At test time, both class probabilities gets multiplied 
+	`Pr(Class_i | Object) &lowast;Pr(Object) &lowast; IOU_(pred)^(truth)`, providing information on probability of object class in the box, and how well box fits the object.
+	</p>
+	<p><b>Network Architecture :</b></p>
+	<p>Architecture of YOLO is inspired by googLeNet. It has 24 convolutional layers, followed by 2 Fully-connected layers, and instead of inception blocks used in googLeNet, YOLO use `1&times;1` reduction
+	layer - to reduce the feature space from preceding layers, followed by `3&times;3` convolutional layer. Network architecture is as shown below:<br>
+	&emsp;&emsp;<img src="assets/img/YOLO_arch.png" alt="YOLO Architecture" width="650" height="350" class="image_full"><br>
+	During training `224&times;224` resolution image is used, however during detection, `448&times;448` reolution is used for fine-grained visual information. Similarly, linear activation function is used in the final layer, whereas leaky ReLU is used in the layers prior to it.
+	</p>
 
-      	<p>Date: 12<sup>th</sup> Dec 2022</p>
-	
-        <h1><a id="yolo">You Only Look Once (YOLO)</a></h1>
-        <p>YOLO is a single convolutional neural network based model, which unlike, <a href="objmodel.html#rc">R-CNN based models</a>, simultaneously, predicts multiple bounding boxes and its class probabilities of those boxes (Redmon et al., 2016).</p>
-        <p>Few advantages are:<br>
-        YOLO is extremely fast. As frame detection doesn't go into a complex pipeline, but taken as a regression problem, YOLO gets to process streaming video real-time with less than 25 milliseconds of latency.<br>
-        It, unlike sliding window and Region-proposal based technique, uses feature extracted from the entire image, to predict all bounding boxes and its classes.<br>
-        YOLO, also, gets to generalize well with unexpected input images/frames - just lags a bit with accuracy.</p>
-		<p><b>Detection :</b></p>
-		<p>YOLO system divides the input image into an `S&times;S` grid, where each grid cells preditcs `B` bounding boxes. <br>
-		Each bounding boxes consists of 5 predictions i.e, `x, y, w, h,` and confidence, where `(x,y)` represent the center of box relative to grid cell. `(w,h)` relative to the whole image.
-		Confidence is given by `Pr(Object) &lowast; IOU_(pred)^(truth)` and represent confidence of box containing object and its accuracy.<br>
-		Each grid cell also predicts `C` class probabilities `Pr(Class_i | Object)` This is probability of grid containing an object - it predict one class probability per grid cell.</p>
-		<p>At test time, both class probabilities gets multiplied 
-		`Pr(Class_i | Object) &lowast;Pr(Object) &lowast; IOU_(pred)^(truth)`, providing information on probability of object class in the box, and how well box fits the object.
-		</p>
-		<p><b>Network Architecture :</b></p>
-		<p>Architecture of YOLO is inspired by googLeNet. It has 24 convolutional layers, followed by 2 Fully-connected layers, and instead of inception blocks used in googLeNet, YOLO use `1&times;1` reduction
-		layer - to reduce the feature space from preceding layers, followed by `3&times;3` convolutional layer. Network architecture is as shown below:<br>
-		&emsp;&emsp;<img src="assets/img/YOLO_arch.png" alt="YOLO Architecture" width="650" height="350" class="image_full"><br>
-		During training `224&times;224` resolution image is used, however during detection, `448&times;448` reolution is used for fine-grained visual information. Similarly, linear activation function is used in the final layer, whereas leaky ReLU is used in the layers prior to it.
-		</p>
-        
 
-        <p><b>References :</b></p>
-		<p>
-		<ul>
-			<li>[1] Redmon, J., Divvala, S., Girshick, R. and Farhadi, A., 2016. You only look once: Unified, real-time object detection. In <i>Proceedings of the IEEE conference on computer vision and pattern recognition </i>(pp. 779-788).</li>
-			<li>[2] </li>
-			<li>[3] </li>
-			<li>[4] </li>
-		</ul>
-		</p>
-		
-		</section>
-	</section>
+<p><b>References :</b></p>
+<ul>
+	<li>[1] Redmon, J., Divvala, S., Girshick, R. and Farhadi, A., 2016. You only look once: Unified, real-time object detection. In <i>Proceedings of the IEEE conference on computer vision and pattern recognition </i>(pp. 779-788).</li>
+	<li>[2] </li>
+	<li>[3] </li>
+	<li>[4] </li>
+</ul>
 </body>
 </html>

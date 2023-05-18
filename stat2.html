@@ -1,5 +1,6 @@
 ---
 layout: article
+title: Statistical Tests
 sidebar:
   nav: "docs-en"
 ---
@@ -29,8 +30,7 @@ sidebar:
 
 <body>
 
-	<h2>Statistical Tests</h2>
-	<p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 5<sup>th</sup> April 2023</p>
+	<p>Date: 5<sup>th</sup> April 2023</p>
 	<p>Before, <a href="stat2.html#one">One-sample t-test</a>, <a href="stat2.html#two">Two-sampled t-test</a>, <a href="stat2.html#paired">Paired-Sampled t-test</a>, and <a href="stat2.html#anova">ANOVA</a> statistical tests, a few baics :</p>
 	<p><b>Null Hypothesis :</b> In statistics, Null Hypothesis is a theory or claim that no relationship exists between two sets of data or variable being analyzed. For a specific characteristic of interest, e.g. mean `&mu;`, of two data sets, null hypothesis can be written as: `H_0: &mu;(&theta;) = &mu;_0`</p>
 	<p><b>Alternate Hypothesis :</b> Alternate Hypothesis, claims that a relationship does exists between two data sets, and any difference is not due to chance, but a cause</p>
@@ -38,7 +38,7 @@ sidebar:
 	<p><b>P-Value :</b> P-Value is the probability of obtaining results at least as extreme as the results actually observed, assuming the null hypothesis is true. It is used to determine the statistical significance of the test and whether the null hypothesis should be rejected or not.<br>
 	The lower the p-value is, the lower the probability of getting that result if the null hypothesis were true, and the result obtained with lower p-value is then said to be <i>statistically significant</i> as it allows us to reject the null hypothesis. `0.05` is generally considered as statistically significant p-value.
 	</p>
-	<h1><a id="one">One Sample t-test</a></h1>
+	<h2><a id="one">One Sample t-test</a></h2>
 	<p>One-sample t-test is a statistical test to compare the mean of a single group of data to a known value or hypothesized value of mean of population.<br>
 	If we have sample size of `n` observations with `x_1, x_2, ..., x_n` observations in group, `&mu;` as the mean of group, `&mu;_0` is mean of population with null hypothesis, `H_0` stating mean of group, `&mu;` is equal to known/hypothesized mean of population, and 
 	alternate hypothesis, `H_a` stating mean of group not equal to mean of population, which can be written as :<br>
@@ -51,7 +51,7 @@ sidebar:
 	<p>Under the null hypothesis, the t-statistic follows a t-distribution with n - 1 degrees of freedom. We can use this distribution to calculate the p-value of the test, which is the probability of obtaining a t-statistic, assuming the null hypothesis is true. 
 	If the p-value is less than a pre-specified significance level (e.g., 0.05), we reject the null hypothesis
 	</p>
-	<h1><a id="two">Two-sampled t-tests (Independent t-test)</a></h1>
+	<h2><a id="two">Two-sampled t-tests (Independent t-test)</a></h2>
 	<p>An independent t-test is a statistical test used to compare the means of two independent groups to determine if there is a significant difference between them.</p>
 	<p>If we have two groups of data: one with `x_1, x_2, ..., x_(n1)` and size `n1`, and other with `y_1, y_2, ..., y_(n2)` and size `n2` with null hypothesis stating that two groups have the same mean, i.e, `H_0: &mu;_1 = &mu;_2` 
 	and the alternative hypothesis is that they have different means i.e, `H_0: &mu;_1 &ne; &mu;_2`
@@ -67,7 +67,7 @@ sidebar:
 	<p>`t = \frac{\tildex - \tildey}{sp &sdot; \sqrt(\frac{1}{n1} + \frac{1}{n2})}`</p>
 	<p>Under the null hypothesis, the t-statistic follows a t-distribution with `(n1 + n2 - 2)` degrees of freedom. We can use this distribution to calculate the p-value of the test, assuming the null hypothesis is true. 
 	If the p-value is less than a pre-specified significance level (e.g., `0.05`), we reject the null hypothesis</p>
-	<h1><a id= "paired">Paired Sample t-test</a></h1>
+	<h2><a id= "paired">Paired Sample t-test</a></h2>
 	<p>A paired t-test is a statistical test used to compare the means of two measurements taken from the same individual, or related data sets. Here "paired" measurements is to represent things like:<br>
 	1. A measurement taken at two different times (e.g, pre-test, post-test)<br>
 	2. A measurement taken under two different conditions (e.g, control/experiment)<br>
@@ -80,7 +80,7 @@ sidebar:
 	<p>`s = \sqrt\frac{(\sumd_i - \tilded)^2}{n}`</p>
 	<p>Next, we calculate t-static as : `t = \frac{\tilded}{s//\sqrtn}`</p>
 	<p>Under the null hypothesis, the t-statistic follows a t-distribution with n - 1 degrees of freedom. We can use this distribution to calculate the p-value of the test, which is the probability of obtaining a t-statistic, assuming the null hypothesis is true. If the p-value is less than a pre-specified significance level (e.g., 0.05), we reject the null hypothesis</p>
-	<h1><a id="anova">Analysis of Variance (ANOVA)</a></h1>
+	<h2><a id="anova">Analysis of Variance (ANOVA)</a></h2>
 	<p>ANOVA is a statistical test used to compare the means of three or more groups. ANOVA is also known as "One Factor ANOVA" or "Between Subjects ANOVA"</p>
 	<p>Null Hypothesis in ANOVA is that the means of all groups have the same mean, i.e, `H_0: &mu;_1, = &mu;_2 = ,..., = &mu;_t`. The alternate hypothesis is then, at least one of the population mean is not equal to the others i.e, 
 	`H_a: &mu;_i &ne; &mu;_j` for some `i` and `j` where `i &ne; j`</p>

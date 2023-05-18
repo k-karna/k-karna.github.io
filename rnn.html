@@ -1,5 +1,6 @@
 ---
 layout: article
+title: Recurrent Neural Networks
 sidebar:
   nav: "docs-en"
 ---
@@ -29,15 +30,13 @@ sidebar:
 
 <body>
 
-	<section id="text">
-		<p class="heading">Recurrent Neural Networks</p>
-        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 25<sup>th</sup> Apr 2022</p>
-		<section id = "page">
+	
+        <p>Date: 25<sup>th</sup> Apr 2022</p>
 		<a href="rnn.html#ar">1. RNN Architecture</a><br>
 		<a href="rnn.html#df">2. Difficulty in Training RNNs</a>
             <p>Recurrent Neural Network is a type of neural network that is most suitable with sequential data or time series data.
                 It is heavily relied upon in the cases of ordinal or temporal problems, e.g., language translation, speech recognition, image captioning, etc.</p>
-            <h1><a id="ar">RNN Architecture</a></h1>
+            <h2><a id="ar">RNN Architecture</a></h2>
 				<p>Architecture of RNNs makes it suitable to solve those problems. In RNNs, firstly, hidden layers are grouped together to form a node. 
                 Afterwards, to predict an output value, each node at its time step, not only take input at that time step, but also from the node at previous time step.</p>
                 <img src="assets/img/RNN arch.png" alt="RNN Architecture" width="520" height="250" class="image_full">
@@ -56,7 +55,7 @@ sidebar:
 			<p>
 				In the equation, `W_(rec)` is recurrent weight, `&sigma;` is element-wise function, `W_(In)` is input weight collected in `&theta;`, `u_(t)` is input, `b` is bias, and `X_(t)` is state at time `t` (Pascanu, Mikolov, and Bengio, 2013).
 			</p>
-			<h1><a id="df">Difficulty in Training RNNs</a></h1>
+			<h2><a id="df">Difficulty in Training RNNs</a></h2>
 			<p>
 				When Backpropagation Through Time (BPTT) was proposed, it was RNNs that got the best of it. However, while backpropagating through deep RNNs, exploding or vanishing gradients can hinder learning process as the same weight i.e.,  `W_(rec)` is being shared by all the nodes in the architecture.<br>
 				Let's try to understand it well - In the above eq(1) of RNN architecture, we can understand that the cost function,   `&epsilon; = \sum_{1\let\leT} &epsilon;X_(t)` gets to measure the performance of some task, where `&epsilon;X_(t) = &tau;(x_(t))` and therefore gradients for backpropagation can be expressed with: </p>
@@ -89,8 +88,6 @@ sidebar:
 				[1] Pascanu, R., Mikolov, T. and Bengio, Y., 2013, February. On the difficulty of training recurrent neural networks. In <i>International conference on machine learning </i>pp. 1310-1318. <br>
 				[2] LeCun, Y., Bengio, Y. and Hinton, G., 2015. Deep learning. <i>Nature</i>, 521(7553), pp.436-444. <br>
 			</p>
-		</section>
 
-	</section>
 </body>
 </html>

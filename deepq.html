@@ -1,5 +1,6 @@
 ---
 layout: article
+title: Deep Q-Learning and Double Q-Learning
 sidebar:
   nav: "docs-en"
 ---
@@ -28,11 +29,8 @@ sidebar:
 
 <body>
 
-	<section id="text">
-		<p class="heading">Deep Q-Learning and Double Q-Learning</p>
-        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 27<sup>th</sup> Apr 2022</p>
-		<section id = "page">
-        <h1>Deep Q-Learning</h1>
+        <p>Date: 27<sup>th</sup> Apr 2022</p>
+        <h2>Deep Q-Learning</h2>
         <p>In Q-Learning, it can be impractical to represent `Q`-function as a table containing values for each combination of `s` and `a`.
         Instead, with Deep Q-Learning we train a function approximator, a neural network with parameters `&theta;` , to estimate the `Q`-values, i.e, `Q(s,a;&theta;)&asymp;Q^*(s,a)` This is done by minimising the loss at each step `t`</p>
         <p>In addition, we use a technique called <u>Experience Replay</u> during network updates. In this technique, at each time step, the transitions are added to a circular buffer called <i>replay buffer.</i>
@@ -60,7 +58,7 @@ sidebar:
         <p>&emsp;&emsp;&emsp;Loss `=\frac{1}{2}\sum_{B}(R(s_(t_(B)),a_(t_(B))) + &gamma;max_{a}(Q(s_(t_(B+1)),a)) - Q(s_(t_(B)),a_(t_(B))))^2` </p>
         <p>&emsp;&emsp;&emsp;&emsp;&emsp;`=\frac{1}{2}\sum_{B}TD_(t_(B))(s_(t_(B)),a_(t_(B)))^2`</p>
         <p>Afterwards, we backprop the loss error back into network, and through stochastic gradient descent, we update the weights on network</p>
-        <h1>Double Q-Learning</h1>
+        <h2>Double Q-Learning</h2>
         <p>In Q-Learning, update can be written as:</p>
         <p>&emsp;&emsp;&emsp;&emsp;`Q_(t+1)(s_(t),a_(t)) = Q_(t)(s_(t),a_(t)) + &alpha;_(t)(s_(t),a_(t))(R_(t)+&gamma;max_{a}Q_(t)(s_(t+1),a) - Q_(t)(S_(t),a_(t)))`&emsp;&emsp;&emsp;...eq(1)</p>
         <p>Th use of <i>max</i> operator in the above eq of Q-Learning, can cause large over-estimation of the action values. This leads to large performance penalty that slows the learning process too</p>
@@ -71,9 +69,6 @@ sidebar:
         <p>Double Q-Learning converges to the optimal policy in the limit, and faster than Q-Learning, its algorithm is given below :</p>
         <img src="assets/img/doubleq.png" width="600" height="280" alt="double-q-learning" class="image_full">
 
-		</section>
-
-	</section>
 
 </body>
 </html>

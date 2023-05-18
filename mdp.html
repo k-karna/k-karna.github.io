@@ -1,5 +1,6 @@
 ---
 layout: article
+title: Markov Decision Processes (MDP)
 sidebar:
   nav: "docs-en"
 ---
@@ -28,10 +29,7 @@ sidebar:
 
 
 <body>
-		<section id="text">
-		<p class="heading">Markov Decision Processes (MDP)</p>
-        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 30<sup>th</sup> Apr 2022</p>
-		<section id = "page">
+        <p>Date: 30<sup>th</sup> Apr 2022</p>
 			<p>Learner and Decision-maker &rarr; <i>agent</i><br>
 			Things it interacts with, outside agent &rarr; <i>environment</i></p>
 			<p>Here, in finite MDP
@@ -78,9 +76,5 @@ sidebar:
 				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`= R_(t+1) + &gamma;G_(t+1)`<br>
 			<p>Note that it works for all time steps `t&lt;T` , even if termination occurs at `t+1`. Also, if `G_(t)` is expected of consisting infinite terms where reward is non-zero and constant `&gamma;&lt;1`, we can write `G_(t)` as:</p>
 				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t)=\sum_{k=0}^&infin; &gamma;^k = \frac{1}{1-&gamma;}`
-
-		</section>
-
-	</section>
 </body>
 </html>

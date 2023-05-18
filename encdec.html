@@ -1,5 +1,6 @@
 ---
 layout: article
+title: Encoder-Decoder and Transformers
 sidebar:
   nav: "docs-en"
 ---
@@ -29,11 +30,8 @@ sidebar:
 
 <body>
 	
-	<section id="text">
-		<p class="heading">Encoder-Decoder and Transformers</p>
-        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 14<sup>th</sup> July 2022</p>
-		<section id = "page">
-        <h1 style="font-size: 18px;">Encoder-Decoder</h1>
+        <p>Date: 14<sup>th</sup> July 2022</p>
+        <h2>Encoder-Decoder</h2>
         <p>Encoder-Decoder architecture is based on Recurrent Neural Network(RNN). In RNN, we have a hidden state `h` which takes a variable length sequence `X = (x_(1),x_(2),...x_(T))`  to generate output `y`. At any time step `t`, hidden state `h_(t)` is updated by :</p>
         <p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`h_(t) = f(h_(t-1),x_(t))`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;..<i>eq(1)</i></p>
         <p>where `f` is a non-linear activation function. It can be element-wise sigmoid function or LSTM. Output at eah time step is the conditional distribution `p(x_(t) | x_(t-1),....x_(1))`</p>
@@ -57,7 +55,7 @@ sidebar:
         2. Deep LSTM should be used. LSTM with four layers is implemented.<br>
         3. To reverse the order of input sequence. For instance, instead of mapping the input sequence `a,b,c` to `&alpha;,&beta;,&gamma;` it asked to map `c,b,a` to `&alpha;,&beta;,&gamma;` </p>
         
-        <h1>Bahdanau Model</h1>
+        <h2>Bahdanau Model</h2>
         <p>Bahdanau model is based on RNN Encoder-Decoder that learns to align and translate simultaneously. This model also uses BiDirectional RNN (BiRNN) for Encoder.</p>
         <p>BiRNN Encoder consists of forward and backward RNN. The forward RNN `\vecf` reads the input sequence in order (from `x_(1)` to `x_(T)`) and provides forward hidden states i.e, `\vech_(1),....,\vech_(T)`.<br>
         The backward RNN `f` reads sequence in reverse (from `x_(T),..,x_(1))` providing sequence of backward hidden states `h_(1)^&larr;,....,h_(T)^&larr;`<br>
@@ -74,7 +72,7 @@ sidebar:
         <p>This way Bahdanau model achieve significantly improved translation in comparison with conventional Encoder-Decoder, and especially in the cases of longer sentences. </p>
         
 
-        <h1 style="font-size: 18px;">Attention Mechanism and Transformers</h1>
+        <h2>Attention Mechanism and Transformers</h2>
         <p>Transformers architecture is based on Encoder-Decoder, but uses Attention Mechanism. Lets first discuss Attention Mechanism and key things in it.<br>
         Like visual world, Attention Mechanism is two component framework, here :<br>
         volitional cues &rarr; queries<br>
@@ -119,7 +117,7 @@ sidebar:
         <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;where `head_(i) = `Attention`(QW_(i)^Q,KW_(i)^K,VW_(i)^V)`</p>
         <p>here, the projections are parameter matrices `W_(i)^Q&isin;&Ropf;^(d_(model)&times;d_(k)), W_(i)^K&isin;&Ropf;^(d_(model)&times;d_(k)),W_(i)^V&isin;&Ropf;^(d_(model)&times;d_(k))`, and `W^o&isin;&Ropf;^(hd_(v)&times;d_(model))`</p>
         
-        <h1>Transformers</h1>
+        <h2>Transformers</h2>
         <p>Transformers consists of an Encoder-Decoder pair, where each of them is a stack of `L` identical blocks. Encoder block is composed of Multi-Head attention and a position-wise feed-forward network (FFN).
         In addition, a residual connection, followed by Layer Normalization around each module. Decoder block, on the other hand, additionally include cross-attention modules between Multi-Head attention and position-wise FFNs.
         Transformers architecture can be seen below :</p>
@@ -131,14 +129,11 @@ sidebar:
         <p><b>Position-Wise FFN :</b> The position-wise FFN is a fully connected feed-forward module that operates separately and identically on each position</p>
         <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`FFN(H') = ReLU(H'W^1 +b^1)W^2 +b^2 `</p>
         <p><b>Position Encoding :</b>Since Transformers do not have recurrence or convolution, it doesn't really know the which word is at which position. Therefore, position needs to be encoded. One way is to append sine and cosine waves with different frequencies with word vector. This helps transformer to learn the word position because each position have unique combination of values.</p>
-        <h1>References :</h1>
+        <p>References :</p>
         [1] Cho, K., Van Merriënboer, B., Gulcehre, C., Bahdanau, D., Bougares, F., Schwenk, H. and Bengio, Y., 2014. Learning phrase representations using RNN encoder-decoder for statistical machine translation. <i>arXiv preprint arXiv:1406.1078.</i><br>
         [2] Sutskever, I., Vinyals, O. and Le, Q.V., 2014. Sequence to sequence learning with neural networks. <i>Advances in neural information processing systems</i>, 27.<br>
         [3] Bahdanau, D., Cho, K. and Bengio, Y., 2014. Neural machine translation by jointly learning to align and translate. <i>arXiv preprint arXiv:1409.0473.</i>
-		
-		</section>
 
-	</section>
 
 
 </body>

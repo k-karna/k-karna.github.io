@@ -1,5 +1,6 @@
 ---
 layout: article
+title: Deeper CNN Variants and their Architecture
 sidebar:
   nav: "docs-en"
 ---
@@ -30,12 +31,9 @@ sidebar:
 
 <body>
 	
-	<section id="text">
-        <p class="heading">Deeper CNN Variants and their Architecture</p>
-        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 13<sup>th</sup> May 2022</p>
-		  <section id = "page">
+        <p>Date: 13<sup>th</sup> May 2022</p>
         <a href="cnn_dp.html#an">1. AlexNet</a>, <a href="cnn_dp.html#vgg">2. VGG</a>, concept of <a href="cnn_dp.html#batch">Batch Normalization</a>, <a href="cnn_dp.html#rn">3. ResNet</a> and <a href="cnn_dp.html#dn">DenseNet</a><br>
-        <h1><a id="an">AlexNet</a></h1>
+        <h2><a id="an">AlexNet</a></h2>
         <p>
         AlexNet is one of the earliest versions of Deeper CNN and won the 2012 ImageNet challenge. It was first to be deployed with two GPUs using cross-GPU parallelization, where both get to read from and write to another memory directly.<br>
         Architecture of AlexNet consists of 8 learned layers - 5 convolutional layers, some of which are followed by pooling layer and 3 fully-connected layers, and for activation function, ReLU is preferred over <i>tanh</i> and <i>sigmoid</i> for being faster to train. </p>
@@ -46,7 +44,7 @@ sidebar:
         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Source: [Krizhevsky et al., 2012]
         <p>In AlexNet, to reduce test error, overlapping pooling is used i.e., `s &lt;z` (stride is less than pooling size) - `3&times;3` max pooling is used with stride of `2` wherever it was implemented after convolutional layers.
         All three fully-connected layers, in AlexNet afterwards, each have 4096 neurons and to reduce overfitting, <i>dropout</i> is used with the first two <i>fully-connected</i> layers.</p>
-        <h1><a id="vgg">VGG</a></h1>
+        <h2><a id="vgg">VGG</a></h2>
         <p>
         VGG is developed after AlexNet's success at Visual Geometry Group (VGG) Oxford University. 
         It deployed more depth to the ConvNet architecture by adding more convolutional layers which has been made possible by using small `3&times;3` kernels in all layers.
@@ -60,7 +58,7 @@ sidebar:
         <p>
         VGG blocks, afterwards followed by three fully-connected layers with 4096 neurons in two of them, and 1000 for each different class in the last fully-connected layer, before SoftMax. VGG networks ran on four nvidia Titan GPUs and took 2-3 weeks for single training. However, for its simplicity, it is still widely used as pre-trained ConvNet model.
         </p>
-        <h1><a id="batch">Batch Normalization</a></h1>
+        <h2><a id="batch">Batch Normalization</a></h2>
         <p>
         Batch Normalization is to solve the problem of <i>internal covariate shift</i> while training deep neural networks.</p>
         <p>Internal covariate shift is one of the subset of dataset shift that measures the data quality for the performance of network.
@@ -84,7 +82,7 @@ sidebar:
         <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`BN_(&gamma;,&beta;)(x_(i))&equiv;y_(i) &larr; &gamma;x&#770;_(i) + &beta;`&emsp;&emsp;&emsp;</p>
         <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;`=&gamma; &odot;\frac{x_(i) - &mu;_(B)}{\sqrt(&sigma;_(B)^2 + &isin;)} + &beta;`&emsp;&emsp;&emsp;//scale and shift</p>
         <p>Here, small constant `&isin; &gt; 0` is added to ensure no division by made by `0`. Also, `&mu;_(B)` and `&sigma;_(B)^2` counteracts scaling with noisy mean and variance, which rather leads to faster training and reduce overfitting than being a problem. Also, suitable mini-batch size for Batch-Normalization is `50 ~ 100`.</p>
-        <h1><a id="rn">ResNet</a></h1>
+        <h2><a id="rn">ResNet</a></h2>
         <p>From the previous two discussions, it appears that <i>learning better network is as easy as stacking layers</i>, but it can lead to the problem of vanishing/exploding gradients which impedes convergence as the number of stacked layers start to increase manifold. Batch Normalization is a way to resolve it [Ioffe & Szegedy, 2015].<br>
         However, when deep networks are able to start converging after batch normalization again, a new problem of <i>degradation</i> starts to emerge. Degradation is when with the increase of depth, network accuracy gets saturated and then sharply degrades.</p>
         <p>ResNet or <i>Deep Residual Learning</i> is proposed to resolve this degradation problem. It introduced the idea of <i>Residual learning block</i> and <i>shortcut connections</i>.<br> Consider we have `x` inputs to the first layer and &Hfr;`(x)` as underlying mapping. 
@@ -105,7 +103,7 @@ sidebar:
         <img src="assets/img/resnet_overall.png" alt="resnet_overall" width="550" height="350" class="image_full"><br>
         <p>Key things to note: 1. Adding a shortcut connection doesn't add additional parameters, so not adding to computational complexity. 2. <u>Dropout function </u>is not essential to ResNet architecture 3. Even with higher (~10 times) depth, ResNet requires less computational power than VGG-16/VGG-19</p>
 
-        <h1><a id="dn">DenseNet</a></h1>
+        <h2><a id="dn">DenseNet</a></h2>
         <p>
         DenseNet is proposed to ensure maximum information flow between layers in the network by connecting all layers (with matching feature-map sizes) directly with each other.
         Here, each layer obtains additional iputs from all preceding layers and passes on its own feature-maps to all subsequent layers.</p>
@@ -131,8 +129,7 @@ sidebar:
         [3] Ioffe, S., & Szegedy, C. (2015). Batch normalization: accelerating deep network training by reducing internal covariate shift. <i>arXiv preprint arXiv:1502.03167.</i><br>
         [4] Huang, G., Liu, Z., Van Der Maaten, L., & Weinberger, K. Q. (2017). Densely connected convolutional networks. <i>Proceedings of the IEEE conference on computer vision and pattern recognition </i>(pp. 4700–4708).
 
-		</section>
-	</section>
+
 
 
 </body>

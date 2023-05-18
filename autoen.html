@@ -1,5 +1,6 @@
 ---
 layout: article
+title: AutoEncoder and its Variants
 sidebar:
   nav: "docs-en"
 ---
@@ -38,15 +39,11 @@ sidebar:
 
 
 <body>
-	
-	<section id="text">
-		<p class="heading">AutoEncoder and its Variants</p>
-        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 14<sup>th</sup> July 2022</p>
-		<section id = "page">
+	<p>Date: 14<sup>th</sup> July 2022</p>
 		<p>AutoEncoders are a specific kind of neural networks, a bridge between supervised and unsupervised. It first encodes the input into a compressed form and learns from it in an
 		un-supervised manner a meaningful representation that helps to decode it back into a re-constructed input, hopefully as similar as the original input.<br>
 		When it was first introduced, it was used with <i>linear activation function</i> as a technique for dimensionality reduction.</p>
-		<h1>AutoEncoder (AE) Architecture</h1>
+		<h2>AutoEncoder (AE) Architecture</h2>
 		<p>AE consists of an encoder and decoder, where the encoder is a function `f` that maps an input `x&isin;&Ropf;^d` to hidden representation `h(x) &isin;&Ropf;^d`. The Encoder has the form:</p>
 		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`h = f(x) = s_{f}(Wx + b_(h))`</p>	
 		<p>where `s_(f)` is a <i>non-linear activation function</i>, typically a sigmoid function`(z) = \frac{1}{1+e^(-z)}`. The encoder is parameterized by a `d_(h)&times;d_(x)` weight matrix `W`, and a bias vector `b_(h)&isin;&Ropf;^d`</p>
@@ -57,7 +54,7 @@ sidebar:
 		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`J_(AE)(&theta;) = \sum_{x&isin;D_(n)} L(x,g(f(x)))`</p>
 		<p>where, `L` is the reconstruction error. Usually, it is `l_(2)` norm i.e, `L(x,y) = ||x-y||^2` in cases of linear reconstruction, and the cross-entropy loss when `s_(g)` is the sigmoid. A basic AutoEncoder Architecture can be seen below :</p>
 		<img src="assets/img/autoen.png" width="450" height="160" class="image_full">
-		<h1>Regularized AutoEncoder</h1>
+		<h2>Regularized AutoEncoder</h2>
 		<p>As AutoEncoder are in a way a tool for feature extraction, and therefore, it is always better to have more and more features extracted from the input. If we leave hidden node with less than the size of node in input, it can overfit.<br>
 		On the other hand, if we add equal or greater number of nodes in the hidden layer than the input node, it will simply the learn and pass the input representation. This is the case, we call - <u>over-complete hidden layer</u><br>
 		Therefore, we need to have some additional regularization added into network, so that more and more feature can be extracted into representation, without being overfit, and underfit. Few key Regularized AutoEncoder are discussed below :</p>
@@ -70,9 +67,7 @@ sidebar:
 		For each neuron `j`, the calculated empirical probability is `p'_(j) = \frac{1}{m}\sum_{i}a_(i)(x)`, where `i` iterates over the samples in the batch. The overall loss function then becomes : </p>
 		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`J_(SparseAE) = (\sum_{x&isin;D_(n)}L(x,g(f(x)))) + \sum_{j} KL (p||p'_(j))`</p>
 		<p>where, the regularization term in it aims at matching `p` to `p'`</p>
-	</section>
 
-	</section>
 
 </body>
 </html>

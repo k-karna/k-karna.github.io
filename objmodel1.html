@@ -1,27 +1,12 @@
 ---
 layout: article
+title: Object Detection Models : 2
 sidebar:
   nav: "docs-en"
 ---
 <!DOCTYPE HTML>
 <html>
 
-<head>
-<title>One-stage Detectors | Git Page - Konark Karna</title>
-<meta charset="utf-8"/>
-<meta name="author" content="Konark Karna">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="keywords" content="Convolution Neural Network Convolution Receptive Field Layer Pooling Max pooling Average Pooling Kernel Filter Fully-connected layer ReLU Konark Karna, Konark Karna India, Konark Karna Northumbria University, Konark Karna Newcastle, Konark Karna Computer Science,Data Scientist, Machine Learning Engineer, MSc Advanced Computer Science, Northumbria University,
-			       Data Analysis, Data Visualization, Machine Learning, Neural Networks, Deep Learning, Natural Language Processing">
-<link rel="stylesheet" type="text/css" href="basic.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Exo+2:400' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Josefin+Sans&family=Balthazar&family=Ropa+Sans&display=swap" rel="stylesheet"> 
-</head>
 <!--- Adding Google Analytics -->
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154990580-2"></script>
@@ -44,10 +29,8 @@ sidebar:
 
 <body>
 
-	<section id="text">
-        <p class="heading">Object Detection Models : 2</p>
-        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 12<sup>th</sup> Dec 2022</p>
-		<section id = "page">
+      	<p>Date: 12<sup>th</sup> Dec 2022</p>
+	
         <h1><a id="yolo">You Only Look Once (YOLO)</a></h1>
         <p>YOLO is a single convolutional neural network based model, which unlike, <a href="objmodel.html#rc">R-CNN based models</a>, simultaneously, predicts multiple bounding boxes and its class probabilities of those boxes (Redmon et al., 2016).</p>
         <p>Few advantages are:<br>
@@ -65,7 +48,7 @@ sidebar:
 		<p><b>Network Architecture :</b></p>
 		<p>Architecture of YOLO is inspired by googLeNet. It has 24 convolutional layers, followed by 2 Fully-connected layers, and instead of inception blocks used in googLeNet, YOLO use `1&times;1` reduction
 		layer - to reduce the feature space from preceding layers, followed by `3&times;3` convolutional layer. Network architecture is as shown below:<br>
-		&emsp;&emsp;<img src="images/YOLO_arch.png" alt="YOLO Architecture" width="650" height="350" class="image_full"><br>
+		&emsp;&emsp;<img src="assets/img/YOLO_arch.png" alt="YOLO Architecture" width="650" height="350" class="image_full"><br>
 		During training `224&times;224` resolution image is used, however during detection, `448&times;448` reolution is used for fine-grained visual information. Similarly, linear activation function is used in the final layer, whereas leaky ReLU is used in the layers prior to it.
 		</p>
         

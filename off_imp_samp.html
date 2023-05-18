@@ -1,5 +1,6 @@
 ---
 layout: article
+title: Off-Policy Prediction via Importance Sampling 
 sidebar:
   nav: "docs-en"
 ---
@@ -28,11 +29,8 @@ sidebar:
 
 <body>
 
-	<section id="text">
-		<p class="heading">Off-Policy Prediction via Importance Sampling</p>
-        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 30<sup>th</sup> Apr 2022</p>
-		<section id = "page">
-        <p>All learning contron methods seek to learn action values on optimal behaviour while exploring all actions. One approach for this - is to use two policies, one that is learned about and that becomes the optimal policy, and other that is more
+      <p>Date: 30<sup>th</sup> Apr 2022</p>
+      <p>All learning contron methods seek to learn action values on optimal behaviour while exploring all actions. One approach for this - is to use two policies, one that is learned about and that becomes the optimal policy, and other that is more
             explotory and is used to generate behavior.</p>
         <p>The policy being learned about is called <b> target policy</b><br>
         The policy that is used to generate behavior is called <b>behaviour policy</b><br>
@@ -59,9 +57,7 @@ sidebar:
         <p>As numerator and deominator cancels out in eq(1), we can understand importance sampling ratio depends only on policies and sequences.<br>
         In importance sampling, we wish to estimate expected returns under the target policy, but we get `G_(t)` returns due to behaviour policy with expectation i.e., &Eopf;`&#91; G_(t) | S_(t)=s&#93; = V_(b)(s)` which cannot converge to `v_(pi)`.
         Therefore, <i>Importance Sampling</i> that helps find right return is: <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&Eopf;`&#91;P_(t:T-1) G_(t) | S_(t)=s&#93; = V_(pi)(s)`</p>
-		</section>
 
-	</section>
 
 </body>
 </html>

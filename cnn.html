@@ -1,5 +1,6 @@
 ---
 layout: article
+title: Convolutional Neural Networks (CNN)
 sidebar:
   nav: "docs-en"
 ---
@@ -29,10 +30,7 @@ sidebar:
 
 <body>
 	
-	<section id="text">
-		<p class="heading">Convolutional Neural Networks (CNN)</p>
-        <p class = "dateline"><a href="notes.html"> &lt;&lt; Notes</a> || Date: 03<sup>rd</sup> May 2022</p>
-		<section id = "page">
+        <p>Date: 03<sup>rd</sup> May 2022</p>
         <a href="cnn.html#ar">1. CNN Architecture</a><br>
         <a href="cnn.html#cv">2. Convolution Layer</a><br>
         <a href="cnn.html#rl">3. ReLu Layer</a><br>
@@ -48,7 +46,7 @@ sidebar:
             Therefore, CNN can be extremely helpful with reducing computation complexity. Second factor is overfitting – even if you have unlimited computational capacity and time, ANN can easily overfit. 
             Having less parameters to train from is one of the perfect solutions to overcome the problem of overfitting, and CNNs tone down parameters to much smaller number than ANNs.
         </p>
-        <h1><a id="ar">CNN Architecture</a></h1>
+        <h2><a id="ar">CNN Architecture</a></h2>
         <p>
             CNN takes input of image as a tensor of order 3, and then pass it forward to different layers in CNN architecture i.e., convolutional layer, pooling layer, fully connected layer, ReLU layer, and loss layer. 
             The loss layer, however, is not needed in the prediction task, and used only when we are trying to learn CNN parameters from training examples. General structure of CNN architecture can be seen below in Fig 1. and will be discussed ahead.
@@ -64,7 +62,7 @@ sidebar:
         &emsp;&emsp;&emsp;&emsp;&emsp;<i>Fig 2: Receptive Field</i>
         </p>
         <p>
-            Before digging deeper into layers, lets first understand the principles that helps maintain <i>spatial invariance</i> in the earlier layers of CNNs i.e., <i>translation invariance</i> and <i>locality</i><br>
+        Before digging deeper into layers, lets first understand the principles that helps maintain <i>spatial invariance</i> in the earlier layers of CNNs i.e., <i>translation invariance</i> and <i>locality</i><br>
         <u>Translation Invariance</u> : Certain section of image or patch of pixel should doesn't depends on where it is located in representation, and our network should respond similarly to the same patch, regardless of where it appears in the image.<br>
         <u>Locality</u> : This principle suggests that the earliest layers of the network should focus on local regions to gain information on how it would be in representation without having to look at content of the image in distant regions.
         </p>
@@ -106,7 +104,7 @@ sidebar:
         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`[H]_(i,j,d) = \sum_{a-&Delta;}^&Delta;\sum_{b=-&Delta;}^&Delta;\sum_{c}[V]_(a,b,c,d)[X]_(i+a,j+b,c)`
         </p>
         <p>where `c` and `d` indexes input and output depth of image and representation. In essence, this is the definition of <i>convolutional layer</i>.</p>
-        <h1><a id="cv">Convolutional Layer</a></h1>
+        <h2><a id="cv">Convolutional Layer</a></h2>
         <p>In convolutional layer afterwards, when image kernel or filter convolves across the spatial dimensionality of the input image, we get a 2D vector called <i>feature map</i> or <i>activation map</i> calculated through scalar product. 
         Size of the <i>feature map</i> can be assessed as: </p>
         <p style="font-size: 18px;">
@@ -125,7 +123,7 @@ sidebar:
         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`\frac{(X-R) + 2Z}{S + 1}`
         <p>where `X` is the input size <i>(height&times;widht&times;depth)</i>, `R` is receptive field size, `Z` is the amount of padding set, and `S` is stride. Also, if the output of above eq is not a whole number, then the stride has been incorrectly set, and needs to be changed.
         </p>
-        <h1><a id="rl">ReLU Layer</a></h1>
+        <h2><a id="rl">ReLU Layer</a></h2>
         <p>Rectified Linear Unit or ReLU are in essense not a separate layer, but a component added with the convolutional layer after creating feature map and before passing it to the pooling layer.
         ReLU layer does not change the size of the output, which means both input and output from ReLU are of same size. </p>
         <p>
@@ -136,7 +134,7 @@ sidebar:
         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i>Fig 3: Activation function in ReLU layer</i>
         <p>Other activation function such as <i>tanH</i> or <i>sigmoid</i> can also be used and used to be used before the inception of <i>AlexNet</i>, however, after <i>AlexNet</i> implementation of ReLU, as it trains much faster, it has become new norm. Moreover, <i>softplus</i> function `f(x) = log(1 + e^x)` is sometimes used especially in the case of backprop while finding parameters. SoftPlus also trains much slower than ReLU</p>
 
-        <h1><a id="pl">Pooling Layer</a></h1>
+        <h2><a id="pl">Pooling Layer</a></h2>
         <p>Pooling layers aim to further reduce dimensionality of the representation received from convolutional layer while maintaining the depth to its standard size. Pooling layer also solve the sensitivity problem derived from convolutional layer.<br>
         For instance, if we take the image `X` with a sharp delineation between black and white and shift the whole image by one pixel to the right, i.e., `Z[i, j] = X[i, j + 1]`, then the output for the new image Z might be vastly different just by the shift of 1 pixel on edge.
         </p>
@@ -152,7 +150,7 @@ sidebar:
         Suppose, we set the convolutional layer input as X and the pooling layer output as Y with `2 &times;2` max pooling. This way whether or not the values of `X[i, j]` and `X[i, j + 1]` are different, or `X[i, j + 1]` and `X[i, j + 2]` are different, the pooling layer always outputs `Y[i, j] = 1`
         </p>
 
-        <h1><a id="fl">Fully-Connected Layer</a></h1>
+        <h2><a id="fl">Fully-Connected Layer</a></h2>
         <p>This is the last layer in CNN where we get to make prediction. Fully-Connected layer is similar to traditional neural network (ANN), however, before passing information into it, we need to flatten our multi-dimensional vector into 1D vector with <i>flattening</i> process. 
         </p>
         <p>Afterwards, information gets passed into this fully-connected layer where we can have <i>any</i> number of hidden layers before and each node is connected to the each node of both the previous and next layer. In the end, we make our classification using <i>binary cross-entropy</i> or <i>soft-max</i> depending on the case if binary or multi-class classification.</p>
@@ -163,11 +161,6 @@ sidebar:
         <p><b>References:</b></p>
         [1] O'Shea, K. and Nash, R., 2015. An introduction to convolutional neural networks. <i>arXiv preprint</i> arXiv:1511.08458. <br>
         Kuo, C.C.J., 2016. Understanding convolutional neural networks with a mathematical model. <i>Journal of Visual Communication and Image Representation</i>, 41, pp.406-413.
-        
-        
-		</section>
-
-	</section>
 
 	
 </body>

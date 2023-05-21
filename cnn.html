@@ -70,7 +70,7 @@ sidebar:
         denote the pixel at location `(i,j)` in the input image and hidden representation, respectively. Here, to have each unit of hidden layer recieve input we need our weight as fourth order tensor `W`, and so with `U` as bias, our network can be written as: </p>
         <p style="font-size: 18px;">
         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`[H]_(i,j) = [U]_(i,j) + \sum_{k}\sum_{l}[W]_(i,j,k,l) [X]_(k,l)`<br>
-        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;`=[U]_(i,j) + \sum_{a}\sum_{b}[V]_(i,j,a,b)[X]_(i+a,j+b)` &emsp;&emsp;&emsp;&emsp;&emsp; ... (1)
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`=[U]_(i,j) + \sum_{a}\sum_{b}[V]_(i,j,a,b)[X]_(i+a,j+b)` &emsp;&emsp;&emsp;&emsp; ...(1)
         </p>
         <p>
         Here, we switch from `W` to `V` as there is a one-to-one correspondence between coefficients in both fourth-order tensors. Also, we re-index `(k,l)` such that `k=i+a` and `l=j+b` where indices `a` and `b` run over both positive and negative offsets, covering the entire image. 
@@ -80,8 +80,7 @@ sidebar:
         Now, as we know from the first principle of <i>translation invariance</i> that any shift in the input `X` should simply lead to a shift in the hidden representation `H`. 
         This is only possible if `V` and `U` do not actually depend on `(i,j)` i.e., we have `[V]_(i,j,a,b) = [V]_(a_b)` and `U` is a constant, say `u`. Then using eq(1) we can re-write `H` as :
         </p>
-        <p style="font-size:18px;">
-        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`[H]_(i,j) = u + \sum_{a}\sum_{b}[V]_(a,b)[X]_(i+a,j+b)`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ... (2)
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`[H]_(i,j) = u + \sum_{a}\sum_{b}[V]_(a,b)[X]_(i+a,j+b)`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...(2)
         </p>
         <p>
         This is <u><i>Convolution</i></u>. We are effectively weighting pixels at `(i+a,j+b)` in the vicinity of location `(i,j)` with coefficients `[V]_(a,b)` to obtain the value of `[H]_(i,j)`. Also, `[V]_(a,b)` needs fewer coefficients than `[V]_(i,j,a,b)` as it no longer depends on the location within the image. 
@@ -90,8 +89,7 @@ sidebar:
         Now, lets look at the principle of <i>locality</i>. Here, it means that we do not need to look far away from location `(i,j)` in order to gain information while computing values for `[H]_(i,j)`. This means that outside some range i.e., `|a| &gt;&Delta;` or `|b|&gt;&Delta;`, we should set `[V]_(a,b) = 0`. 
         Then using eq(2), we can re-write `[H]_(i,j)` as: 
         </p>
-        <p style="font-size: 18px;">
-        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`[H]_(i,j) = u + \sum_{a=-&Delta;}^&Delta;\sum_{b=-&Delta;}^&Delta;[V]_(a,b)[X]_(i+a,j+b)`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ... (3)
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`[H]_(i,j) = u + \sum_{a=-&Delta;}^&Delta;\sum_{b=-&Delta;}^&Delta;[V]_(a,b)[X]_(i+a,j+b)`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ...(3)
         </p>
         <p>
         This eq(3) is in nutshell <i>convolutional layer</i>, and `[V]` is <i>convolutional kernel</i> or <i>filter</i>. This helps reduce parameters drastically without altering the dimensionality of input or representation. Thus the name - Convolutional Neural Network.
@@ -100,15 +98,13 @@ sidebar:
         However, all images are of three channels (RGB)  consisting of <i>height</i>, <i>width</i> and <i>depth</i>. This makes input image of third-order tensor where the first two concern spatial relationships and third assigns multidimensional representation to each pixel location.
         For eq(3), now convolutional kernel/filter `[V]_(a,b)` will be `[V]_(a,b,c)` and eq(3) can be re-written as:
         </p>
-        <p style="font-size: 18px;">
-        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`[H]_(i,j,d) = \sum_{a-&Delta;}^&Delta;\sum_{b=-&Delta;}^&Delta;\sum_{c}[V]_(a,b,c,d)[X]_(i+a,j+b,c)`
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`[H]_(i,j,d) = \sum_{a-&Delta;}^&Delta;\sum_{b=-&Delta;}^&Delta;\sum_{c}[V]_(a,b,c,d)[X]_(i+a,j+b,c)`
         </p>
         <p>where `c` and `d` indexes input and output depth of image and representation. In essence, this is the definition of <i>convolutional layer</i>.</p>
         <h2><a id="cv">Convolutional Layer</a></h2>
         <p>In convolutional layer afterwards, when image kernel or filter convolves across the spatial dimensionality of the input image, we get a 2D vector called <i>feature map</i> or <i>activation map</i> calculated through scalar product. 
         Size of the <i>feature map</i> can be assessed as: </p>
-        <p style="font-size: 18px;">
-        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`(n_(h) -k_(h) + 1) &times; (n_(w) - k_(w) + 1)`
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`(n_(h) -k_(h) + 1) &times; (n_(w) - k_(w) + 1)`
         </p>
         <p>where `n_(h)` and `n_(w)` are height and width of input size, and `k_(h)` and `k_(w)` are height and width of image kernel. Also, as kernel spread along the entirety of the depth of the input, we get a stack of feature maps for each depth dimension called <i>pooled feature maps.</i><br>
         Two other keys things in convolutional layer are <i>stride</i> and <i>zero-padding.</i></p>

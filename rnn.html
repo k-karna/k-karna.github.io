@@ -50,7 +50,7 @@ sidebar:
 				For instance, in the case of music-generation problem, one-to-many architecture could be used. 
 				On the other hand, in case of sentiment analysis, many-to-one RNN architecture would be suitable. <br>
 				In general, RNNs architecture can be mathematical expressed as below: <br> </p>
-			<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`X_(t) = W_(rec) &sigma; (X_(t - 1)) + W_(In) * u_(t) + b`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b>...(1)</b>
+			<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`X_(t) = W_(rec) &sigma; (X_(t - 1)) + W_(In) * u_(t) + b`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...(1)
 			</p>
 			<p>
 				In the equation, `W_(rec)` is recurrent weight, `&sigma;` is element-wise function, `W_(In)` is input weight collected in `&theta;`, `u_(t)` is input, `b` is bias, and `X_(t)` is state at time `t` (Pascanu, Mikolov, and Bengio, 2013).
@@ -60,9 +60,9 @@ sidebar:
 				When Backpropagation Through Time (BPTT) was proposed, it was RNNs that got the best of it. However, while backpropagating through deep RNNs, exploding or vanishing gradients can hinder learning process as the same weight i.e.,  `W_(rec)` is being shared by all the nodes in the architecture.<br>
 				Let's try to understand it well - In the above eq(1) of RNN architecture, we can understand that the cost function,   `&epsilon; = \sum_{1\let\leT} &epsilon;X_(t)` gets to measure the performance of some task, where `&epsilon;X_(t) = &tau;(x_(t))` and therefore gradients for backpropagation can be expressed with: </p>
 			<p>
-				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`\frac{&part;&epsilon;}{&part;&theta;} =\sum_{1\let\leT} \frac{&part;&epsilon;_(t)}{&part;&theta;}` &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b>...(2)</b><br>
-				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`\frac{&part;&epsilon;_(t)}{&part;&theta;}=\sum_{1\lek\leT}(\frac{&part;&epsilon;_(t)}{&part;X_(t)}* \frac{&part;X_(t)}{&part;X_(k)}* \frac{&part;^+X_(k)}{&part;&theta;})` &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;<b>...(3)</b> <br>
-				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`\frac{&part;X_(t)}{&part;X_(k)}= \Pi_(t\gei\gtk)\frac{&theta;X_(i)}{&theta;X_(i-1)}= \Pi_{t\gei\gtk}&nbsp; \W_{rec}^T &nbsp;diag(&sigma;^'(X_(i-1)))`&emsp;&emsp;&emsp;&emsp;<b>...(4)</b><br>
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`\frac{&part;&epsilon;}{&part;&theta;} =\sum_{1\let\leT} \frac{&part;&epsilon;_(t)}{&part;&theta;}` &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...(2)<br>
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`\frac{&part;&epsilon;_(t)}{&part;&theta;}=\sum_{1\lek\leT}(\frac{&part;&epsilon;_(t)}{&part;X_(t)}* \frac{&part;X_(t)}{&part;X_(k)}* \frac{&part;^+X_(k)}{&part;&theta;})` &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;...(3) <br>
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`\frac{&part;X_(t)}{&part;X_(k)}= \Pi_(t\gei\gtk)\frac{&theta;X_(i)}{&theta;X_(i-1)}= \Pi_{t\gei\gtk}&nbsp; \W_{rec}^T &nbsp;diag(&sigma;^'(X_(i-1)))`&emsp;&emsp;&emsp;...(4)<br>
 			</p>
 			<p>
 				In eq(3) the gradient component `\frac{&part;&epsilon;_(t)}{&part;&theta;}` is a sum of temporal contribution at given node. We can see that temporal contribution `\frac{&part;&epsilon;_(t)}{&part;X_(t)}* \frac{&part;X_(t)}{&part;X_(k)}* \frac{&part;^+X_(k)}{&part;&theta;}`measures how `&theta;` at step `k` affects the cost at step `t > k`.

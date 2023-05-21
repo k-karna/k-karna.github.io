@@ -103,13 +103,14 @@ sidebar:
 		`\lambda` is rate paramter i.e, average number of events occuring per unit of time <br>
 		`x` is time elapsed since last event <br></p>
 		<p>The Cumulative Distribution Function (CDF) of exponential is given by :</p>
-		<p>&emsp;&emsp;&emsp;&emsp;`f(x) = 1 - e^(-\lambdax)` &emsp;&emsp; for `x \ge 0`<br>
-			&emsp;&emsp;&emsp;&emsp;`f(x) = 0` &emsp;&emsp;&emsp;&emsp;&emsp; for `x \lt 0`</p>
+		<p>&emsp;&emsp;&emsp;&emsp;`f(x) = 1 - e^(-\lambdax)` &emsp; for `x \ge 0`<br>
+			&emsp;&emsp;&emsp;&emsp;`f(x) = 0` &emsp;&emsp;&emsp;&emsp;&emsp;for `x \lt 0`</p>
 		<p><b>Alternative Parameterization</b> <br>
 		Exponential distribution, sometimes, can parameterized in terms of the scale parameter `β = \frac{1}{\lambda}`, then :<br>
-		&emsp;&emsp;&emsp;&emsp;PDF `f(x) = \frac{1}{\beta} &sdot;e^(\frac{-x}{\beta})`  &emsp;&emsp;&emsp;for `x \ge 0`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CDF `f(x) = 1 - e^(\frac{-x}{\beta})`&emsp;&emsp;&emsp;for `x \ge0 `<br>
-		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`f(x) = 0` &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;for `x \lt 0`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`f(x) = 0` &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;for `x \lt 0`
-		</p>
+		&emsp;&emsp;&emsp;PDF `f(x) = \frac{1}{\beta} &sdot;e^(\frac{-x}{\beta})`&emsp;&emsp;for `x \ge 0`<br>
+		&emsp;&emsp;&emsp;&emsp;&emsp;`f(x) = 0` &emsp;&emsp;&emsp;&emsp;&emsp;for `x \lt 0`</p>
+		<p>&emsp;&emsp;&emsp;CDF `f(x) = 1 - e^(\frac{-x}{\beta})`&emsp;&emsp;for `x \ge0 `<br>
+		&emsp;&emsp;&emsp;&emsp;&emsp;`f(x) = 0` &emsp;&emsp;&emsp;&emsp;&emsp;for `x \lt 0`</p>
 		<p>The mean and variance of Exponential Distribution are: `μ = \frac{1}{\lambda}` and `\sigma^2 = \frac{1}{\lambda^2}`, respectively</p>
 		<h2><a id="gamma">Gamma Distribution</a></h2>
 		<p>It is a continuous probability distribution, mostly used to model the sum of independent exponentially distributed random variables. 
@@ -132,7 +133,7 @@ sidebar:
 		<p><b>Degree of Freedom</b></p>
 		<p>Degree of freedom (df) is the number of independent observations or sample values that go into estimating a parameter or testing a hypothesis.<br>
 		Mathematically, the degree of freedom (df) is defined as the number of values in a sample that are free to vary after certain restrictions have been imposed.
-		For example, if we have a sample of size `n`, and we know the sample mean, then there are `n-1` degrees of freedom remaining because we can calculate any `n-1` values in the sample and the mean constraint will tell the `nth` value.</p>
+		For example, if we have a sample of size `n`, and we know the sample mean, then there are `n-1` degrees of freedom remaining because we can calculate any `n-1` values in the sample and the mean constraint will tell the `n^(th)` value.</p>
 		<h2><a id = "chi">Chi-Squared Distribution</a></h2>
 		<p>It is continuous probability distribution widely used in hypothesis testing and goodness-of-fit observation. It has just one parameter: a positive integer `k` specifying degree of freedom</p>
 		<p>If `Z_1, ..., Z_k` are independent standard normal randon variable, then sum of their squares i.e, `Q = \sum_{i=1}^k Z_i^2` is distributed according chi-squared distribution with `k` degree of freedom, usually denoted as `Q ~ X^2(k)`. 
@@ -153,7 +154,7 @@ sidebar:
 			1. Its PDF is symmetric around zero.<br>
 			2. Its overall shape resembles the bell shape of a normally distributed variable with mean 0 and variance 1, except that it is a bit lower and wider.<br>
 			3. As the number of degrees of freedom grows, the t-distribution approaches the normal distribution with mean `0` and variance `1`. For this reason `v` is also known as the normality parameter. <br>
-			<img src="images/student.png" alt="Student t-distribution" width="650" height="500" class="image_full">
+			<img src="assets/img/student.png" alt="Student t-distribution" width="650" height="500" class="image_full">
 		</p>
 
 		<h3><a id = "fdis">F-Distribution</a></h3>

@@ -35,7 +35,7 @@ sidebar:
         Monte Carlo, then, solves RL problem by averaging sample returns. </p>
         <p>MC methods sample and average returns for each state-action pair, where each of them are inter-related i.e, return after taking an action in one state depends on the cation taken in later states in same episode.</p>
         <p>It thus, makes problem non-stationary. And, to handle non-stationarity, we use Geneeralized Policy Iteration (GPI), learning value-fuction from sample returns.</p>
-        <p style="font-size: 17px;"><b>Monte Carlo Predictions :</b></p>
+        <p><b>Monte Carlo Predictions :</b></p>
         <p>Value of a state is the expected return - expected cumulative future discounted reward - starting from that state.</p>
         <p>In MC method, we simply average the returns observed after visits to that state. As more returns are observed, the average should converge to the expected value.</p>
 		<p>
@@ -47,7 +47,7 @@ sidebar:
         >> In MC method, the estimate for one state does not build upon the estimate of any other.<br>
         >> Also, computational expense of estimating the value of a single state in independent of the number of states.
         </p>
-        <p style="font-size: 17px;"><b>Monte Carlo Estimation of Action Value :</b></p>
+        <p><b>Monte Carlo Estimation of Action Value :</b></p>
         <p>When a model is available, state-value are sufficient to determine a policy, choosing whichever action that leads to best combination of reward and next state. However, when model is not available, action values(the pair of state-action pair). 
         Thus, primary goal of MC methods is to estimate `q_(&star;)` considering visit to <i>state-action pair</i> rather than to state. </p>
         <p>The only complication is that many state-action pairs may never be visited. Following a deterministic policy `&pi;`, one can observe retruns only for one of the actions from each state, which may lead to not improve the Monte Carlo estimates. 
@@ -56,24 +56,24 @@ sidebar:
         >> First Approach -- By specifying episode <i>start in a state-action pair</i> and that every pair has a nonzero probability of being selected as the start. This guarantees that all state-action pairs will be visited infinite number of times in the limit of an infinite number of episodes. This assumption is called <u><b>Exploring Starts</u></b><br>
         >> Second Approach -- is to consider only policies that are stochastic with a nonzero probability of selecting all actions in each state.
         </p>
-        <p style="font-size: 17px;"><b>Monte Carlo Control :</b></p>
+        <p><b>Monte Carlo Control :</b></p>
         <p>In Geneeralized Policy Iteration (GPI) one maintains both an approximate policy and an approximate value function. In Monte Carlo version of GPI, we similarly perform alternative steps of <i>policy evaluation</i> and <i>policy improvement</i>, beginning with arbitrary policy `&pi;_(0)`
         and ending with the optimal policy and optimal action-value function.
         </p>
-        <p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&pi;_(0)&rarr;^E&rarr; q&pi;_(0)&rarr;^I&rarr;&pi;_(1)&rarr;^E&rarr;q&pi;_(2)&rarr;^I&rarr;&pi;_(2)&rarr;` </p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&pi;_(0)&rarr;^E&rarr; q&pi;_(0)&rarr;^I&rarr;&pi;_(1)&rarr;^E&rarr;q&pi;_(2)&rarr;^I&rarr;&pi;_(2)&rarr;` </p>
         where `E` denotes policy evaluation and `I` denotes policy improvement
         <p>
         If we assume that we observe an infinite number of episodes and episodes are generated with <b><u>Exploring Starts</b></u>, then MC method will compute `q_(&pi;_(k))` each for arbitrary `&pi;_(k)`
         </p>
         <p>Policy improvement is done by making the policy greedy with respect to the current value function. Then for any action-value function, `q`, the corresponding greedy policy is the one that, for each `s &isin; S` deterministically chooses an action with maximum action-value</p>
-        <p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&pi;_(s) &esdot; argmax_{a} q(s,a) `</p>
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&pi;_(s) &esdot; argmax_{a} q(s,a) `</p>
         <p>
         Policy improvement then can be done by constructing each `&pi;_(k+1)` as the greedy policy with respect to `q_(&pi;_(k))`. The policy improvement theorem tehn applies to `&pi;_(k)` and `&pi;_(k+1)` for all `s &isin;S` because
         </p>
-        <p  style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`q_(&pi;_(k))(s,&pi;_(k+1)(s)) = q_(&pi;_(k)) (s, argmax_{a} q_(&pi;_(k))(s,a))`<br>
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; `= max_{a} q_(&pi;_(k)) (s,a)` <br>
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&ge; q_(&pi;_(k)) (s, &pi;_(k)(s))`<br>
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&ge; v_(&pi;_(k)(s))`
+        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`q_(&pi;_(k))(s,&pi;_(k+1)(s)) = q_(&pi;_(k)) (s, argmax_{a} q_(&pi;_(k))(s,a))`<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`= max_{a} q_(&pi;_(k)) (s,a)` <br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&ge; q_(&pi;_(k)) (s, &pi;_(k)(s))`<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&ge; v_(&pi;_(k)(s))`
         </p>
 
 </body>

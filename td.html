@@ -45,12 +45,11 @@ sidebar:
                 Also, above mentioned simplest TD method is called <i>TD(0)</i> or <i>one-step TD</i>
             </p>
             <p>
-                >> Because TD(0) bases its update in part on an existing estimate, we can say it is a <b>bootstrapping method</b> like DP.<br>
-                We know<br></p>
-            <p class="code">
+                >> Because TD(0) bases its update in part on an existing estimate, we can say it is a <b>bootstrapping method</b> like DP. We know</p>
+            <p>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`v_(&pi;)= `&Eopf;<sub>`pi`</sub>`&#91;G_(t) | S_(t) = s&#93;`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...(2)<br>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`=`&Eopf;<sub>`pi`</sub>`&#91;R_(t+1) +&gamma;G_(t+1) | S_(t)=s&#93;`<br>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`=`&Eopf;<sub>`pi`</sub>`&#91;R_(t+1) +&gamma;v_(&pi;)(S_(t+1) | S_(t) =s)` &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;....(3)</p>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`=`&Eopf;<sub>`pi`</sub>`&#91;R_(t+1) +&gamma;G_(t+1) | S_(t)=s&#93;`<br>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`=`&Eopf;<sub>`pi`</sub>`&#91;R_(t+1) +&gamma;v_(&pi;)(S_(t+1) | S_(t) =s)` &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;....(3)</p>
             <p>
                 MC method uses estimate of eq(2) as target<br>
                 DP method uses estimate of eq(3) as target<br>
@@ -65,7 +64,7 @@ sidebar:
             <p><b>Note: </b>TD error is the error in the estimate made at that time, because it depends on the next state and next reward <i>(not available until next time step)</i> i.e., `&delta;` is error in `V(S_(t))` available at `t+1`<br>
             Also, if `V` doesn't change during episode (as in MC methods) then, MC error can be written as sum of TD errors.</p>
 
-            <p style="font-size: 18px;">
+            <p>
                 &emsp;&emsp;&emsp;&emsp;`G_(t)-V(S_(t))=R_(t+1) + &gamma;G_(t+1) - V(S_(t)) + &gamma;V(S_(t+1)) -&gamma;V(S_(t+1))`<br>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;`=&delta;_(t) +&gamma;(G_(t+1) -V(S_(t+1)))`<br>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;`=&delta;_(t) +&gamma;&delta;_(t+1) + &gamma;^2(G_(t+2)-V(S_(t+2)))`<br>

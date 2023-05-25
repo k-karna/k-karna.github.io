@@ -53,10 +53,12 @@ sidebar:
 	<p>As YOLO detection consists of three phases: 1. detecting bounding box 2. Confidence of box (containing object and its accuracy), and 3. Class probability. Loss Function of YOLO is also have three distinct parts: </p>
 	<p>1. Localization Loss : It can be defined as: </p>
 	<p>Localization Loss `= &lambda;_(coord) \sum_(i=0)^(S^2) \sum_(j=0)^B 1_(ij)^(obj) [(x_(ij) - x_(ij)^(gdt))^2 + (y_(ij) - y_(ij)^(gdt))^2 + (sqrt (w_(ij)) - sqrtw_(ij)^(gdt))^2 + (sqrth_(ij) - sqrth_(ij)^(gdt))^2] `</p>
+	<p>where,<br>
+	`S^2` is the number of grid cells, `B` is the number of bounding boxes per grid cell, `&lambda;_(coord)` is the coefficient to scale the localization loss, and `1_(i)^(obj)` is the indicator function that equals `1` if the `i^(th)` grid cell in the `j^(th)` bounding box contains an object</p>
 	<p>Confidence Loss: It can be defined as:</p>
 	<p>Confidence Loss `=  &lambda;_(conf)  \sum_(i=0)^(S^2) \sum_(j=0)^B 1_(ij)^(obj) (C_(ij) - C_(ij)^(gdt))^2 + &lambda;_(conf)  \sum_(i=0)^(S^2) \sum_(j=0)^B 1_(ij)^(noobj) (C_(ij) - C_(ij)^(gdt))^2`</p>
 	<p>Class Loss:</p>
-	<p>Class loss `= `</p>
+	<p>Class loss `= \sum_(i=0)^(S^2) 1_i^(obj) \sum_(c&isin;classes) (p_(i)(c) - (p_(i)^(gdt)(c))^2)`</p>
 
 
 

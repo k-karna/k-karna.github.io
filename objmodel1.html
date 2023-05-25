@@ -51,14 +51,16 @@ sidebar:
 	Similarly, linear activation function is used in the final layer, whereas leaky ReLU is used in all the layers prior to it.</p>
 	<p><b>Loss Function :</b></p>
 	<p>As YOLO detection consists of three phases: 1. detecting bounding box 2. Confidence of box (containing object and its accuracy), and 3. Class probability. Loss Function of YOLO is also have three distinct parts: </p>
-	<p>1. Localization Loss : It can be defined as: </p>
+	<p><b>1. Localization Loss :</b> In this, as sum-squared error weights error in small and large boxes equally, it can fail to converge quickly, as small deviations in large bouding boxes matter less than small deviations in small bounding boxes. 
+	It is addressed by simply using square-root of height and width. Localization Loss can be stated as: </p>
 	<p>Localization Loss `= &lambda;_(coord) \sum_(i=0)^(S^2) \sum_(j=0)^B 1_(ij)^(obj) [(x_(ij) - x_(ij)^(gdt))^2 + (y_(ij) - y_(ij)^(gdt))^2 + (sqrt (w_(ij)) - sqrtw_(ij)^(gdt))^2 + (sqrth_(ij) - sqrth_(ij)^(gdt))^2] `</p>
 	<p>where,<br>
 	`S^2` is the number of grid cells, `B` is the number of bounding boxes per grid cell, `&lambda;_(coord)` is the coefficient to scale the localization loss, and `1_(i)^(obj)` is the indicator function that equals `1` if the `i^(th)` grid cell in the `j^(th)` bounding box contains an object</p>
-	<p>Confidence Loss: It can be defined as:</p>
-	<p>Confidence Loss `=  &lambda;_(conf)  \sum_(i=0)^(S^2) \sum_(j=0)^B 1_(ij)^(obj) (C_(ij) - C_(ij)^(gdt))^2 + &lambda;_(conf)  \sum_(i=0)^(S^2) \sum_(j=0)^B 1_(ij)^(noobj) (C_(ij) - C_(ij)^(gdt))^2`</p>
-	<p>Class Loss:</p>
-	<p>Class loss `= \sum_(i=0)^(S^2) 1_i^(obj) \sum_(c&isin;classes) (p_(i)(c) - (p_(i)^(gdt)(c))^2)`</p>
+	<p><b>2. Confidence Loss: </b>It measures the discrepancy between predicted confidence score (of having object in the box) and ground-truth score. However, as grid in the image, may not any object. It can push confidence score of cell to zero. To remedy this, we increase the loss from bounding box coordinate 
+	predictions and decrease the loss from conﬁdence predictions for boxes that don’t contain objects, using two parameters i.e, `&lambda;_(coord)` and `&lambda;_(noobj)`, with values `5` and `0.5` respectively. If `C` is the predicted confidence, and `C^(gdt)` is ground-truth confidence, then Confidence Loss then can be expressed as:</p>
+	<p>Confidence Loss `=  &lambda;_(coord)  \sum_(i=0)^(S^2) \sum_(j=0)^B 1_(ij)^(obj) (C_(ij) - C_(ij)^(gdt))^2 + &lambda;_(noobj)  \sum_(i=0)^(S^2) \sum_(j=0)^B 1_(ij)^(noobj) (C_(ij) - C_(ij)^(gdt))^2`</p>
+	<p><b>3. Classification Loss: </b>It measures the discrepancy between the predicted class probabilities and the ground truth class labels. It is also computer using cross-entropy, and if `p_(i)` is predicted class probability, with `p^(gdt)` as ground-truth class labels, we can write classification loss as :</p>
+	<p>Classification Loss `= \sum_(i=0)^(S^2) 1_i^(obj) \sum_(c&isin;classes) (p_(i)(c) - (p_(i)^(gdt)(c))^2)`</p>
 
 
 

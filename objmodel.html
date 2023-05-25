@@ -177,7 +177,7 @@ sidebar:
 		<p>A RPN takes an input image and outputs a set of rectangular object proposals, each with an <i>objectness score</i>.
 		It is constructed by adding two additional conv layers: one that encodes each conv map position into a short feature vector and a second that, at each conv map position, outputs an objectness score, and regressed bounds for `k` region proposal.</p>
 		<p>To generate Region Proposal, we slide a small network over the conv feature map output of the first CNN, it is fully-connected to an `n&times;n` spatial window of input conv feature map. Each sliding window is then mapped to a lower-dimension vector, which is fed into two sibling fully-connected layers - box-regression layer <i>(reg)</i> and box-classification layer <i>(cls)</i>.<br>
-		<img src="images/faster-rcnn.png" width="560" height="300" alt="faster-RCNN" class="image_full">
+		<img src="assets/img/faster-rcnn.png" width="560" height="300" alt="faster-RCNN" class="image_full">
 		</p>
 		<p>Then, at each sliding-window location, we get `k` region proposal where <i>reg</i> layer provides `4K` output (coordinates of `k` boxes) and <i>cls</i> layer provides `2k` score estimating probability of <u>object / not-object</u> for each proposal.<br>
 		These `k` proposals are parameterized relative to `k` reference boxes called <i>Anchors</i>. With k = 9 anchor boxes at each sliding position.</p>

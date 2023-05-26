@@ -30,8 +30,8 @@ sidebar:
 
 
 <body>
-	
-        <h2>Encoder-Decoder</h2>
+        <a href="encdec.html#enc">1. Encoder-Decoder</a>, <a href="encdec.html#bdm">2. Bahdanau Model</a>, <a href="encdec.html#att">3. Attention Mechanism</a>, and <a href="encdec.html#trf">4. Transformers</a>
+        <h2><a id="enc">Encoder-Decoder</a></h2>
         <p>Encoder-Decoder architecture is based on Recurrent Neural Network(RNN). In RNN, we have a hidden state `h` which takes a variable length sequence `X = (x_(1),x_(2),...x_(T))`  to generate output `y`. At any time step `t`, hidden state `h_(t)` is updated by :</p>
         <p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`h_(t) = f(h_(t-1),x_(t))`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;..<i>eq(1)</i></p>
         <p>where `f` is a non-linear activation function. It can be element-wise sigmoid function or LSTM. Output at eah time step is the conditional distribution `p(x_(t) | x_(t-1),....x_(1))`</p>
@@ -55,7 +55,7 @@ sidebar:
         2. Deep LSTM should be used. LSTM with four layers is implemented.<br>
         3. To reverse the order of input sequence. For instance, instead of mapping the input sequence `a,b,c` to `&alpha;,&beta;,&gamma;` it asked to map `c,b,a` to `&alpha;,&beta;,&gamma;` </p>
         
-        <h2>Bahdanau Model</h2>
+        <h2><a id="bdm">Bahdanau Model</a></h2>
         <p>Bahdanau model is based on RNN Encoder-Decoder that learns to align and translate simultaneously. This model also uses BiDirectional RNN (BiRNN) for Encoder.</p>
         <p>BiRNN Encoder consists of forward and backward RNN. The forward RNN `\vecf` reads the input sequence in order (from `x_(1)` to `x_(T)`) and provides forward hidden states i.e, `\vech_(1),....,\vech_(T)`.<br>
         The backward RNN `f` reads sequence in reverse (from `x_(T),..,x_(1))` providing sequence of backward hidden states `h_(1)^&larr;,....,h_(T)^&larr;`<br>
@@ -72,7 +72,7 @@ sidebar:
         <p>This way Bahdanau model achieve significantly improved translation in comparison with conventional Encoder-Decoder, and especially in the cases of longer sentences. </p>
         
 
-        <h2>Attention Mechanism and Transformers</h2>
+        <h2><a id ="att">Attention Mechanism and Transformers</a></h2>
         <p>Transformers architecture is based on Encoder-Decoder, but uses Attention Mechanism. Lets first discuss Attention Mechanism and key things in it.<br>
         Like visual world, Attention Mechanism is two component framework, here :<br>
         volitional cues &rarr; queries<br>
@@ -117,7 +117,7 @@ sidebar:
         <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;where `head_(i) = `Attention`(QW_(i)^Q,KW_(i)^K,VW_(i)^V)`</p>
         <p>here, the projections are parameter matrices `W_(i)^Q&isin;&Ropf;^(d_(model)&times;d_(k)), W_(i)^K&isin;&Ropf;^(d_(model)&times;d_(k)),W_(i)^V&isin;&Ropf;^(d_(model)&times;d_(k))`, and `W^o&isin;&Ropf;^(hd_(v)&times;d_(model))`</p>
         
-        <h2>Transformers</h2>
+        <h2><a id="trf">Transformers</a></h2>
         <p>Transformers consists of an Encoder-Decoder pair, where each of them is a stack of `L` identical blocks. Encoder block is composed of Multi-Head attention and a position-wise feed-forward network (FFN).
         In addition, a residual connection, followed by Layer Normalization around each module. Decoder block, on the other hand, additionally include cross-attention modules between Multi-Head attention and position-wise FFNs.
         Transformers architecture can be seen below :</p>

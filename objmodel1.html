@@ -29,7 +29,8 @@ sidebar:
 
 
 <body>
-	<h2>You Only Look Once (YOLO)</h2>
+	<a href="objmodel1.html#yolo">1. YOLO</a>, <a href="objmodel1.html#rt">2.Retina Net</a>, and <a href="objmodel1.html#ssd">3. SSD</a> 
+	<h2><a id = "yolo">You Only Look Once (YOLO)</a></h2>
 	<p>YOLO is a single convolutional neural network based model, which unlike, <a href="objmodel.html#rc">R-CNN based models</a>, simultaneously, predicts multiple bounding boxes and its class probabilities of those boxes (Redmon et al., 2016).</p>
 	<p>Few advantages are:<br>
 	YOLO is extremely fast. As frame detection doesn't go into a complex pipeline, but taken as a regression problem, YOLO gets to process streaming video real-time with less than 25 milliseconds of latency.<br>
@@ -69,7 +70,7 @@ sidebar:
 
 
 
-	<h2>Retina Net</h2>
+	<h2><a id ="rt">Retina Net</a></h2>
 	<p><b>Focal Loss:</b></p>
 	<p>Focal Loss is designed to address the class imbalance problem, where where the number of background (non-object) samples greatly outweighs the number of object samples</p>
 	<p>Focal Loss is based on cross-entroy loss, but designed to down-weight easy (well-classified) examples, and focussing on hard negatives (misclassified) examples during training. 
@@ -79,6 +80,9 @@ sidebar:
 	<p>where, `p_t` is the predicted probability of the true class label. In the context of object detection, this probability is obtained from the softmax function applied to the class predictions for each anchor or bounding box. <br>
 	`&alpha;_t` is the modulating factor that addresses the class imbalance problems. It is defined as: <br>
 	`&alpha;_t = `</p>
+
+	<h2><a id="ssd">Single Shot Detector (SSD)</a></h2>
+	<p></p>
 
 
 

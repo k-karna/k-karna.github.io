@@ -31,7 +31,7 @@ sidebar:
 
 
 <body>
-	
+		<a href="pgrad.html#pgt">1. Policy Gradient Theorem</a>, and <a href="pgrad.html#reinforce">2. REINFORCE</a>
         <p>Unlike other methods where we first learn the <i>value of actions</i> and then select action based on estimated <i>action-values</i>, here in Policy Gradient Methods, we use <i>parameterized policy</i> that can select actions without consulting a value function.</p>
         <p>If we use `&theta; &isin; &Ropf;^d` for the policy's parameter vector, and then probability for the action `a` is taken at time `t` given environment is in state `s` with parameter `&theta;` is given by :</p>
         <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&pi;(a | s,&theta;) = Pr{A_(t) = a | S_(t) = s, &theta;_(t) = &theta;}`</p>
@@ -51,7 +51,7 @@ sidebar:
 			3. It learns faster and yields a better asymptotic policy.<br>
 			4. It can help inject prior knowledge about the desired form of the policy into the RL system.
 		</p>
-		<h2>The Policy Gradient Theorem</h2>
+		<h2><a id="pgt">Policy Gradient Theorem</a></h2>
 		<p>Episodic and continuing cases define the performance measure, `J(&theta;)` differently.</p>
 		<p><u>In episodic cases,</u> the performance is define as :</p>
 		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`J(&theta;) &esdot;v_(&pi;_(&theta;))(s_(0))`</p>
@@ -66,7 +66,7 @@ sidebar:
 		<p><i>Policy Gradient Theorem</i> solves this by providing expression for the gradient of performance w.r.t. policy parameter that <u>does not</u> involve derivatives of state distribution. It establishes that :</p>
 		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`&nabla;J(&theta;)&prop;\sum_{s}&mu;(s)\sum_{a}q_(&pi;)(s,a)&nabla;&pi;(a | s,&theta;)`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...eq(2)</p>
 
-		<h2>REINFORCE : Monte Carlo Policy Gradient</h2>
+		<h2><a id="reinforce">REINFORCE : Monte Carlo Policy Gradient</a></h2>
 		<p>In eq(2), policy gradient theorem is a sum over states weighted by how often the sum sum occur under the target policy `&pi;`. Thus, it can be written as : </p>
 		<p>&emsp;&emsp;&emsp;&emsp;&emsp;`&nabla;J(&theta;)&prop;\sum_{s}&mu;(s)\sum_{a}q_(&pi;)(s,a)&nabla;&pi;(a | s,&theta;)`<br>
 		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`= `&Eopf;<sub>`pi`</sub>`[\sum_{a}q_(&pi;)(S_(t),a)&nabla;&pi;(a | S_(t),&theta;)]`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...eq(3)</p>

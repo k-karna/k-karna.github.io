@@ -64,15 +64,7 @@ sidebar:
 	<p>Classification Loss `= \sum_(i=0)^(S^2) 1_i^(obj) \sum_(c&isin;classes) (p_(i)(c) - (p_(i)^(gdt)(c))^2)`</p>
 	<p>Total Loss, thereafter, is the sum of all three losses, i.e,</p>
 	<p>Total Loss = Localization Loss + Confidence Loss + Classification Loss</p>
-	<p>which then gets used to updated weights of YOLO architecture through backpropagation. YOLO architecture, however, have a few limitations i.e, <br>
-	1. <i>Prone to Localization Error</i> :</p>
-
-
-
-
-
-
-
+	<p>which then gets used to updated weights of YOLO architecture through backpropagation. YOLO architecture, however, have a few limitations: 1. <i>Prone to Localization Error</i> :</p>
 
 	<h2><a id ="rt">Retina Net</a></h2>
 	<p><b>Focal Loss:</b></p>
@@ -83,11 +75,16 @@ sidebar:
 	where, `p_t` is the predicted probability of the true class label.</p>
 	<p>Here, when an example is misclassified and `p_(t)` is small, the modulating factor is near `1` and almost equivalent to cross-entropy. On the other hand, if `p_(t)` is large i.e, `p_(t) -> 1`, 
 	the modulating factor goes to `0`, and loss for well-classified example is down-weighted.<br>
-	However, for practical purposes,we add `&alpha;_(t)` to Focal Loss, making it</p>
+	However, for practical purposes, we add a balancing factor `&alpha;_(t)` to Focal Loss, making it</p>
 	<p>&emsp;&emsp;&emsp;`FL(p_t) = -&alpha;_(t)(1 - p_t)^&gamma;log(p_t)`</p>
-	In the context of object detection, this probability is obtained from the softmax function applied to the class predictions for each anchor or bounding box. <br>
-	`&alpha;_t` is the modulating factor that addresses the class imbalance problems. It is defined as: <br>
-	`&alpha;_t = `</p>
+	<p>`&alpha;_(t)` ,as a balancing factor, adjusts the weight of positive (presence of object) and negative (non-bject) examples in the loss. Specifically, `&alpha;` represents the weight assigned to the positive examples relative to the negative examples. 
+	By default, `&alpha;` is set to 0.25, which means that positive examples <i>(anchorboxes with object)</i> have a weight of 0.25, while negative examples <i>(anchorboxes with non-objects)</i> have a weight of `1 - &alpha; = 0.75`.</p>
+	<p><b>Retina Net Architecture :</b></p>
+	<p>Architecture of Retina Net is composed of one <i>backbone network</i> that is responsible for computing a convolutional feature map over the entire image, and two <i>task-specific subnets</i>.
+	The ﬁrst is <u>Classification Subnet</u> performing convolutional object classiﬁcation on the backbone’s output, and the second is <u>Box Regression Subnet</u> performs convolutional bounding box regression
+	</p>
+	<img src="assets/img/retina_net.png" alt="retina_net", width="780", height="320">
+	
 
 	<h2><a id="ssd">Single Shot Detector (SSD)</a></h2>
 	<p></p>
@@ -98,7 +95,7 @@ sidebar:
 <ul>
 	<li>[1] Redmon, J., Divvala, S., Girshick, R. and Farhadi, A., 2016. You only look once: Unified, real-time object detection. In <i>Proceedings of the IEEE conference on computer vision and pattern recognition </i>(pp. 779-788).</li>
 	<li>[2] Lin, T.Y., Goyal, P., Girshick, R., He, K. and Dollár, P., 2017. Focal loss for dense object detection. In <i>Proceedings of the IEEE international conference on computer vision </i>(pp. 2980-2988).</li>
-	<li>[3] </li>
+	<li>[3] Lin, T.Y., Dollár, P., Girshick, R., He, K., Hariharan, B. and Belongie, S., 2017. Feature pyramid networks for object detection. In <i>Proceedings of the IEEE conference on computer vision and pattern recognition</i> (pp. 2117-2125).</li>
 	<li>[4] </li>
 </ul>
 </body>

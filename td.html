@@ -37,7 +37,7 @@ sidebar:
                 <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`V(S_(t)) &larr; V(S_(t)) + &alpha;&#91;G_(t)-V(S_(t))&#93;`<br>
             where,<br> `G_(t)` is actual return following time `t` <br> `&alpha;` is a constant step-size parameter
             </p>
-            <p><b>Temporal-Difference (TD) method </b>, unlike MC, doesn't need to wait until the end of episode, it only needs to wit till the next time step. Simplest TD: <br>
+            <p><b>Temporal-Difference (TD) method </b>, unlike MC, doesn't need to wait until the end of episode, it only needs to wait until the next time step. Simplest TD: <br>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`V(S_(t)) &larr; V(S_(t)) + &alpha;&#91;R_(t+1) + &gamma;V(S_(t+1))-V(S_(t))&#93;`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ...(1)<br>
                 In effect, <br>
                 the target of the MC method is `G_(t)`<br>

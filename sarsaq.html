@@ -33,30 +33,32 @@ sidebar:
 	
 
 
-            <p><b>SARSA : On-Policy TD Control</b></p>
-            <p>
-                In any on-policy control method, the first step is to learn an action-value function rather than a state-value function.<br>
-                Therefore, we must estimate `q_(pi)(s,a)` for current behavior policy `pi` and for all states `s` and action `a`.
-                Here, instead we consider transition from state-action pair to state-action pair, and learn the values of state-action pair.<br>
-                The theorem assuring the convergence of state value under TD(0) applies for action values too:</p>
-			<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q(S_(t),A_(t)) &larr;Q(S_(t),A_(t)) + &alpha; &#91;R_(t+1) + &gamma;Q(S_(t+1),A_(t+1)) -Q(S_(t),A_(t))&#93;`</p>
-			<p> The update is done after every transition from one state-action pair to the next, using quintuple of events `(S_(t),A_(t),R_(t+1),S_(t+1),A_(t+1))` => thus the name - <b>SARSA</b></p>
-			<p>Designing on-policy control algorithm based on SARSA is similar to designing any other on-policy method. Here, we continually estimate `q_(pi)` for the behaviour policy `pi`, and simultaneously change `pi` toward greediness with respect to `q_(pi)`. 
-			The convergence properties of the SARSA depends on the nature of the policy's dependence on Q. For example, one could use `&epsilon;-greedy` or `&epsilon;-soft` policies.</p>
+<p><b>SARSA : On-Policy TD Control</b></p>
+<p>
+In any on-policy control method, the first step is to learn an action-value function rather than a state-value function.<br>
+Thus, our goal is to estimate `q_(pi)(s,a)` for the current behavior policy `pi`, for all states `s` and action `a`.</p>
 
-			<p><b>Q-Learning : Off-Policy TD Control </b></p>
-			<p>Q-Learning is defined by:</p>
-			<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q(S_(t),A_(t)) &larr;Q(S_(t),A_(t)) + &alpha;&#91;R_(t+1) + &gamma; max_{a}(S_(t+1),a) -Q(S_(t),A_(t))&#93;`</p>
-			<P>
-				Here, the learned action-value function, `Q`, directly approximates the optimal action-value `q_(&star;)`, independent of the policy being followed. The policy still has an effect as it determines which state-action pairs are visited and updated.
-				However, for correct convergence it is required that all pairs continue to be updated.<br>
-				Therefore, as each state-action pairs needs to be visited and updated, independent of the choice of policy being followed, this algorithm enable early convergence.
-			</P>
-			<p><b>Expected SARSA</b></p>
-			<p>It follows the schema of <i>Q-Learning</i>, but with the <i>update rule</i>. Instead of using maximum over state-action pair, it uses expected value, taking into account how likely each action is under the current policy.</p>
-			<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q(S_(t),A_(t)) &larr;Q(S_(t),A_(t)) + &alpha;&#91;R_(t+1) + &gamma;`&Eopf;<sub>&pi;</sub>`&#91;Q(S_(t+1),A_(t+1)) | S_(t+1)&#93;-Q(S_(t),A_(t))&#93;`<br>
-				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;`&larr;Q(S_(t),A_(t)) + &alpha;&#91;R_(t+1) + &gamma;&sum;_(a)&pi;(a | S_(t+1))Q(S_(t+1),a) - Q(S_(t),A_(t))&#93;`</p>
-			<p> Expected SARSA shows significant improvement over SARSA over a wide range of values over for the step-size parameter `&alpha;`. Expected SARSA has another advantage of having lower variance than seen in SARSA due to random selection of `A_(t+1)`. </p>
+<p>Instead of solely considering state transitions, in these methods, we examine transitions from state-action pairs to state-action pairs, learning the values associated with state-action pairs. The convergence theorem that ensures the convergence of state values under TD(0) also applies to action values:</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q(S_(t),A_(t)) &larr;Q(S_(t),A_(t)) + &alpha; &#91;R_(t+1) + &gamma;Q(S_(t+1),A_(t+1)) -Q(S_(t),A_(t))&#93;`</p>
+
+<p> This update is performed after each transition from one state-action pair to the next, utilizing a quintuple of events `(S_(t),A_(t),R_(t+1),S_(t+1),A_(t+1))`. This update scheme is referred to as: <b>SARSA</b></p>
+
+<p>When designing an on-policy control algorithm based on SARSA, the approach is similar to any other on-policy methods. We continuously estimate `q_(pi)` for the behaviour policy `pi`, while simultaneously adjusting `pi` to become more greedy with respect to `q_(pi)`. 
+The convergence properties of the SARSA depends on the nature of the policy's dependence on Q. For example, one could use `&epsilon;-greedy` or `&epsilon;-soft` policies.</p>
+
+<p><b>Q-Learning : Off-Policy TD Control </b></p>
+<p>Q-Learning is defined by:</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q(S_(t),A_(t)) &larr;Q(S_(t),A_(t)) + &alpha;&#91;R_(t+1) + &gamma; max_{a}(S_(t+1),a) -Q(S_(t),A_(t))&#93;`</p>
+<P>
+	Here, the learned action-value function, `Q`, directly approximates the optimal action-value `q_(&star;)`, independent of the policy being followed. The policy still has an effect as it determines which state-action pairs are visited and updated.
+	However, for correct convergence it is required that all pairs continue to be updated.<br>
+	Therefore, as each state-action pairs needs to be visited and updated, independent of the choice of policy being followed, this algorithm enable early convergence.
+</P>
+<p><b>Expected SARSA</b></p>
+<p>It follows the schema of <i>Q-Learning</i>, but with the <i>update rule</i>. Instead of using maximum over state-action pair, it uses expected value, taking into account how likely each action is under the current policy.</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q(S_(t),A_(t)) &larr;Q(S_(t),A_(t)) + &alpha;&#91;R_(t+1) + &gamma;`&Eopf;<sub>&pi;</sub>`&#91;Q(S_(t+1),A_(t+1)) | S_(t+1)&#93;-Q(S_(t),A_(t))&#93;`<br>
+	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;`&larr;Q(S_(t),A_(t)) + &alpha;&#91;R_(t+1) + &gamma;&sum;_(a)&pi;(a | S_(t+1))Q(S_(t+1),a) - Q(S_(t),A_(t))&#93;`</p>
+<p> Expected SARSA shows significant improvement over SARSA over a wide range of values over for the step-size parameter `&alpha;`. Expected SARSA has another advantage of having lower variance than seen in SARSA due to random selection of `A_(t+1)`. </p>
 
 </body>
 </html>

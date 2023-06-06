@@ -1,6 +1,6 @@
 ---
 layout: article
-title: n-Step Bootstrapping
+title: N-Step Bootstrapping
 date: 2022-05-03
 sidebar:
   nav: "docs-en"
@@ -30,36 +30,38 @@ sidebar:
 
 
 <body>
-		
-		<p>With one-step TD or TD(0) the same time step determines how often the action can be changed and the time-interval over which bootstrapping is done.<br>
-		>> Ideally, Bootstrapping would work better if it is over a length of time in which a <i>significant and recongnisable state change</i> has occured. <u>n-step bootstrapping</u> enables it to occur over multiple time steps</p>
-        <p><b>n-step TD prediction</b></p>
-		<p>The methods that use n-step updates are still TD methods because they still change an earlier estimate based on how it differs from a later estimate. However, when these TD methods extends over n-step, it becomes <u>n-step TD methods</u></p>
-		<p>in one-step updates, the target is the first reward plus the discounted estimated value of the next state, here then, we have <u>one-step return</u> as :</p>
-		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t:t+1) &esdot; R_(t+1) + &gamma;V_(t)(S_(t+1))`</p>
-		<p><u>two-step return</u> as :</p>
-		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t:t+2) &esdot; R_(t+1) + &gamma;R_(t+2) +&gamma;^2V_(t+1)(S_(t+2))`</p>
-		<p><u>n-step return</u> as :</p>
-		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t:t+n) &esdot; R_(t+1) + &gamma;R_(t+2) + ...... + &gamma;^(n-1)R_(t+n) + &gamma;^nV_(t+n-1)(S_(t+n))`</p>
-		<p ><i>for all `n,t` such that `n&ge;1` and `0&le;t&lt;T-n`</i>. Psuedo Code for n-step TD is given below:</p>
-		&emsp;&emsp;<img src="assets/img/nstep.png" alt="n-step" width="450" height="300" class="image_full"><br>
-		<p><u>Note :</u> <i>n-step</i> returns for `n&lt;1` involve future rewards and states that are not available at the time of tansition from `t` to `t+1`, but only after seeing `R_(t+n)` and computed `V_(t+n-1)`. 
-		<i>n-step</i> return uses the value function, `V_(t+n-1)` to correct for the missing rewards beyond `R_(t+n)`</p>
-		<p>The natural state-value learning algorithm for using <i>n-step</i> returns is thus :</p>
-		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`V_(t+n)(S_(t))&esdot;V_(t+n-1)(S_(t)) + &alpha;[G_(t:t+n) - V_(t+n-1)(S_(t))]`</p>
-		<p>while the values of all other states remain unchanged: `V_(t+n)(S) = V_(t+n-1)(S)`, for all `s != S_(t)` . This algorithm is called <i>n-step TD</i></p>
-		<p>An important aspect of <i>n-step</i> return is that their expectation is guaranteed to be a better estimate of `V_(&pi;)` than `V_(t+n-1)` is, in a worst-state sense. That is, worst error of the expected n-step return is guaranteed to be less than or equal to `&gamma;^n` times the worst error under `V_(t+n-1)`</p>
-		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`max_{x}[`&Eopf;<sub>`&pi;`</sub> `[G_(t:t+n) | S_(t)=s] - V_(&pi;)(s) &le;&gamma;^n max_{s}[V_(t+n-1)(s)-V_(&pi;)(s)]`</p>
-		<p>This is called <u>error reduction property</u> of n-step returns.</p>
-		<p><b>n-step SARSA</b></p>
-		<p>n-step of version of SARSA is called n-step SARSA. The main idea is to simply switch states for action (state-action pair) and then use `&isin;-greedy` policy. Here, we redefine n-step returns (update targets) in terms of estimated action-values</p>
-		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t:t+n)&esdot; R_(t+1) + &gamma;R_(t+2) + ..... + &gamma;^(n-1)R_(t+n) + &gamma;^n Q_(t+n-1)(S_(t+n),A_(t+n))`
-		</p>
-		<p>with `G_(t:t+n) &esdot; G_(t)` if `t+n &ge;T` . The natural algorithm is then :</p>
-		<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q_(t+n)(S_(t), A_(t)) &esdot;Q_(t+n-1)(S_(t),A_(t)) + &alpha;[G_(t:t+n) - Q_(t+n-1)(S_(t),A_(t))]`</p>
-		<p>with the values of all other states remain unchanged: `Q_(t+n)(s,a) = Q_(t+n-1)(s,a)`. Pseudo Code for it is given below<br>
-		&emsp;&emsp;<img src="assets/img/nstepsarsa.png" alt="n-stepSARSA" width="480" height="380" class="image_full">
-		</p> 
+
+<p>When using one-step TD or TD(0), the time step determines both how frequently the action can be changed and the time interval over which bootstrapping is performed.</p>
+<p>Ideally, bootstrapping works best when conducted over a duration in which a significant and recognizable state change has occurred. <b>N-step bootstrapping</b> allows for this to happen across multiple time steps.</p>
+
+<p><b>N-step TD prediction :</b></p>
+<p>N-step TD prediction involves using N-step updates, which are still considered TD methods because they update earlier estimates based on differences from later estimates. However, when these TD methods are extended over N steps, they become N-step TD methods.</p>
+<p>In one-step updates, the target is the first reward plus the discounted estimated value of the next state. Thus, the one-step return is defined as:</p>
+
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t:t+1) &esdot; R_(t+1) + &gamma;V_(t)(S_(t+1))`</p>
+<p>For two-step updates, the return is calculated as :</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t:t+2) &esdot; R_(t+1) + &gamma;R_(t+2) +&gamma;^2V_(t+1)(S_(t+2))`</p>
+<p>For N-step updates, the return is computed as :</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t:t+n) &esdot; R_(t+1) + &gamma;R_(t+2) + ...... + &gamma;^(n-1)R_(t+n) + &gamma;^nV_(t+n-1)(S_(t+n))`</p>
+<p ><i>for all `n,t` such that `n&ge;1` and `0&le;t&lt;T-n`</i>.<br> Psuedo Code for n-step TD is given below:</p>
+&emsp;&emsp;<img src="assets/img/nstep.png" alt="n-step" width="450" height="300" class="image_full"><br>
+<p><u>Note :</u> <i>n-step</i> returns for `n&lt;1` involve future rewards and states that are not available at the time of tansition from `t` to `t+1`, but only after seeing `R_(t+n)` and computed `V_(t+n-1)`. 
+<i>n-step</i> return uses the value function, `V_(t+n-1)` to correct for the missing rewards beyond `R_(t+n)`</p>
+<p>The natural state-value learning algorithm for using <i>n-step</i> returns is thus :</p>
+<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`V_(t+n)(S_(t))&esdot;V_(t+n-1)(S_(t)) + &alpha;[G_(t:t+n) - V_(t+n-1)(S_(t))]`</p>
+<p>while the values of all other states remain unchanged: `V_(t+n)(S) = V_(t+n-1)(S)`, for all `s != S_(t)` . This algorithm is called <i>n-step TD</i></p>
+<p>An important aspect of <i>n-step</i> return is that their expectation is guaranteed to be a better estimate of `V_(&pi;)` than `V_(t+n-1)` is, in a worst-state sense. That is, worst error of the expected n-step return is guaranteed to be less than or equal to `&gamma;^n` times the worst error under `V_(t+n-1)`</p>
+<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`max_{x}[`&Eopf;<sub>`&pi;`</sub> `[G_(t:t+n) | S_(t)=s] - V_(&pi;)(s) &le;&gamma;^n max_{s}[V_(t+n-1)(s)-V_(&pi;)(s)]`</p>
+<p>This is called <u>error reduction property</u> of n-step returns.</p>
+<p><b>n-step SARSA</b></p>
+<p>n-step of version of SARSA is called n-step SARSA. The main idea is to simply switch states for action (state-action pair) and then use `&isin;-greedy` policy. Here, we redefine n-step returns (update targets) in terms of estimated action-values</p>
+<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`G_(t:t+n)&esdot; R_(t+1) + &gamma;R_(t+2) + ..... + &gamma;^(n-1)R_(t+n) + &gamma;^n Q_(t+n-1)(S_(t+n),A_(t+n))`
+</p>
+<p>with `G_(t:t+n) &esdot; G_(t)` if `t+n &ge;T` . The natural algorithm is then :</p>
+<p style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`Q_(t+n)(S_(t), A_(t)) &esdot;Q_(t+n-1)(S_(t),A_(t)) + &alpha;[G_(t:t+n) - Q_(t+n-1)(S_(t),A_(t))]`</p>
+<p>with the values of all other states remain unchanged: `Q_(t+n)(s,a) = Q_(t+n-1)(s,a)`. Pseudo Code for it is given below<br>
+&emsp;&emsp;<img src="assets/img/nstepsarsa.png" alt="n-stepSARSA" width="480" height="380" class="image_full">
+</p> 
 
 </body>
 </html>

@@ -21,13 +21,15 @@ header:
     url: /notes.html
   - title: Resume
     url: /resume.html
-  - titles:
-      # @start locale config
-      en      : &EN       Archive
-      en-GB   : *EN
-      tr      : &TR       Arşivdekiler
-      # @end locale config
-    url: /archive.html
+  - title: Books I've Read
+    url: /books.html
+  # - titles:
+  #     # @start locale config
+  #     en      : &EN       Archive
+  #     en-GB   : *EN
+  #     tr      : &TR       Arşivdekiler
+  #     # @end locale config
+  #   url: /archive.html
     
 docs-en:
   - title:      Statistics Essentials

@@ -30,44 +30,47 @@ sidebar:
 
 <body>
 
-        <h2>Deep Q-Learning</h2>
-        <p>In Q-Learning, it can be impractical to represent `Q`-function as a table containing values for each combination of `s` and `a`.
-        Instead, with Deep Q-Learning we train a function approximator, a neural network with parameters `&theta;` , to estimate the `Q`-values, i.e, `Q(s,a;&theta;)&asymp;Q^*(s,a)` This is done by minimising the loss at each step `t`</p>
-        <p>In addition, we use a technique called <u>Experience Replay</u> during network updates. In this technique, at each time step, the transitions are added to a circular buffer called <i>replay buffer.</i>
-        Then, during training, instead of choosing the most recent action to compute the loss and its gradient, Experience Replay technique uses a mini-batch of transitions sampled from the replay buffer.</p>
-        <p><b>Deep Q-Learning Steps:</b></p>
-        <p>
-        <i>Initializtion:</i></p>
-        <p>
-        1. Experience replay is initialized to an empty list of size M<br>
-        2.We choose a maximum size of the memory<br>
-        </p>
-        <p>
-        <i>At each time step `t`, we repeat then following processes until the end of the epoch.</i></p>
-        <p>
-        1. We predict the `Q`-values of the current state `s_(t)`<br>
-        2. We play the action that has the highest `Q`-value: `a_(t) = argmax_{a}{Q(s_(t),a)}`<br>
-        3. We get the reward `R(s_(t),a_(t))`<br>
-        4. We reach the next state `s_(t+1)`<br>
-        5. We append the transition `(s_(t),a_(t),r_(t),s_(t+1))` in the memory M<br>
-        6. We take a random mini-batch `B &sub; M` of replay buffer. For all the transitions `(s_(t_(B)),a_(t_(B)),r_(t_(B)),s_(t_(B+1)))` of the random mini-batch `B`.
-        </p>
-        <p>&emsp;&emsp;&emsp;We get the predictions, `Q(s_(t_(B)),a_(t_(B)))`<br>
-        &emsp;&emsp;&emsp;We get the target `R(s_(t_(B)),a_(t_(B))) + &gamma;max_{a}(Q(s_(t_(B+1)),a))`</p>
-        <p>Now, we compute the desired loss between the predictions and the target over the whole mini-batch `B`</p>
-        <p>&emsp;&emsp;&emsp;Loss `=\frac{1}{2}\sum_{B}(R(s_(t_(B)),a_(t_(B))) + &gamma;max_{a}(Q(s_(t_(B+1)),a)) - Q(s_(t_(B)),a_(t_(B))))^2` </p>
-        <p>&emsp;&emsp;&emsp;&emsp;&emsp;`=\frac{1}{2}\sum_{B}TD_(t_(B))(s_(t_(B)),a_(t_(B)))^2`</p>
-        <p>Afterwards, we backprop the loss error back into network, and through stochastic gradient descent, we update the weights on network</p>
-        <h2>Double Q-Learning</h2>
-        <p>In Q-Learning, update can be written as:</p>
-        <p>&emsp;&emsp;&emsp;&emsp;`Q_(t+1)(s_(t),a_(t)) = Q_(t)(s_(t),a_(t)) + &alpha;_(t)(s_(t),a_(t))(R_(t)+&gamma;max_{a}Q_(t)(s_(t+1),a) - Q_(t)(S_(t),a_(t)))`&emsp;&emsp;&emsp;...eq(1)</p>
-        <p>Th use of <i>max</i> operator in the above eq of Q-Learning, can cause large over-estimation of the action values. This leads to large performance penalty that slows the learning process too</p>
-        <p>Therefore, Double Q-Learning proposes <i>the double estimator</i> method. Here, two sets of estimators: `&mu;^A = {&mu;_(1)^A,....&mu;_(M)^A}` and `&mu;^B = {&mu;_(1)^B,...., &mu;_(M)^B}` is used to approximate `max_(i)E{X_(i)}`. The approximation can be written as :</p>
-        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`max_{i}E{X_(i)} = max_{i}E{&mu;_(i)^B} &asymp;&mu;_(a&lowast;)^B`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...eq(2)</p>
-        <P><b>Double Q-Learning</b> stores two `Q` functions: `Q^A` and `Q^B`. Each `Q` function is updated with a value from the other `Q` function for the next state. This way it can be considered an unbiased estimate for the value fo this action.
-        For instance, the action `a^&lowast;` in eq(2) is the maximum value action in state `s'`, according to the value function `Q^A`. i.e, `Q^A(s',a^&lowast;) = max_{a}Q^A(s',a)`. However, we still use `Q^B(s',a^&lowast;)` to update `Q^A`</P>
-        <p>Double Q-Learning converges to the optimal policy in the limit, and faster than Q-Learning, its algorithm is given below :</p>
-        <img src="assets/img/doubleq.png" width="600" height="280" alt="double-q-learning" class="image_full">
+<h2>Deep Q-Learning</h2>
+<p>In Q-Learning, representing the `Q`-function as a table for all state-action pairs can be impractical. 
+Deep Q-Learning solves this by training a neural network with parameters `&theta;` to approximate `Q`-values i.e., `Q(s,a;&theta;)&asymp;Q^*(s,a)`  
+This is achieved by minimizing loss at each time step `t`, enabling efficient estimation of `Q`-values without an exhaustive table representation.</p>
+
+<p>In addition, Deep Q-Learning uses a technique called <b>Experience Replay</b> during network updates. In this technique, at each time step `t`, the transitions are added to a circular buffer called <i>replay buffer.</i>
+During training, instead of using only the most recent action, a mini-batch of transitions sampled from the replay buffer is employed to compute the loss and its gradient, improving learning efficiency and stability.
+</p>
+<p><b>Deep Q-Learning Steps:</b></p>
+<p>
+<i>Initializtion:</i></p>
+<p>
+1. Experience replay is initialized to an empty list of size M<br>
+2.We choose a maximum size of the memory<br>
+</p>
+<p>
+<i>At each time step `t`, we repeat then following processes until the end of the epoch.</i></p>
+<p>
+1. We predict the `Q`-values of the current state `s_(t)`<br>
+2. We play the action that has the highest `Q`-value: `a_(t) = argmax_{a}{Q(s_(t),a)}`<br>
+3. We get the reward `R(s_(t),a_(t))`<br>
+4. We reach the next state `s_(t+1)`<br>
+5. We append the transition `(s_(t),a_(t),r_(t),s_(t+1))` in the memory M<br>
+6. We take a random mini-batch `B &sub; M` of replay buffer. For all the transitions `(s_(t_(B)),a_(t_(B)),r_(t_(B)),s_(t_(B+1)))` of the random mini-batch `B`.
+</p>
+<p>&emsp;&emsp;&emsp;We get the predictions, `Q(s_(t_(B)),a_(t_(B)))`<br>
+&emsp;&emsp;&emsp;We get the target `R(s_(t_(B)),a_(t_(B))) + &gamma;max_{a}(Q(s_(t_(B+1)),a))`</p>
+<p>Now, we compute the desired loss between the predictions and the target over the whole mini-batch `B`</p>
+<p>&emsp;&emsp;&emsp;Loss `=\frac{1}{2}\sum_{B}(R(s_(t_(B)),a_(t_(B))) + &gamma;max_{a}(Q(s_(t_(B+1)),a)) - Q(s_(t_(B)),a_(t_(B))))^2` </p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;`=\frac{1}{2}\sum_{B}TD_(t_(B))(s_(t_(B)),a_(t_(B)))^2`</p>
+<p>Afterwards, we backprop the loss error back into network, and through stochastic gradient descent, we update the weights on network</p>
+<h2>Double Q-Learning</h2>
+<p>In Q-Learning, update can be written as:</p>
+<p>&emsp;&emsp;&emsp;&emsp;`Q_(t+1)(s_(t),a_(t)) = Q_(t)(s_(t),a_(t)) + &alpha;_(t)(s_(t),a_(t))(R_(t)+&gamma;max_{a}Q_(t)(s_(t+1),a) - Q_(t)(S_(t),a_(t)))`&emsp;&emsp;&emsp;...eq(1)</p>
+<p>Th use of <i>max</i> operator in the above eq of Q-Learning, can cause large over-estimation of the action values. This leads to large performance penalty that slows the learning process too</p>
+<p>Therefore, Double Q-Learning proposes <i>the double estimator</i> method. Here, two sets of estimators: `&mu;^A = {&mu;_(1)^A,....&mu;_(M)^A}` and `&mu;^B = {&mu;_(1)^B,...., &mu;_(M)^B}` is used to approximate `max_(i)E{X_(i)}`. The approximation can be written as :</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`max_{i}E{X_(i)} = max_{i}E{&mu;_(i)^B} &asymp;&mu;_(a&lowast;)^B`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...eq(2)</p>
+<P><b>Double Q-Learning</b> stores two `Q` functions: `Q^A` and `Q^B`. Each `Q` function is updated with a value from the other `Q` function for the next state. This way it can be considered an unbiased estimate for the value fo this action.
+For instance, the action `a^&lowast;` in eq(2) is the maximum value action in state `s'`, according to the value function `Q^A`. i.e, `Q^A(s',a^&lowast;) = max_{a}Q^A(s',a)`. However, we still use `Q^B(s',a^&lowast;)` to update `Q^A`</P>
+<p>Double Q-Learning converges to the optimal policy in the limit, and faster than Q-Learning, its algorithm is given below :</p>
+<img src="assets/img/doubleq.png" width="600" height="280" alt="double-q-learning" class="image_full">
 
 
 </body>

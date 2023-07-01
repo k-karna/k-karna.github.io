@@ -57,6 +57,16 @@ docs-en:
         url:    /gan.html
       - title:  DL06 - AutoEncoder and its variants
         url:    /autoen.html
+  
+  - title:      Self Supervised Learning
+    children:
+      - title:  SL01 - Self-Supervised Learning
+        url:    /sl.html
+  
+  - title:      Federated Learning 
+    children:
+      - title:  FL01 - Federated Learning (FedAvg)
+        url:    /fdl.html
 
   - title:      Computer Vision
     children:

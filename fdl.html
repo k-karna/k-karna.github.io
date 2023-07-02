@@ -40,7 +40,8 @@ FL, as takes updates from each mobile, few things differ from traditional machin
   <li><b>Non-IID Data :</b> Devices used for training data can vary in hardware capibilities, sensors, operating systems. Similary, user can vary based on geograhic and demographic, and consequently their usage pattern and preferences. Therfore, any user's local dataset cannot be representative of population distribution.</li>
   <li><b>Unbalanced Data :</b> Even two similar users can varying amount of training data based on heavy or light usages.</li>
   <li><b>Massively Distributed :</b> Data can be distributed among tens of thousand of users, where average number of data generated per user can be less than total number of users.</li>
-  <li><b>Limited Communication :</b> Devices can be frequently switched off or on restricted/poor internet connection</li>
+  <li><b>Limited Communication :</b> Devices can be frequently switched off or on restricted/poor internet connection. Therefore, each client tends to participate for only a small number of update round each day.</li>
+  <li><b>Communication Cost :</b> Unlike distributed systems, computation cost at data center is essential free in FL, but communication cost of for each round of updates is manifold.</li>
 </ul>
 </p>
 <h4>Federated Learning Optimization :</h4>
@@ -49,7 +50,11 @@ If there is a fixed set of `K` clients, each with a fixed local dataset. At the 
 Each selected client then performs local computation based on global state and its own dataset, and sends an update back to server. The server then applies these updates to its global state, and the process repeats.</p>
 <p>FL objective function can be stated as :</p>
 <p>`min_{w&isin;&Ropf;^d} f(w)` &emsp;&emsp; where `f(w) &esdot; \frac{1}{n} \sum_{i=1}^n f_(i)(w)` &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;eq(1)</p>
-<p>Here, as it is inherently machine learning problem, `f_(i)(w) = l(x_(i), y_(i);w)` i.e, loss of prediction on data `(x_(i),y_(i))` with model parameter `w`</p>
+<p>Here, as it is inherently a machine learning problem, `f_(i)(w) = l(x_(i), y_(i);w)` i.e, loss of prediction on data `(x_(i),y_(i))` with model parameter `w`</p>
+<p>Also, as we have `K` clients over which data is partitioned as `P_(k)` and set of indexes of data points on each client `k` as `n_(k) = |P_(k)|`, then we can re-write eq(1) as: </p>
+<p>&emsp; `f_(w) = \sum_{k=1}^K \frac{n_(k)}{n} F_(k) (w)` &emsp;&emsp;&emsp;`F(w) = \frac{1}{n_(k)}\sum_(i&isin;P_(k)) f_(i)(w)`</p>
+
+<h4>FederatedAveraging Algorithm</h4>
 <p></p>
 <h3>References :</h3>
 [1] McMahan, B., Moore, E., Ramage, D., Hampson, S. and y Arcas, B.A., 2017, April. Communication-efficient learning of deep networks from decentralized data. In <i>Artificial intelligence and statistics</i> (pp. 1273-1282). PMLR.<br>

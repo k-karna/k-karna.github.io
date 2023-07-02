@@ -35,8 +35,22 @@ In FL, training is performed distributedly on each mobile device separately, and
 This helps protect users' privacy as only updates (and not the data) are shared for a short time, and information on the source of updates is not needed for the optimization process in FL.
 </p>
 <p>
-
+FL, as takes updates from each mobile, few things differ from traditional machine learning and distributed computing.<br>
+<ul>
+  <li><b>Non-IID Data :</b> Devices used for training data can vary in hardware capibilities, sensors, operating systems. Similary, user can vary based on geograhic and demographic, and consequently their usage pattern and preferences. Therfore, any user's local dataset cannot be representative of population distribution.</li>
+  <li><b>Unbalanced Data :</b> Even two similar users can varying amount of training data based on heavy or light usages.</li>
+  <li><b>Massively Distributed :</b> Data can be distributed among tens of thousand of users, where average number of data generated per user can be less than total number of users.</li>
+  <li><b>Limited Communication :</b> Devices can be frequently switched off or on restricted/poor internet connection</li>
+</ul>
 </p>
+<h4>Federated Learning Optimization :</h4>
+<p>In FL, we assume a iterative process of synchronous updates in each round of communication.<br>
+If there is a fixed set of `K` clients, each with a fixed local dataset. At the begining of each round, a random fraction of `C` clients is selected, and server sends the current global algorithm state to each of `C` clients. 
+Each selected client then performs local computation based on global state and its own dataset, and sends an update back to server. The server then applies these updates to its global state, and the process repeats.</p>
+<p>FL objective function can be stated as :</p>
+<p>`min_{w&isin;&Ropf;^d} f(w)` &emsp;&emsp; where `f(w) &esdot; \frac{1}{n} \sum_{i=1}^n f_(i)(w)` &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;eq(1)</p>
+<p>Here, as it is inherently machine learning problem, `f_(i)(w) = l(x_(i), y_(i);w)` i.e, loss of prediction on data `(x_(i),y_(i))` with model parameter `w`</p>
+<p></p>
 <h3>References :</h3>
 [1] McMahan, B., Moore, E., Ramage, D., Hampson, S. and y Arcas, B.A., 2017, April. Communication-efficient learning of deep networks from decentralized data. In <i>Artificial intelligence and statistics</i> (pp. 1273-1282). PMLR.<br>
 

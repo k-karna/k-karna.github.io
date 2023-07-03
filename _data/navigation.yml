@@ -35,71 +35,71 @@ docs-en:
   - title:      Statistics Essentials
     children:
       - title:  ML01 - Basic Statistics
-        url:    /2022/05/14/stat.html
+        url:    /stat.html
       - title:  ML02 - Probability Distributions
-        url:    /2023/04/05/stat1.html
+        url:    /stat1.html
       - title:  ML03 - Statistical Tests
-        url:    /2023/04/05/stat2.html
+        url:    /stat2.html
 
   - title:      Deep Learning
     children:
       - title:  DL00 - The whole idea behind Convolutional Neural Networks (CNNs)
-        url:    /2022/05/03/cnn.html
+        url:    /cnn.html
       - title:  DL01 - Deeper CNN Variants and their Architecture
-        url:    /2022/05/13/cnn_dp.html
+        url:    /cnn_dp.html
       - title:  DL02 - Recurrent Neural Networks(RNNs) and difficulty in training
-        url:    /2022/04/25/rnn.html
+        url:    /rnn.html
       - title:  DL03 - LSTM and GRU
-        url:    /2022/04/26/lstm.html
+        url:    /lstm.html
       - title:  DL04 - Encoder-Decoder, Attention Mechanism and Transformers
-        url:    /2022/07/14/encdec.html
+        url:    /encdec.html
       - title:  DL05 - Generative Adversarial Networks(GANs) and its variants
-        url:    /2022/07/14/gan.html
+        url:    /gan.html
       - title:  DL06 - AutoEncoder and its variants
-        url:    /2022/07/14/autoen.html
+        url:    /autoen.html
   
   - title:      Self Supervised Learning
     children:
       - title:  SL01 - Self-Supervised Learning
-        url:    /2023/05/13/sl.html
+        url:    /sl.html
   
   - title:      Federated Learning 
     children:
       - title:  FL01 - Federated Learning (FedAvg)
-        url:    /2023/05/24/fdl.html
+        url:    /fdl.html
 
   - title:      Computer Vision
     children:
       - title:  CV00 - Basics of Image Processing
-        url:    /2022/05/13/ip.html
+        url:    /ip.html
       - title:  CV01 - Image Transformation
-        url:    /2022/06/06/it.html
+        url:    /it.html
       - title:  CV02 - Feature Detection and Matching
-        url:    /2022/05/13/fd.html
+        url:    /fd.html
       - title:  CV03 - Object Detection Models - Two-stage Detectors (SS, RCNN based)
-        url:    /2022/05/13/objmodel.html
+        url:    /objmodel.html
       - title:  CV04 - Object Detection Models - One-stage Dectectors (YOLO, RetinaNet)
-        url:    /2022/12/12/objmodel1.html
+        url:    /objmodel1.html
       - title:  CV05 - Evaluation Metrics used in CV problems
-        url:    /2022/06/06/cvev.html
+        url:    /cvev.html
 
   - title:      Reinforcement Learning
     children:
       - title:  RL00 - Markov Decision Process (MDP)
-        url:    /2022/04/30/mdp.html
+        url:    /mdp.html
       - title:  RL01 - Policies and Value Function
-        url:    /2022/04/30/polval.html
+        url:    /polval.html
       - title:  RL02 - Monte Carlo Methods and Control
-        url:    /2022/05/03/mc.html
+        url:    /mc.html
       - title:  RL03 - Off-Policy via Importance Sampling
-        url:    /2022/04/30/off_imp_samp.html
+        url:    /off_imp_samp.html
       - title:  RL04 - TD Learning
-        url:    /2022/04/27/td.html
+        url:    /td.html
       - title:  RL05 - SARSA and Q-Learning
-        url:    /2022/04/27/sarsaq.html
+        url:    /sarsaq.html
       - title:  RL06 - n-step Bootstrapping
-        url:    /2022/05/03/nstep.html
+        url:    /nstep.html
       - title:  RL07 - Deep Q-Learning and Double Q-Learning
-        url:    /2022/12/12/deepq.html
+        url:    /deepq.html
       - title:  RL08 - Policy Gradient Methods & REINFORCE
-        url:    /2022/12/14/pgrad.html
+        url:    /pgrad.html

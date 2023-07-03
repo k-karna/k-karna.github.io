@@ -35,7 +35,7 @@ docs-en:
   - title:      Statistics Essentials
     children:
       - title:  ML01 - Basic Statistics
-        url:    /2022/05/13/stat.html
+        url:    /2022/05/14/stat.html
       - title:  ML02 - Probability Distributions
         url:    /2023/04/05/stat1.html
       - title:  ML03 - Statistical Tests

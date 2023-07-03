@@ -1,142 +1,122 @@
 ---
 layout: article
 title: Basic Statistics
+date: 2022-05-13
 sidebar:
   nav: "docs-en"
 ---
+<!DOCTYPE HTML>
+<html>
+
+<!--- Adding Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154990580-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154990580-2');
+</script>
+<!-- End of Google Analytics Code -->
+<!-- Adding MathJAX -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script async="true" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=AM_CHTML"> </script>
+<!-- End of MathJAX -->
 
 
-**Population:** Population is a set of similar items or events that is of interest for some statistical problem. It can be a group of existing object or a hypothetical or potentially infinite group of items.
-
-**Sample :** It is a selection of individual, events or objects taken from a well-defined population. Thus sample is a subset of population.
-
-**Parameters :** Parameters are those quantities that summarizes or describes an aspect of the population such as mean, deviation, correlation, etc.
-
-**Sampling Error :** It is the difference between sample statistics and population parameters. Since, samples does not include all elements of population, its estimate tends to differ from it.
-
-**Mode :** Mode is the score that occurs most often in a frequency distribution of data.
-
-**Mean :** Mean is the arithmetic average of numbers in a data set i.e, sum of numbers divided by the total.
-
-**Median :** Median is the middle score found by arranging a set of numbers from the smallest to the largest (or from largest to smallest). If even number in data point, then median is the average of two middle values.
-
-**Range :** Range is the difference between the smallest and the largest data value.
-
-### Variance 
-Variance is the average squared deviation of the data values from their mean.
-
-$(&sigma;^2) = \frac{\sum{x - &mu;}^2}{N}$
-
-where $x$ is an individual data value, $&mu;$ is the mean of all data values, and $N$ is the number of data values.
-
-### Covariance
-Covariance between two random vairable, $x$ and $y$ measures how two variables are related. Positive covariance means the two variables are positively related, and they move in the same direction.
-Negative covariance means that the variables are inversely related, or that they move in opposite directions.
-
-$COV(x,y) = \frac{\sum_{i=1}^n (x-&mu;_x)(y-&mu;_y)}{n-1}$
-
-where $&mu;_x$ is mean of $x$ and $&mu;_y$ is mean of $y$ and $n$ is the total number of data values.
-
-### Standard Deviation 
-Standard Deviation is the square root of the variance.
-
-$s.d.=\sqrt(&sigma;^2) = \sqrt\frac{\sum{x - &mu;}^2}{N}$
-
-Standard Deviation provides a measure in standard units of how far the data values fall from the sample mean. In a **normal distribution**, 68% of the data values fall apprx one standard deviation (1 SD) on either side of the mean. 
-95% fall two standard deviation (2 SD) on either side of the mean, and 99% of the data values fall approximately three standard deviation (3 SD) on either side of the mean.
-
-### Normal Distribution 
-Normal or Gaussian Distribution is a probability distribution of data symmetric about the mean, (and resembles bell-curve) implying data near the mean are more frequent in occurrence than data far from the mean. 
-_Coefficient of skewness_ and _Coefficient of Kurtosis_ are 0 for normal distribution. It can represented as below:
-
-$f(x) = \frac{1}{&sigma;\sqrt2&pi;}e^(-1/2(\frac{x-&mu;}{&sigma;})^2)$
-
-### Tchebysheff Inequality Theorem 
-It helps determine proportion of observation expected within a certain number of standard deviation from the mean, even if data is not _normally distributed_
-
-Given a number $k &ge;1$, and set of $n$ measurements, at least, $1 -\frac{1}{k^2}$ of the measurements will lie within $k$ standard deviation of their mean, and following deduction can be made :
-
-Lower limit = mean - $k &times;$ s.d.<br>
-Upper limit = mean - $k &times;$ s.d.<br>
-
-**(Standardized) Moments :** Moments are a set of parameters to measure a distribution. Four moments are: `1st moment: Mean` -> `2nd Moment: Variance` -> `3rd Moment: Skewness` -> `4th Moment: Kurtosis`
-
-**3rd Moment -> Skewness :** It is a measure of the asymmetry of the probability distribution of data and defined as:
-
-$&gamma; = \frac{1}{N&sigma;^3}\sum_{i=1}^n (x_(i)- &mu;)^3$
-
-Generally, If Mean $&gt;$ Mode, the skewness is positive having _tail_ on the right side, and if Mean $&lt;$ Mode, the skewness is negative, with  _tail_ on the left side of the distribution.
-
-<img class="image image--xl" src="/assets/img/skew.png"/>
+<body>
 
 
-Pearson Skewness Coefficient (based on Mode) is defined as: $\frac{Mean - Mode}{s.d.}$ <br>and based on Median, it is $\frac {3 (Mean - Median)}{s.d.}$
+<p>
+<b>Population :</b> is a set of similar items or events that is of interest for some statistical problem. It can be a group of existing object or a hypothetical or potentially infinite group of items.<br>
+<b>Sample :</b> is a selection of individual, events or objects taken from a well-defined population. Thus sample is a subset of population.<br>
+<b>Parameters :</b> are those quantities that summarizes or describes an aspect of the population such as mean, deviation, correlation, etc<br>
+<b>Sampling Error :</b> is the difference between sample statistics and population parameters. Since, samples does not include all elements of population, its estimate tends to differ from it.
+</p>
+<p>
+<b> Mode :</b> is the score that occurs most often in a frequency distribution of data<br>
+<b>Mean :</b> is the arithmetic average of numbers in a data set i.e, sum of numbers divided by the total<br>
+<b>Median :</b> is the middle score found by arranging a set of numbers from the smallest to the largest (or from largest to smallest). If even number in data point, then median is the average of two middle values. <br>
+<b>Range :</b> is the difference between the smallest and the largest data value.<br>
+<b>Variance :</b> is the average squared deviation of the data values from their mean. <br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;variance `(&sigma;^2) = \frac{\sum{x - &mu;}^2}{N}` <br>
+where `x` is an individual data value, `&mu;` is the mean of all data values, and `N` is the number of data values<br>
+</p>
 
+<p><b>Covariance</b> between two random vairable, `x` and `y` measures how two variables are related. Positive covariance means the two variables are positively related, and they move in the same direction.
+Negative covariance means that the variables are inversely related, or that they move in opposite directions.<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;COV `(x,y) = \frac{\sum_{i=1}^n (x-&mu;_x)(y-&mu;_y)}{n-1}`<br>
+where `&mu;_x` is mean of `x` and `&mu;_y` is mean of `y` and `n` is the total number of data values.</p>
 
-**Kurtosis :** refers to the degree of peakedness of a frequency curve. It tell how tall and sharp the cenral peak is, relative to a standard bell curve of normal distribution.<br>
+<p><b>Standard Deviation :</b> is the square root of the variance<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;s.d.`=\sqrtvariance (&sigma;^2) = \sqrt\frac{\sum{x - &mu;}^2}{N}`<br>
+Standard Deviation provides a measure in standard units of how far the data values fall from the sample mean. In a <b>normal distribution</b>, 68% of the data values fall apprx one standard deviation (1 SD) on either side of the mean. 95% fall two standard deviation (2 SD) on either side of the mean, and 99% of the data values fall approximately three standard deviation (3 SD) on either side of the mean.
+</p>
+
+<p><b>Normal Distribution :</b> Normal or Gaussian Distribution is a probability distribution of data symmetric about the mean, (and resembles bell-curve) implying data near the mean are more frequent in occurrence than data far from the mean. <i>Coefficient of skewness</i> and <i>Coefficient of Kurtosis</i> are 0 for normal distribution. It can represented as below: <br>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`f(x) = \frac{1}{&sigma;\sqrt2&pi;}e^(-1/2(\frac{x-&mu;}{&sigma;})^2)`</p>
+</p>
+
+<p><b>Tchebysheff Inequality Theorem :</b> It helps determine proportion of observation expected within a certain number of standard deviation from the mean, even if data is not <i>normally distributed</i>.<br>
+Given a number `k &ge;1`, and set of `n` measurements, at least, `1 -\frac{1}{k^2}` of the measurements will lie within `k` standard deviation of their mean, and following deduction can be made : <br>
+Lower limit = mean - `k &times;` s.d.<br>
+Upper limit = mean - `k &times;` s.d.<br>
+</p>
+<p>
+<b>(Standardized) Moments :</b> Moments are a set of parameters to measure a distribution. Four moments are: 1st moment -> Mean 2nd Moment -> Variance 3rd Moment - Skewness 4th Moment -> Kurtosis <br>
+<b>3rd Moment -> Skewness :</b> is a measure of the asymmetry of the probability distribution of data and defined as:<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;`&gamma; = \frac{1}{N&sigma;^3}\sum_{i=1}^n (x_(i)- &mu;)^3`<br>
+Generally, If `Mean &gt; Mode`, the skewness is positive having <i>tail</i> on the right side, and if `Mean &lt; Mode`, the skewness is negative, with  <i>tail</i> on the left side of the distribution. <br>
+<img src="/assets/img/skew.png" alt="skewness" width="650" height="180" class="image_full"><br>
+</p>
+<p>Pearson Skewness Coefficient (based on Mode) is defined as: `\frac{Mean - Mode}{s.d.}` and based on Median, it is `\frac {3 (Mean - Median)}{s.d.}`
+</p>
+<p><b>Kurtosis :</b> refers to the degree of peakedness of a frequency curve. It tell how tall and sharp the cenral peak is, relative to a standard bell curve of normal distribution.<br>
 Kurtosis can be described in the following ways:
 <ul>
 	<li>Playkurtic : When Kurtosis `&lt; 0`. The curve is more flat and wide.</li>
 	<li>Leptokurtic : When Kurtosis `&gt; 0`. The curve is more peaked.</li>
 	<li>Mesokurtic : When the Kurtosis `= 0` (<i>normal</i> in shape)</li>
 </ul>
-<img class="image image--xl" src="/assets/img/kurt.png"/>
-
-### Correlation
-It measures the interdependence between two variables and illustrate how closely two variables move together. Correlation value range between -1.0 and 1.0
-A correlation value of -1.0 represents negative correlation between said variables and they move in opposite direction. A correlation value of 0 means no linear relationship at all. A perfect positive correlation value is 1. Below given image is to illustrate it.
-
-<img class="image image--xl" src="/assets/img/Corr_coeff.png"/>
-
-### Pearson Correlation Coefficient
-It is between two _linearly_ related variables, and required three assumption to be true i.e, 1. interval or ratio level, 2. Bivariable normally distributed 3. Linearly related.
-
-For a sample data, it is defined as :
-
-$&rho; = \frac{\sum(x_(i)-x&#772;)(y_(i)-y&#772;)}{\sqrt(\sum(x_(i)-x&#772;)^2\sum(y_(i)-y&#772;)^2)}$
-
-where,<br>
-
-$&rho;= $ correlation coefficient,
-
-$x_(i) = $ values of the x-variable in sample<br>
-$x&#772;= $ mean of the values of the x-variable<br>
-$y_(i) = $ valus of the y-variable in a sample<br>
-$y&#772;= $ mean of the values of the y-variable<br>
-
-For population data, correlation coefficient is defined as :<br>
-
-$&rho;_(X,Y) = \frac{cov(X,Y)}{&sigma;_(X)&sigma;_(Y)}$
-
-where,<br>
-$cov(x,y) = $ covariance between $x$ and $y$<br>
-$&sigma;_(X)=$ standard deviation of $$X$$
-$&sigma;_(Y) =$ standard deviation of $$Y$$
-
-### Spearman's Rank Correlation Coefficient :
-It requires two assumption to be true i.e, 1. interval or ratio level or ordinal(categorical data) 2. monotonically related. A monotonic function is one that either never increases or never decreases as its independent variable increases. Below given image is to demonstrate that:
-
-<img class="image image--xl" src="/assets/img/monotonic.png"/>
-
-Spearman's Rank Correlation is represented by $r_(s)$ and constrained as $-1 &le;r_(s)&le;1$. For a sample size of $n$, the $n$ raw scores $X_(i)$, $Y_(i)$ are converted to ranks $R(X_(i)), R(Y_(i))$ and $r_(s)$ then computed as:
-
-$r_(s) = &rho;_(R(X),R(Y)) = \frac{cov(R(X),R(Y))}{&sigma;_(R(x))&sigma;_(R(Y))}$
+<img src="/assets/img/kurt.png" alt="kurtosis" width="480" height="200" class="image_full">
+</p>
+<p>
+<b>Correlation :</b> It measures the interdependence between two variables and illustrate how closely two variables move together. Correlation value range between -1.0 and 1.0
+A correlation value of -1.0 represents negative correlation between said variables and they move in opposite direction. A correlation value of 0 means no linear relationship at all. A perfect positive correlation value is 1. below given image is to illustrate it.
+<img src="/assets/img//Corr_coeff.png" alt="correlation coefficient" width="520" height="250" class="image_full">
+</p>
+<p>
+<b>Pearson Correlation Coefficient :</b> It is between two <i>linearly</i> related variables, and required three assumption to be true i.e, 1. interval or ratio level, 2. Bivariable normally distributed 3. Linearly related. <br> For sample, it is defined as : </p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;`&rho;=\frac{\sum(x_(i)-x&#772;)(y_(i)-y&#772;)}{\sqrt(\sum(x_(i)-x&#772;)^2\sum(y_(i)-y&#772;)^2)}`
+</p>
+where `&rho;=` correlation coefficient,&emsp;`x_(i) = `values of the x-variable in sample &emsp; `x&#772;=` mean of the values of the x-variable &emsp;&emsp;&emsp; `y_(i) = ` valus of the y-variable in a sample &emsp; `y&#772;=` mean of the values of the y-variable
+<p>For a population, correlation coefficient is defined as:<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;`&rho;_(X,Y)=\frac{cov(X,Y)}{&sigma;_(x)&sigma;_(Y)}` <br>where `cov(x,y) = ` covariance between `x` and `y` &emsp; `&sigma;_(x)=` standard deviation of `X` &emsp;&emsp; `&sigma;_(Y) =` standard deviation of `Y`
+</p>
+<p>
+<b>>Spearman's Rank Correlation Coefficient </b> It requires two assumption to be true i.e, 1. interval or ratio level or ordinal(categorical data) 2. monotonically related. A monotonic function is one that either never increases or never decreases as its independent variable increases. Below given image is to demonstrate that  <br>
+<img src="/assets/img/monotonic.png" alt="monotonic function" width="500" height="190" class="image_full"><br>
+Spearman's Rank Correlation is represented by `r_(s)` and constrained as `-1 &le;r_(s)&le;1`. For a sample size of `n`, the `n` raw scores `X_(i), Y_(i)` are converted to ranks `R(X_(i)), R(Y_(i))` and `r_(s)` then computed as: 
+</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;`r_(s) = &rho;_(R(X),R(Y)) = \frac{cov(R(X),R(Y))}{&sigma;_(R(x))&sigma;_(R(Y))}` 
+</p>
+where `&rho;` denotes <i>Pearson Correlation Coefficient</i> of rank variables,&emsp;`
+cov(R(X),R(Y))` is covariance of rank variables &emsp;&emsp;`&sigma;_(R(X))` and `&sigma;_(R(Y))` are standard deviations of rank variables.<br>
+<b>>> </b>If all `n` ranks are <i>distinct integers</i>, it can be computed as:
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;`r_(s)= 1 - \frac{6 \sumd_{i}^2}{n(n^2 - 1)}`
+</p>
+where `d_(i) = R(X_(i)) - R(Y_(i))` is the difference between the two ranks of each obsevation, and `n` is the number of observations.
+<p>
+<b>>Z-score :</b> It is the number of standard deviation by which the value of a raw score is above or below the mean. Raw score above mean value <i>positive</i> z-score (standard score) and those below mean value have <i>negative</i> z-score (standard score). It is defined as :<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`z = \frac{x - &mu;}{&sigma;}`<br>
+where `&mu;` is the mean of the population and `&sigma;` is s.d. of the population. And, for sample,<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;`z = \frac{x-x&#772;}{S}` where `x&#772;` is the mean of the sample, and `S` is the s.d. of the sample.
+</p>
 
 
-where,
-$&rho;$ denotes _Pearson Correlation Coefficient_ of rank variables, $cov(R(X),R(Y))$ is covariance of rank variables $&sigma;_(R(X))$ and $&sigma;_(R(Y))$ are standard deviations of rank variables.
-
-If all $n$ ranks are _distinct integers_, it can be computed as:
-$r_(s)= 1 - \frac{6∑ d_{i}^2}{n(n^2 - 1)}$
-
-where,
-$d_(i) = R(X_(i)) - R(Y_(i))$ is the difference between the two ranks of each obsevation, and $n$ is the number of observations.
-
-**Z-score :** It is the number of standard deviation by which the value of a raw score is above or below the mean. Raw score above mean value _positive_ z-score (standard score) and those below mean value have _negative_ z-score (standard score). It is defined as :
-
-$z = \frac{x - &mu;}{&sigma;}$ 
-<br>
-
-where $&mu;$ is the mean of the population and $&sigma;$ is s.d. of the population. And, for sample,
-
-$z = \frac{x-x&#772;}{S}$ where $x&#772;$ is the mean of the sample, and $S$ is the s.d. of the sample.
+</body>
+</html>

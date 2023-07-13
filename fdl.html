@@ -48,13 +48,14 @@ Each selected client then performs local computation based on global state and i
 <p><b>Federated Stochastic Gradient Descent (FedSGD)</b></p>
 <p>In FedSGD, Stochastic Gradient Descent is used for FL optimization. FedSGD uses `C` random subset of nodes, but all the local data on those nodes.<br>
 We first initialize a model parameter `w_(t)`. Then, on client side, each client `k` computes its local average gradient `g_(k) = &nabla;F_(k)(w_(t))` using all its local data.<br>
-Then, on central server all local gradients are received and aggregated before global model update where model updated parameter `w_(t+1)` with learning rate &#544; is computed as: 
-`w_(t+1) &larr; w_(t) - &#544; \sum_(k=1)^K \frac{n_(k)}{n} g_(k)`
-
-
+Then, on central server all local gradients are received and aggregated before global model update where model updated parameter `w_(t+1)` with learning rate &eta; is computed as: 
+`w_(t+1) &larr; w_(t) - &eta; \sum_(k=1)^K \frac{n_(k)}{n} g_(k)`
 </p>
 
 <p><b>Federated Averaging (FedAVG)</b></p>
+<p>FedAVG is similar to FedSGD, but it averages weights on each client state instead of updating global model with client's local parameters on server side.</p>
+<p>If &eta; is learning rate, then updated weight on client state is computed as `w_(t+1)^k &larr; w_(t) - &eta;g_(k)` and then server computes weighted average as `w_(t+1) &larr; \sum_(k=1)^K \frac{n_(k)}{n} w_(t+1)^k`
+</p>
 
 <h3>References :</h3>
 [1] McMahan, B., Moore, E., Ramage, D., Hampson, S. and y Arcas, B.A., 2017, April. Communication-efficient learning of deep networks from decentralized data. In <i>Artificial intelligence and statistics</i> (pp. 1273-1282). PMLR.<br>

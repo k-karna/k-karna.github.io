@@ -21,11 +21,26 @@ sidebar:
 
 <body>
 <p>Self-supervised learning is a deep learning method in which a model learns representation form unlabeled data. 
-It leverages data's inherent co-occurence relationship as self-supervision for labels.(Liu et al., 2021).<br>
+It leverages data's inherent co-occurence relationship or lack thereof as self-supervision for labels.(Liu et al., 2021).<br>
 Yann LeCun put it as, <i>"the machine predicts any parts of its input for any observed part"</i></p>
+<p>Self supervised learning can be summarized as: <br>
+1. Obtain "labels" from data itself by using internal structure<br>
+2. Predict part of the data from the other parts, where other parts could be incomplete, transformed, distorted or corrupted (Liu et al., 2021)</p>
+<p>For ease of purposes, we can separate self-supervised learning into three categories: </p>
+<ul>
+  <li><b>Generative :</b></li> In this, we have an encoder and a decoder. We encode an input `x` into an explicit vector `z` and using reconstruction loss, decoder afterwrads tries to reconstruct `x` from `z`. 
+    Generative methods are <a href="autoen.html">AutoEncoder and its variants</a> 
+  <li><b>Contrastive :</b></li> In contrastive learning, we have an encoder, and a discriminator. Here, we encode an input `x` into an explicit vector `z`. 
+    Discriminator then uses similarity metrics such as InfoNCE to maximize the similarity between positive samples, and minimize the similarity between negative samples.
+  <li><b>Generative - Constrastive :</b></li> Here, we have an encoder-decoder where `z` implicitly modelled to generate fake samples, and then a discriminator using distribution divergence loss such JS-Divergence, Wasserstein Distance tries to distinguish fake samples from the real ones.
+    <a href="gan.html">GAN and its variants</a> fall into this category.
+</ul>
+<h4>Contrastive Learning</h4>
+<p>(Jaiswal et al., 2020)</p>
 
 </body>
 
 <h3>References :</h3>
-[1] Liu, X., Zhang, F., Hou, Z., Mian, L., Wang, Z., Zhang, J. and Tang, J., 2021. Self-supervised learning: Generative or contrastive.<i>IEEE transactions on knowledge and data engineering</i>, 35(1), pp.857-876.
+[1] Liu, X., Zhang, F., Hou, Z., Mian, L., Wang, Z., Zhang, J. and Tang, J., 2021. Self-supervised learning: Generative or contrastive.<i>IEEE transactions on knowledge and data engineering</i>, 35(1), pp.857-876.<br>
+[2] Jaiswal, A., Babu, A.R., Zadeh, M.Z., Banerjee, D. and Makedon, F., 2020. A survey on contrastive self-supervised learning. <i>Technologies</i> 9(1), p.2.
 </html>

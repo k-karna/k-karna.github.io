@@ -36,7 +36,7 @@ Yann LeCun put it as, <i>"the machine predicts any parts of its input for any ob
     <a href="gan.html">GAN and its variants</a> fall into this category.
 </ul>
 <h3><a id ="cl">Contrastive Learning</a></h3>
-<p>There are many ways to approach contrastive learning problem. One of them is Mutual Information.<br>
+<p>There are many ways to approach contrastive learning problem. One of them is <b>Mutual Information</b>.<br>
 Mutual Information (MI) measures the degree of dependence or correlation between the input data and the learned representation.
 The goal is to maximize the MI between input data and learned representation where positive pairs share more MI than negative pairs.
 </p>
@@ -46,6 +46,7 @@ The goal is to maximize the MI between input data and learned representation whe
 and `X` and `C` are the random variables associated with data and representations, respectively.</p>
 <p>Then Mutual Information (MI) (Song and Ermon, 2020) can be given as:</p>
 <p>`I(X, C) &colone; E_((x, y)&sim;p(x,y)) [log \frac{p(x,c)}{p(x)p(c)}]`</p>
+
 <h4><a id="cpc">Contrastive Predictive Coding</a></h4>
 <p>One of the approach that uses MI is Contrastive Predictive Coding (CPC). <br>
 In CPC, a non-linear encoder `g_(enc)` maps the input data sequences `x_t` to latent representations `z_t = g_(enc)(x_t)`.
@@ -54,6 +55,13 @@ Then, an autoregressive model `g_(ar)` summarizes all `z_(&le;t)` and produces a
 <p>Then, if that CPC is an `m`-class classification problem, wher the goal is to distinguish a positive pair `(x, c) &sim; p(x, c)` from `(m -1)` negative pair `(x, c̄ ) &sim; p(x)p(c)`.</p>
 <p>We optimize the loss for a batch of `n` positive pairs `{(x_(i), c_(i))}_(i=1)^n` as:</p>
 <p>`L(g) &colone; E [\frac{1}{n} \sum_(i=1)^n log \frac{m &sdot; g(x_(i),c_(i))}{g(x_(i), c_(i)) + \sum_(j=1)^(m-1) g(x_(i), c_(i,j)̄ )}]`</p>
+<p>This loss function is called Information Noise Contrastive Estimation or <b>InfoNCE</b> and used in many further proposed methods in Contrastive Learning.</p>
+<p>Both encoder and autoregressive model jointly optimize the loss using InfoNCE, and CPC afterwards models a density ratio which preserves the Mutual Information between `x_(t+k)` and `c_t` (Oord et al., 2019) as follows :</p>
+<p>`f_(k)(x_(t+k),c_(t)) &prop; \frac{p(x_(t+k) | c_(t))}{p(x_(t+k))}`</p>
+<p>In CPC, both `z_t` and `c_t` can be used as representation for downstream task, when more information from past is necessary `c_t` is suitable.</p>
+
+<h4><a id="deepinfomax">Deep Info MAX</a></h4>
+<p></p>
 <p>(Jaiswal et al., 2020)</p>
 
 </body>

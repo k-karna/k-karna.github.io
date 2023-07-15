@@ -30,17 +30,37 @@ Yann LeCun put it as, <i>"the machine predicts any parts of its input for any ob
 <ul>
   <li><b>Generative :</b></li> In this, we have an encoder and a decoder. We encode an input `x` into an explicit vector `z` and using reconstruction loss, decoder afterwrads tries to reconstruct `x` from `z`. 
     Generative methods are <a href="autoen.html">AutoEncoder and its variants</a> 
-  <li><b>Contrastive :</b></li> In contrastive learning, we have an encoder, and a discriminator. Here, we encode an input `x` into an explicit vector `z`. 
+  <li><a href="sl.html#cl">Contrastive :</a></li> In contrastive learning, we have an encoder, and a discriminator. Here, we encode an input `x` into an explicit vector `z`. 
     Discriminator then uses similarity metrics such as InfoNCE to maximize the similarity between positive samples, and minimize the similarity between negative samples.
   <li><b>Generative - Constrastive :</b></li> Here, we have an encoder-decoder where `z` implicitly modelled to generate fake samples, and then a discriminator using distribution divergence loss such JS-Divergence, Wasserstein Distance tries to distinguish fake samples from the real ones.
     <a href="gan.html">GAN and its variants</a> fall into this category.
 </ul>
-<h4>Contrastive Learning</h4>
+<h3><a id ="cl">Contrastive Learning</a></h3>
+<p>There are many ways to approach contrastive learning problem. One of them is Mutual Information.<br>
+Mutual Information (MI) measures the degree of dependence or correlation between the input data and the learned representation.
+The goal is to maximize the MI between input data and learned representation where positive pairs share more MI than negative pairs.
+</p>
+<p>If `p(x)` is the data distribution <br>
+`p(x, c)` is the joint distribution for data and representation<br>
+`p(c)` is the marginal distribution of the representations<br>
+and `X` and `C` are the random variables associated with data and representations, respectively.</p>
+<p>Then Mutual Information (MI) (Song and Ermon, 2020) can be given as:</p>
+<p>`I(X, C) &colone; E_((x, y)&sim;p(x,y)) [log \frac{p(x,c)}{p(x)p(c)}]`</p>
+<h4><a id="cpc">Contrastive Predictive Coding</a></h4>
+<p>One of the approach that uses MI is Contrastive Predictive Coding (CPC). <br>
+In CPC, a non-linear encoder `g_(enc)` maps the input data sequences `x_t` to latent representations `z_t = g_(enc)(x_t)`.
+Then, an autoregressive model `g_(ar)` summarizes all `z_(&le;t)` and produces a latent representation `y_t = g_(ar)(z&le;t)` (Oord et al., 2019) as shown in the image below:</p>
+<img src="assets/img/cpc.png"><br>
+<p>Then, if that CPC is an `m`-class classification problem, wher the goal is to distinguish a positive pair `(x, c) &sim; p(x, c)` from `(m -1)` negative pair `(x, c̄ ) &sim; p(x)p(c)`.</p>
+<p>We optimize the loss for a batch of `n` positive pairs `{(x_(i), c_(i))}_(i=1)^n` as:</p>
+<p>`L(g) &colone; E [\frac{1}{n} \sum_(i=1)^n log \frac{m &sdot; g(x_(i),c_(i))}{g(x_(i), c_(i)) + \sum_(j=1)^(m-1) g(x_(i), c_(i,j)̄ )}]`</p>
 <p>(Jaiswal et al., 2020)</p>
 
 </body>
 
 <h3>References :</h3>
 [1] Liu, X., Zhang, F., Hou, Z., Mian, L., Wang, Z., Zhang, J. and Tang, J., 2021. Self-supervised learning: Generative or contrastive.<i>IEEE transactions on knowledge and data engineering</i>, 35(1), pp.857-876.<br>
-[2] Jaiswal, A., Babu, A.R., Zadeh, M.Z., Banerjee, D. and Makedon, F., 2020. A survey on contrastive self-supervised learning. <i>Technologies</i> 9(1), p.2.
+[2] Jaiswal, A., Babu, A.R., Zadeh, M.Z., Banerjee, D. and Makedon, F., 2020. A survey on contrastive self-supervised learning. <i>Technologies</i> 9(1), p.2.<br>
+[3] Oord, A.V.D., Li, Y. and Vinyals, O., 2018. Representation learning with contrastive predictive coding. <i>arXiv preprint arXiv:1807.03748.</i><br>
+[4] Song, J. and Ermon, S., 2020. Multi-label contrastive predictive coding. <i>Advances in Neural Information Processing Systems,</i> 33, pp.8161-8173.
 </html>

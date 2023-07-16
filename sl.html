@@ -61,8 +61,17 @@ Then, an autoregressive model `g_(ar)` summarizes all `z_(&le;t)` and produces a
 <p>In CPC, both `z_t` and `c_t` can be used as representation for downstream task, when more information from past is necessary `c_t` is suitable.</p>
 
 <h4><a id="deepinfomax">Deep Info MAX</a></h4>
-<p></p>
 <p>(Jaiswal et al., 2020)</p>
+
+<h4><a id="simclr">SimCLR</a></h4>
+<p>SimCLR is one of the simplest yet effective method proposed for contrastive learning of visual representations. Key features of simCLR framework are :</p>
+<ul>
+  <li><b>Data Augmentation </b>: Using stochastic data augmentation, first two correlated data samples are generated from one, as `\tilde(x_i)` and `\tilde{x_j}`</li>
+  <li><b>Encoder</b> : A neural network <i>base encoder</i> `f(&sdot;)` is used to map augmented data samples to a lower-dimensional representation. SimCLR used <a href="cnn_dp.html#rn">ResNet</a> (Chen et al., 2020) to obtain `h_i = f(\tilde{x_i}) =`ResNet `(\tilde{x_i})` where `h_i &isin; &Ropf;^d` is the ouput after the average pooling layer</li>
+  <li><b>Projection Head</b> : Afterwards, a small neural network <i>projection head</i> `g(&sdot;)` is used with one hidden layer to obtain latent space `z_i` where, `z_i = g(h_i) = W^(2)&sigma;(W^(1)h_i)` where &sigma; is a ReLU function. It is beneficial to maximize agreement using contrastive loss on `z_i` than `h_i`.</li>
+  <li><b>Contrastive Loss Function</b> : Given a set of `{\tilde{x_k}}` including positive pair of `\tilde{x_i}` and `\tilde{x_j}`, it aims to identify `\tilde{x_j}` in `{\tilde{x_k}}_k\nei`. SimCLR framework is illustrated in the image below :</li>
+</ul>
+<img src="assets/img/simclr.png" alt="simclr" width="300" height="200">
 
 </body>
 
@@ -70,5 +79,6 @@ Then, an autoregressive model `g_(ar)` summarizes all `z_(&le;t)` and produces a
 [1] Liu, X., Zhang, F., Hou, Z., Mian, L., Wang, Z., Zhang, J. and Tang, J., 2021. Self-supervised learning: Generative or contrastive.<i>IEEE transactions on knowledge and data engineering</i>, 35(1), pp.857-876.<br>
 [2] Jaiswal, A., Babu, A.R., Zadeh, M.Z., Banerjee, D. and Makedon, F., 2020. A survey on contrastive self-supervised learning. <i>Technologies</i> 9(1), p.2.<br>
 [3] Oord, A.V.D., Li, Y. and Vinyals, O., 2018. Representation learning with contrastive predictive coding. <i>arXiv preprint arXiv:1807.03748.</i><br>
-[4] Song, J. and Ermon, S., 2020. Multi-label contrastive predictive coding. <i>Advances in Neural Information Processing Systems,</i> 33, pp.8161-8173.
+[4] Song, J. and Ermon, S., 2020. Multi-label contrastive predictive coding. <i>Advances in Neural Information Processing Systems,</i> 33, pp.8161-8173.<br>
+[5] Chen, T., Kornblith, S., Norouzi, M. and Hinton, G., 2020, November. A simple framework for contrastive learning of visual representations. <i>In International conference on machine learning</i> (pp. 1597-1607). PMLR.<br>
 </html>

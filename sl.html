@@ -6,10 +6,7 @@ sidebar:
   nav: "docs-en"
 ---
 
-
 <html>
-
-
 <!-- Adding MathJAX -->
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
@@ -17,7 +14,6 @@ sidebar:
   </script>
   <script async="true" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=AM_CHTML"> </script>
 <!-- End of MathJAX -->
-
 
 <body>
 <p>Self-supervised learning is a deep learning method in which a model learns representation form unlabeled data. 
@@ -72,8 +68,14 @@ Then, an autoregressive model `g_(ar)` summarizes all `z_(&le;t)` and produces a
   <li><b>Contrastive Loss Function</b> : Given a set of `{\tilde{x_k}}` including positive pair of `\tilde{x_i}` and `\tilde{x_j}`, it aims to identify `\tilde{x_j}` in `{\tilde{x_k}}_k\nei`. SimCLR framework is illustrated in the image below :</li>
 </ul>
 <img src="assets/img/simclr.png" alt="simclr" width="300" height="200">
-
-</body>
+<p><b>SimCLR Optimization Process</b> :</p>
+<p>For the optimization in SimCLR, we have a minibatch of `N` data samples which gets augmented into `2N` samples. Negative data example are not explicitly sampled, but given a positive pair, remaining `2(N-1)` are treated as negative ones.
+Th loss function of positive pair of examples `(i,j)` is defined as:</p>
+<p>`l_(i,j) = -log frac{exp(sim(z_i,z_j)// &tau;)}{\sum_(k=1)^(2N) 1_(k&ne;i) exp((z_i, z_k) // &tau;)}`</p>
+<p>where, `sim(&sdot;, &sdot;)` is cosine similarity function i.e, `sim(u, v) = u^T v // || u ||&nbsp;||v ||` to normalize the representation<br>
+`&tau;` is a temperature parameter<br>
+`1_[k&ne;i] &isin; {0,1}` is an indicator function if and only if `k&ne;i`</p>
+<p>The final loss is computed as : `\mathfrak{L} = \frac{1}{2N} \sum_(k=1)^N [l(2k-1, 2k) +l(2k, 2k-1)]` and is called <b>NT-Xent</b> (Normalized Temperature Scaled Cross Entropy Loss) </p>
 
 <h3>References :</h3>
 [1] Liu, X., Zhang, F., Hou, Z., Mian, L., Wang, Z., Zhang, J. and Tang, J., 2021. Self-supervised learning: Generative or contrastive.<i>IEEE transactions on knowledge and data engineering</i>, 35(1), pp.857-876.<br>
@@ -81,4 +83,6 @@ Then, an autoregressive model `g_(ar)` summarizes all `z_(&le;t)` and produces a
 [3] Oord, A.V.D., Li, Y. and Vinyals, O., 2018. Representation learning with contrastive predictive coding. <i>arXiv preprint arXiv:1807.03748.</i><br>
 [4] Song, J. and Ermon, S., 2020. Multi-label contrastive predictive coding. <i>Advances in Neural Information Processing Systems,</i> 33, pp.8161-8173.<br>
 [5] Chen, T., Kornblith, S., Norouzi, M. and Hinton, G., 2020, November. A simple framework for contrastive learning of visual representations. <i>In International conference on machine learning</i> (pp. 1597-1607). PMLR.<br>
+
+</body>
 </html>

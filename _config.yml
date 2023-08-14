@@ -21,9 +21,7 @@ highlight_theme: "tomorrow-night-bright" # "default" (default), "tomorrow", "tom
 url     : https://k-karna.github.io # the base hostname & protocol for your site e.g. https://www.someone.com
 baseurl : # does not include hostname
 title   : Konark Karna | AI Blog
-description: Konark Karna MSc Northumbria University, Artificial Intelligence, Deep Learning ,Encoder-Decoder, AutoEncoder, GANs, Transformer, Attention Mechanism, SURF, Monte Carlo, TD Learning, Selective Search, Fast-RCNN, Faster-RCNN, Computer Vision, Reinforcement Learning, Statistics, CNN, RNN, LSTM, GRU, Object Detection Models, ResNet, DenseNet, VGG-19, VGG-16, Batch-Normalization, YOLO, RetinaNet, Probability Distribution, Poisson Distribution, Beta Distribution, ANOVA, t-test, Feature Detection, Image Processing, Fourier Transform, Feature Matching, SIFT, IoU, MDP, SARSA, Poliy Gradient, REINFORCE
-# this means to ignore newlines until "Language & timezone"
-
+description: Konark Karna MSc Northumbria University, Artificial Intelligence Research Scientist
 
 ## => Language and Timezone
 ##############################

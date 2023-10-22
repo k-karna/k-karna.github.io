@@ -19,8 +19,8 @@ header:
   #   url: /about.html
   - title: AI NOTEBOOK
     url: /notes.html
-  - title: LLMs
-    url: /llm.html
+  # - title: LLMs
+  #   url: /llm.html
   - title: RESUME
     url: /resume.html
   - title: BOOKSHELF

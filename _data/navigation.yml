@@ -19,10 +19,13 @@ header:
   #   url: /about.html
   - title: AI NOTEBOOK
     url: /notes.html
+  - title: LLMs
+    url: /llm.html
   - title: RESUME
     url: /resume.html
   - title: BOOKSHELF
     url: /books.html
+ 
   # - titles:
   #     # @start locale config
   #     en      : &EN       Archive
@@ -45,17 +48,19 @@ docs-en:
     children:
       - title:  DL00 - The whole idea behind Convolutional Neural Networks (CNNs)
         url:    /cnn.html
-      - title:  DL01 - Deeper CNN Variants and their Architecture
+      - title:  DL01 - Activation, Optimization, and Loss Function 
+        url:    /2023/10/22/activation.html
+      - title:  DL02 - Deeper CNN Variants and their Architecture
         url:    /cnn_dp.html
-      - title:  DL02 - Recurrent Neural Networks(RNNs) and difficulty in training
+      - title:  DL03 - Recurrent Neural Networks(RNNs) and difficulty in training
         url:    /rnn.html
-      - title:  DL03 - LSTM and GRU
+      - title:  DL04 - LSTM and GRU
         url:    /lstm.html
-      - title:  DL04 - Encoder-Decoder, Attention Mechanism and Transformers
+      - title:  DL05 - Encoder-Decoder, Attention Mechanism and Transformers
         url:    /encdec.html
-      - title:  DL05 - Generative Adversarial Networks(GANs) and its variants
+      - title:  DL06 - Generative Adversarial Networks(GANs) and its variants
         url:    /gan.html
-      - title:  DL06 - AutoEncoder and its variants
+      - title:  DL07 - AutoEncoder and its variants
         url:    /autoen.html
   
   - title:      Self Supervised Learning
@@ -103,3 +108,13 @@ docs-en:
         url:    /deepq.html
       - title:  RL08 - Policy Gradient Methods & REINFORCE
         url:    /pgrad.html
+
+docs-llm:
+  - title:      Large Language Models
+    children:
+      - title:  LLM01 - BERT
+        url:    /bert.html
+      - title:  LLM02 - ELECTRA
+        url:    /electra.html
+      - title:  LLM03 - ROBERTa
+        url:    /roberta.html

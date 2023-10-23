@@ -66,7 +66,7 @@ docs-en:
   - title:      Self Supervised Learning
     children:
       - title:  SL01 - Self-Supervised Learning
-        url:    /sl.html
+        url:    /2023/05/13/sl.html
   
   - title:      Federated Learning 
     children:

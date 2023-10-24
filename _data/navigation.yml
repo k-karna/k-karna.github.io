@@ -86,7 +86,7 @@ docs-en:
       - title:  CV04 - Object Detection Models - One-stage Dectectors (YOLO, RetinaNet)
         url:    /objmodel1.html
       - title:  CV05 - Evaluation Metrics used in CV problems
-        url:    /cvev.html
+        url:    /2022/06/06/cvev.html
 
   - title:      Reinforcement Learning
     children:

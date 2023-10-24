@@ -42,7 +42,7 @@ docs-en:
       - title:  ML02 - Probability Distributions
         url:    /2023/04/05/stat1.html
       - title:  ML03 - Statistical Tests
-        url:    /stat2.html
+        url:    /2023/04/05/stat2.html
 
   - title:      Deep Learning
     children:

@@ -53,9 +53,9 @@ docs-en:
       - title:  DL02 - Deeper CNN Variants and their Architecture
         url:    /cnn_dp.html
       - title:  DL03 - Recurrent Neural Networks(RNNs) and difficulty in training
-        url:    /rnn.html
+        url:    /2022/04/25/rnn.html
       - title:  DL04 - LSTM and GRU
-        url:    /lstm.html
+        url:    /2022/04/26/lstm.html
       - title:  DL05 - Encoder-Decoder, Attention Mechanism and Transformers
         url:    /encdec.html
       - title:  DL06 - Generative Adversarial Networks(GANs) and its variants

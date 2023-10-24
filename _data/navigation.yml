@@ -76,7 +76,7 @@ docs-en:
   - title:      Computer Vision
     children:
       - title:  CV00 - Basics of Image Processing
-        url:    /ip.html
+        url:    /2022/05/13/ip.html
       - title:  CV01 - Image Transformation
         url:    /it.html
       - title:  CV02 - Feature Detection and Matching

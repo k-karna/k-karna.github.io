@@ -71,7 +71,7 @@ docs-en:
   - title:      Federated Learning 
     children:
       - title:  FL01 - Federated Learning (FedAvg)
-        url:    /fdl.html
+        url:    /2023/05/24/fdl.html
 
   - title:      Computer Vision
     children:

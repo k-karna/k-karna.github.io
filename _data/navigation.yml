@@ -59,7 +59,7 @@ docs-en:
       - title:  DL05 - Encoder-Decoder, Attention Mechanism and Transformers
         url:    /2022/07/14/encdec.html
       - title:  DL06 - Generative Adversarial Networks(GANs) and its variants
-        url:    /gan.html
+        url:    /2022/07/14/gan.html
       - title:  DL07 - AutoEncoder and its variants
         url:    /autoen.html
   

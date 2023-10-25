@@ -61,7 +61,7 @@ docs-en:
       - title:  DL06 - Generative Adversarial Networks(GANs) and its variants
         url:    /2022/07/14/gan.html
       - title:  DL07 - AutoEncoder and its variants
-        url:    /autoen.html
+        url:    /2022/07/14/autoen.html
   
   - title:      Self Supervised Learning
     children:

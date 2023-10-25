@@ -57,7 +57,7 @@ docs-en:
       - title:  DL04 - LSTM and GRU
         url:    /2022/04/26/lstm.html
       - title:  DL05 - Encoder-Decoder, Attention Mechanism and Transformers
-        url:    /encdec.html
+        url:    /2022/07/14/encdec.html
       - title:  DL06 - Generative Adversarial Networks(GANs) and its variants
         url:    /gan.html
       - title:  DL07 - AutoEncoder and its variants

@@ -19,8 +19,6 @@ header:
   #   url: /about.html
   - title: AI NOTEBOOK
     url: /notes.html
-  # - title: LLMs
-  #   url: /llm.html
   - title: RESUME
     url: /resume.html
   - title: BOOKSHELF
@@ -35,6 +33,13 @@ header:
   #   url: /archive.html
     
 docs-en:
+  - title:      LLMs
+    children:
+      - title:  LLM01 - ELECTRA
+        url:    /2023/10/22/electra.html
+      - title:  LLM02 - ROBERTa
+        url:    /2023/10/22/roberta.html
+
   - title:      Statistics Essentials
     children:
       - title:  ML01 - Basic Statistics
@@ -43,6 +48,8 @@ docs-en:
         url:    /2023/04/05/stat1.html
       - title:  ML03 - Statistical Tests
         url:    /2023/04/05/stat2.html
+      - title:  ML04 - Dimensionality Reduction
+        url:    /2023/10/26/dim.html
 
   - title:      Deep Learning
     children:
@@ -108,13 +115,3 @@ docs-en:
         url:    /deepq.html
       - title:  RL08 - Policy Gradient Methods & REINFORCE
         url:    /pgrad.html
-
-docs-llm:
-  - title:      Large Language Models
-    children:
-      - title:  LLM01 - BERT
-        url:    /bert.html
-      - title:  LLM02 - ELECTRA
-        url:    /electra.html
-      - title:  LLM03 - ROBERTa
-        url:    /roberta.html

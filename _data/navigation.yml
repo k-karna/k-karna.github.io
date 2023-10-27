@@ -54,7 +54,7 @@ docs-en:
   - title:      Deep Learning
     children:
       - title:  DL00 - The whole idea behind Convolutional Neural Networks (CNNs)
-        url:    /cnn.html
+        url:    /2022/05/03/cnn.html
       - title:  DL01 - Activation, Optimization, and Loss Function 
         url:    /2023/10/22/activation.html
       - title:  DL02 - Deeper CNN Variants and their Architecture

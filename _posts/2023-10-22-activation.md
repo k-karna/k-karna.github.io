@@ -83,7 +83,7 @@ $$\text{softplus}(x) = \log(1 + \text{exp}(x))$$
 
 This was proposed to outperform ReLU, however results are more or less similar, with softplus being computationally costly.
 
-### Exponentially Linear Units (ELU)
+### Exponential Linear Units (ELU), PELU, SELU
 
 It is another method similar to ReLU (or parametric ReLU). It can be defined as: 
 
@@ -96,15 +96,81 @@ x,  & \text{if $x \ge 0$} \\
 
 With the additional parameter $\alpha$ controlling the values for negative inputs, ELU allows faster learning as values given by ELU units push the mean of activation closer to $0$.
 
-### Gated Linear Units (GLU)
-### Swish Activation
+__Parametric Exponential Linear Units (PELU)__
+
+PELU takes two trainable parameter, that do not need to be manually set, learned with other network parameters using gradient method. It can be defined as :
+
+$$
+\text{PELU}(x) =
+\begin{cases}
+\frac{\beta}{\gamma}x,  & \text{if $x \ge 0$} \\
+\beta ⋅ (\text{exp}(\frac{x}{\gamma}) -1), & \text{otherwise}
+\end{cases}$$
+
+__Scaled Exponential Linear Units (SELU)__
+
+SELU has additional scaling hyper-parameter $\lambda$. It can be defined as: 
+
+$$
+\text{SELU}(x) = λ 
+\begin{cases}
+x,  & \text{if $x \ge 0$} \\
+\alpha ⋅ (\text{exp}^x -1), & \text{otherwise}
+\end{cases}
+$$
+
+
+Here,  $λ ≈ 1.05070098$, and $α ≈ 1.67326324$. SELU is effective when it comes to covariate shift, and vanishing / exploding gradient problem for having __self-normalizing__ property. By self-normalizing, we mean if the SELU inputs follows a Gaussian distribution with mean and variance around $0$ and $1$, respectively, the mean and variance of SELU are also around $0$ and $1$. 
+
+### SiLU
+
+__Sigmoid-weighted Linear Units (SiLU)__
+
+SiLU is sigmoid function weighted by its inputs, so can be expressed as:
+
+$$ \text{SiLU}(x) = x ⋅ \text{sigmoid}(x)$$
+
+### Swish Activation, E-Swish
+
+__Swish__ is another function based on Sigmoid, but similar to ReLU for being unbounded above and bounded below. However, unlike ReLU, Swish is non-monotonic, and smooth. It can be defined as:
+
+$$ \text{Swish}(x) = x ⋅ \text{Sigmoid}{β ⋅ x}$$
+
+They key thing with Swish is when trainable parameter $\beta$ approaches $\infty$, it behaves like ReLU, and when $β = 1$, it is similar to SiLU.
+
+__E-Swish__
+
+E-Swish is similar to SiLU, but with additional parameter that needs to be tuned by user. It can be written as:
+
+$$ \text{E-Swish}_{\gamma}(x) = γ  x ⋅ \text{sigmoid}(x)$$
+
+
 ### Mish Activation
 
-### Softmax
+Mish is similar to Swish, smooth, continuous, non-monotonic, unbounded above and bounded below. It can be defined as:
+
+$$ \text{Mish}(x) = x \text{tanh}(\text{softplus}(x))$$
+
+It is effectively solving dead neuron and vanishing gadient problem, and usually outperform Swish, and ReLU.
+
+### Gaussian Error Linear Units (GELU)
+
+__GELU__  is one of the most promising activation function. It is widely used in BERT, GPT-3 and other transformers. GELU weight inputs by their values, rather than gated sign as in ReLU. GELU scales input $x$ by how much greater it is than other inputs. It can be expressed as: 
+
+$$\text{GELU}(x) = x ⋅ Φ (x) \notag$$
+
+Where, $\Phi(x)$ is cumulative distribution function of standard Gaussian distribution. Thus, GELU can be defined as: 
+
+$$\text{GELU}(x) = x ⋅ \frac{1}{2}\left[1 + \text{erf}(x / \sqrt{2}) \right]$$
+
+GELU can be approximated with $0.5\,x(1 + \text{tanh}[\sqrt{\frac{2}{\pi}}(x + 0.044715x^3)])$
+
+
+<!-- ### Softmax
 
 Softmax activation function is used in the final layer of network for multi-class classification tasks. It maps output as a probability distribution in the range of $[0,1]$ and sum of each outcome is equal to $1$. Given a input vector $\overrightarrow z $ with $K$ classes, softmax can be defined as:
 
-$$\text{softmax}(\overrightarrow z) = \frac{e^{z_{i}}}{\sum_{j =1}^K e^{z_{i}}} $$
+$$\text{softmax}(\overrightarrow z) = \frac{e^{z_{i}}}{\sum_{j =1}^K e^{z_{i}}} $$ -->
 
 ## Optimization Methods
 ### Gradient Descent

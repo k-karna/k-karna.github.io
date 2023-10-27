@@ -33,12 +33,12 @@ header:
   #   url: /archive.html
     
 docs-en:
-  - title:      LLMs
-    children:
-      - title:  LLM01 - ELECTRA
-        url:    /2023/10/22/electra.html
-      - title:  LLM02 - ROBERTa
-        url:    /2023/10/22/roberta.html
+  # - title:      LLMs
+  #   children:
+  #     - title:  LLM01 - ELECTRA
+  #       url:    /2023/10/22/electra.html
+  #     - title:  LLM02 - ROBERTa
+  #       url:    /2023/10/22/roberta.html
 
   - title:      Statistics Essentials
     children:
@@ -48,8 +48,8 @@ docs-en:
         url:    /2023/04/05/stat1.html
       - title:  ML03 - Statistical Tests
         url:    /2023/04/05/stat2.html
-      - title:  ML04 - Dimensionality Reduction
-        url:    /2023/10/26/dim.html
+      # - title:  ML04 - Dimensionality Reduction
+      #   url:    /2023/10/26/dim.html
 
   - title:      Deep Learning
     children:

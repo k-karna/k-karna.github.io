@@ -136,7 +136,7 @@ __Swish__ is another function based on Sigmoid, but similar to ReLU for being un
 
 $$ \text{Swish}(x) = x ⋅ \text{Sigmoid}{β ⋅ x}$$
 
-They key thing with Swish is when trainable parameter $\beta$ approaches $\infty$, it behaves like ReLU, and when $β = 1$, it is similar to SiLU.
+They key thing with Swish is when trainable parameter $\beta$ approaches $\infty$, it behaves like ReLU, and when $β = 1$, it is similar to SiLU. (Ramchandran, Zoph & Le, 2017)
 
 __E-Swish__
 
@@ -163,7 +163,7 @@ Where, $\Phi(x)$ is cumulative distribution function of standard Gaussian distri
 
 $$\text{GELU}(x) = x ⋅ \frac{1}{2}\left[1 + \text{erf}(x / \sqrt{2}) \right]$$
 
-GELU can be approximated with $0.5\,x(1 + \text{tanh}[\sqrt{\frac{2}{\pi}}(x + 0.044715x^3)])$
+GELU can be approximated with $0.5\,x(1 + \text{tanh}[\sqrt{\frac{2}{\pi}}(x + 0.044715x^3)])$ (Hendrycks & Gimpel, 2016)
 
 
 <!-- ### Softmax
@@ -186,3 +186,5 @@ $$\text{softmax}(\overrightarrow z) = \frac{e^{z_{i}}}{\sum_{j =1}^K e^{z_{i}}} 
 
 ## References
 - Apicella, A., Donnarumma, F., Isgrò, F. and Prevete, R., 2021. A survey on modern trainable activation functions. _Neural Networks_, 138, pp.14-32.
+- Hendrycks, D. and Gimpel, K., 2016. Gaussian error linear units (gelus). _arXiv preprint arXiv:1606.08415_.
+- Ramachandran, P., Zoph, B. and Le, Q.V., 2017. Searching for activation functions. _arXiv preprint arXiv:1710.05941_.

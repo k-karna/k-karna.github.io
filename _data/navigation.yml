@@ -85,7 +85,7 @@ docs-en:
       - title:  CV00 - Basics of Image Processing
         url:    /2022/05/13/ip.html
       - title:  CV01 - Image Transformation
-        url:    /it.html
+        url:    /2022/06/06/it.html
       - title:  CV02 - Feature Detection and Matching
         url:    /fd.html
       - title:  CV03 - Object Detection Models - Two-stage Detectors (SS, RCNN based)

@@ -87,7 +87,7 @@ docs-en:
       - title:  CV01 - Image Transformation
         url:    /2022/06/06/it.html
       - title:  CV02 - Feature Detection and Matching
-        url:    /fd.html
+        url:    /2022/05/13/fd.html
       - title:  CV03 - Object Detection Models - Two-stage Detectors (SS, RCNN based)
         url:    /2022/05/13/objmodel.html
       - title:  CV04 - Object Detection Models - One-stage Dectectors (YOLO, RetinaNet)
@@ -108,7 +108,7 @@ docs-en:
       - title:  RL04 - TD Learning
         url:    /td.html
       - title:  RL05 - SARSA and Q-Learning
-        url:    /sarsaq.html
+        url:    /2022/04/27/sarsaq.html
       - title:  RL06 - n-step Bootstrapping
         url:    /nstep.html
       - title:  RL07 - Deep Q-Learning and Double Q-Learning

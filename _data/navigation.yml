@@ -102,7 +102,7 @@ docs-en:
       - title:  RL01 - Policies and Value Function
         url:    /2022/04/30/polval.html
       - title:  RL02 - Monte Carlo Methods and Control
-        url:    /mc.html
+        url:    /2022/05/03/mc.html
       - title:  RL03 - Off-Policy via Importance Sampling
         url:    /off_imp_samp.html
       - title:  RL04 - TD Learning
@@ -110,7 +110,7 @@ docs-en:
       - title:  RL05 - SARSA and Q-Learning
         url:    /2022/04/27/sarsaq.html
       - title:  RL06 - n-step Bootstrapping
-        url:    /nstep.html
+        url:    /2022/05/03/nstep.html
       - title:  RL07 - Deep Q-Learning and Double Q-Learning
         url:    /2022/12/12/deepq.html
       - title:  RL08 - Policy Gradient Methods & REINFORCE

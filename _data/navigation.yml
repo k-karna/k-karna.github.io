@@ -58,7 +58,7 @@ docs-en:
       - title:  DL01 - Activation, Optimization, and Loss Function 
         url:    /2023/10/22/activation.html
       - title:  DL02 - Deeper CNN Variants and their Architecture
-        url:    /cnn_dp.html
+        url:    /2022/05/04/cnndp.html
       - title:  DL03 - Recurrent Neural Networks(RNNs) and difficulty in training
         url:    /2022/04/25/rnn.html
       - title:  DL04 - LSTM and GRU

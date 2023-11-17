@@ -98,7 +98,7 @@ docs-en:
   - title:      Reinforcement Learning
     children:
       - title:  RL00 - Markov Decision Process (MDP)
-        url:    /mdp.html
+        url:    /2022/04/30/mdp.html
       - title:  RL01 - Policies and Value Function
         url:    /2022/04/30/polval.html
       - title:  RL02 - Monte Carlo Methods and Control

@@ -104,7 +104,7 @@ docs-en:
       - title:  RL02 - Monte Carlo Methods and Control
         url:    /2022/05/03/mc.html
       - title:  RL03 - Off-Policy via Importance Sampling
-        url:    /off_imp_samp.html
+        url:    /2022/04/30/off.html
       - title:  RL04 - TD Learning
         url:    /2022/04/27/td.html
       - title:  RL05 - SARSA and Q-Learning

@@ -50,6 +50,12 @@ docs-en:
         url:    /2023/04/05/stat2.html
       # - title:  ML04 - Dimensionality Reduction
       #   url:    /2023/10/26/dim.html
+  - title:       PhD Research Proposal
+    children:
+      - title:  DR01 - To Improve Reasoning of LLMs
+        url:    /2023/09/30/rp.html
+      - title:  DR02 - To Advance HMI
+        url:    /2023/05/30/rp1.html
 
   - title:      Deep Learning
     children:

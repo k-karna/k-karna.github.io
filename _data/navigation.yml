@@ -40,16 +40,7 @@ docs-en:
   #     - title:  LLM02 - ROBERTa
   #       url:    /2023/10/22/roberta.html
 
-  - title:      Statistics Essentials
-    children:
-      - title:  ML01 - Basic Statistics
-        url:    /2022/05/13/stat.html
-      - title:  ML02 - Probability Distributions
-        url:    /2023/04/05/stat1.html
-      - title:  ML03 - Statistical Tests
-        url:    /2023/04/05/stat2.html
-      # - title:  ML04 - Dimensionality Reduction
-      #   url:    /2023/10/26/dim.html
+   
   - title:       PhD Research Proposal
     children:
       - title:  DR01 - To Improve Reasoning of LLMs
@@ -121,3 +112,12 @@ docs-en:
         url:    /2022/12/12/deepq.html
       - title:  RL08 - Policy Gradient Methods & REINFORCE
         url:    /2022/12/14/pgrad.html
+
+  - title:      Statistics Essentials
+    children:
+      - title:  ML01 - Basic Statistics
+        url:    /2022/05/13/stat.html
+      - title:  ML02 - Probability Distributions
+        url:    /2023/04/05/stat1.html
+      - title:  ML03 - Statistical Tests
+        url:    /2023/04/05/stat2.html

@@ -122,6 +122,11 @@ $$
 
 Here,  $λ ≈ 1.05070098$, and $α ≈ 1.67326324$. SELU is effective when it comes to covariate shift, and vanishing / exploding gradient problem for having __self-normalizing__ property. By self-normalizing, we mean if the SELU inputs follows a Gaussian distribution with mean and variance around $0$ and $1$, respectively, the mean and variance of SELU are also around $0$ and $1$. 
 
+```
+def selu(x, alpha = 1.67, lmbda = 1.05):
+    return lmbda * jnp.where(x>0, x, alpha * jnp.exp(x) - alpha)
+```
+
 ### SiLU
 
 __Sigmoid-weighted Linear Units (SiLU)__

@@ -221,6 +221,7 @@ Here, $v_t$ is current update vector, $v_{t-1}$ is the previous vector, $\theta$
 Momentum, thus, helps to increase the step size in dimensions where the gradient is consistently pointing in the same direction (accelerating towards convergence), and reduces the step size in dimensions where the gradient frequently changes directions.
 
 ### Nesterov Accelerated Gradient
+
 Nesterov Accelerated Gradient (NAG) is further improvement on Momentum method. It gives an approximation of the next position of parameters by computing $θ - γ v_{t-1}$. We can then calculate the gradient not w.r.t to our current parameters, but w.r.t to the approximate future position of our parameters as follows:
 
 $$v_t = γ v_{t-1} + η \Delta_{\theta} ⋅ J(θ - γ v_{t-1})$$
@@ -230,6 +231,7 @@ $$θ = θ - v_t$$
 The momentum term $\gamma$ again can be set to 0.9 or similar value.
 
 ### AdaGrad
+
 In AdaGrad method, we adapt the learning rate to the parameters, performing larger updates from infrequent parameters, and smaller updates for frequent ones. This is achieved by introducing per-parameter learning rate for each time step. The update rule is as follows:
 
 $$\theta_{(t+1),i} =  \theta_{t,i} - \frac{\eta}{\sqrt{G_{t,ii} + \epsilon}} ⋅ g_{t,i}$$
@@ -253,6 +255,7 @@ $$\theta_{t+1} = \theta_{t} - \frac{\eta}{\sqrt{G_{t} +\epsilon}} ⊙ g_{t}$$
 AdaGrad is highly suitable for modelling with sparse data, and learning rate tuning is not necessary, and negative aspect of AdaGrad is that it can shrink learning rate over time, for accumulating positive terms in the denominator of eq(25) and eq(26).
 
 ### Adadelta
+
 AdaDelta removes drawbacks in AdaGrad i.e, (1) need to select global learning rate at the beginning, and (2) its continual decay over time.
 
 It can be achieved by restricting the window of past squared gradients at some $w$, however to make it more efficient, the sum of gradients is recursively defined as a decaying average of all past squared gradients. If at any given time $t$, this running average is $\mathbb{E}[g^2]_t$, then we can calculate it as:
@@ -269,12 +272,33 @@ As the denominator is just the root mean squared (RMS) error criterion of the gr
 
 $$ Δ \theta_{t} = -\frac{\eta}{\text{RMS}[g]_t}⋅ g_t$$
 
+Another key thing - as units in the above update do not match, Adadelta defines another decaying average of squared parameters, instead of squared gradients, as:
 
-### ADAM
+$$ \mathbb{E}[Δ \theta^2]_t = ρ \mathbb{E}[Δ \theta^2]_{t-1} + (1 - \rho)Δ \theta^2_t $$
+
+Therefore, Root Mean Square of parameter is following:
+
+$$ \text{RMS}[Δ \theta]_t = \sqrt{\mathbb{E}[Δ \theta^2]_t + \epsilon} $$
+
+However, $$\text{RMS}[Δ θ]_t$$ is unknown, so we approximate it with the RMS value up to the previous time step $$t-1$$, denoted as $$\text{RMS}[Δ θ]_{t-1}$$. We can replace the learning rate $$\eta$$ with this approximation, making the Adadelta update rule as follows:
+
+$$Δ θ_{t} = - \frac{\text{RMS}[Δ \theta]_{t-1}}{\text{RMS}[g]_t} ⋅ g_{t}$$
+
+$$\theta_{t+1} = \theta_{t} + Δ \theta_{t} $$
+
+Adadelta do not need learning rate to be specified, as evident in the update rule.
 
 ### RMSProp
 
-### L-BFGS
+Root Mean Square Propagation (RMSProp) is to resolve the issues with AdaGrad. Adadelta and RMSProp are both similar method solving similar problem.
+
+RMSprop, however, stops at eq (28) where we replace the diagonal matrix $G_t$ in the update rule with decaying average of past squared gradients as:
+
+$$ Δ \theta_{t} = -\frac{\eta}{\sqrt{\mathbb{E}[g^2]_t + \epsilon}}⋅ g_t $$
+
+RMSProp, afterwards, does not track the running average of squared parameters updates to tackle mis-match in unit-consistency. RMSProp, on the other hand, requires learning rate to be provided to its update rule. Default learning rate can be used as 0.001
+
+### ADAM
 
 ## Loss Functions
 
@@ -284,4 +308,6 @@ $$ Δ \theta_{t} = -\frac{\eta}{\text{RMS}[g]_t}⋅ g_t$$
 - Hendrycks, D. and Gimpel, K., 2016. Gaussian error linear units (gelus). _arXiv preprint arXiv:1606.08415_.
 - Hinton, G., Srivastava, N. and Swersky, K., 2012. Neural networks for machine learning lecture 6a overview of mini-batch gradient descent. _Cited on_, 14(8), p.2.
 - Ramachandran, P., Zoph, B. and Le, Q.V., 2017. Searching for activation functions. _arXiv preprint arXiv:1710.05941_.
+- Ruder, S., 2016. An overview of gradient descent optimization algorithms. _arXiv preprint arXiv:1609.04747_.
+- Wang, Q., Ma, Y., Zhao, K. and Tian, Y., 2020. A comprehensive survey of loss functions in machine learning. _Annals of Data Science_, pp.1-26.
 - Zeiler, M.D., 2012. ADADELTA: an adaptive learning rate method. _arXiv preprint arXiv:1212.5701_.

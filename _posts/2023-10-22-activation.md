@@ -11,11 +11,11 @@ mathjax_autoNumber: true
 In its simplest form, the neuron output of each layer is computed as: $a_{n+1} = w^T z_n + b_n$ where $w_n$ and $b_n$ are weight and bias parameters at layer $n$, respectively, and $z_n$ is neuron output of previous layer $n_1$ computed by a differentiable non-linear function $f(\cdot):z_n = f(a_n)$. This fixed non-linear function is known as __activation function__ (Apicella _et al.,_ 2021).
 
 ### Sigmoid, Hard-Sigmoid
-The most common activation function is __Sigmoid__, also known as logistic. It is a bounded differentiable real-function defined as: 
+The most common activation function is __Sigmoid__, also known as logistic. It is a bounded differentiable real-function defined as:
 
 $$\text{Sigmoid} \quad or \quad σ = \frac{1}{1 + e^{-x}}$$
 
-Major problem with sigmoid is that, it binds all inputs between $0$ and $1$, where a large change of inputs leads to small change in output, resulting in smaller gradient values. When network is trained over many layers, these smaller gradient creates a __vanishing gradient problem__. 
+Major problem with sigmoid is that, it binds all inputs between $0$ and $1$, where a large change of inputs leads to small change in output, resulting in smaller gradient values. When network is trained over many layers, these smaller gradient creates a __vanishing gradient problem__.
 
 As a solution with Sigmoid, we have a __Hard-Sigmoid__ which introduce linear behavior around $0$ to allow gradient flow easily. It can be defined as:
 
@@ -35,7 +35,7 @@ Hyperbolic Tangent (TanH) is similar to Sigmoid, continuous, bounded, differenti
 
 $$ \text{tanh} = \frac{1 - e^{-x}}{1 + e^{x}}$$
 
-It has improved range of output i.e., between $-1$ to $1$. However, problem of large change of inputs leading to smaller change in output is not resolved, even with __Hard-Tanh__ which can be expressed as: 
+It has improved range of output i.e., between $-1$ to $1$. However, problem of large change of inputs leading to smaller change in output is not resolved, even with __Hard-Tanh__ which can be expressed as:
 
 $$\text{Hard-tanH} = \text{max}(\text{min}(\text{tanh}, 1),-1)$$
 
@@ -51,7 +51,7 @@ It is not exponential, so computationally cheap, and __alleviates the vanishing 
 
 __Leaky-ReLU (LReLU)__
 
-It attempts to solve __dead neuron__ issue with ReLU by allowing small gradient to flow when inputs are non-positive. It can defined as: 
+It attempts to solve __dead neuron__ issue with ReLU by allowing small gradient to flow when inputs are non-positive. It can defined as:
 
 $$
 \text{LReLU}(x) =
@@ -77,7 +77,7 @@ It is not computationally expensive to ReLU or Leaky-ReLU and slightly improves 
 
 ### Softplus
 
-Another activation function similar to ReLU is __softplus__ It is smooth approximation of ReLU function and defined as: 
+Another activation function similar to ReLU is __softplus__ It is smooth approximation of ReLU function and defined as:
 
 $$\text{softplus}(x) = \log(1 + \text{exp}(x))$$
 
@@ -112,15 +112,14 @@ __Scaled Exponential Linear Units (SELU)__
 SELU has additional scaling hyper-parameter $\lambda$. It can be defined as: 
 
 $$
-\text{SELU}(x) = λ 
+\text{SELU}(x) = λ
 \begin{cases}
 x,  & \text{if $x \ge 0$} \\
 \alpha ⋅ (\text{exp}^x -1), & \text{otherwise}
 \end{cases}
 $$
 
-
-Here,  $λ ≈ 1.05070098$, and $α ≈ 1.67326324$. SELU is effective when it comes to covariate shift, and vanishing / exploding gradient problem for having __self-normalizing__ property. By self-normalizing, we mean if the SELU inputs follows a Gaussian distribution with mean and variance around $0$ and $1$, respectively, the mean and variance of SELU are also around $0$ and $1$. 
+Here,  $λ ≈ 1.05070098$, and $α ≈ 1.67326324$. SELU is effective when it comes to covariate shift, and vanishing / exploding gradient problem for having __self-normalizing__ property. By self-normalizing, we mean if the SELU inputs follows a Gaussian distribution with mean and variance around $0$ and $1$, respectively, the mean and variance of SELU are also around $0$ and $1$.
 
 ```
 def selu(x, alpha = 1.67, lmbda = 1.05):
@@ -178,18 +177,71 @@ Softmax activation function is used in the final layer of network for multi-clas
 $$\text{softmax}(\overrightarrow z) = \frac{e^{z_{i}}}{\sum_{j =1}^K e^{z_{i}}} $$ -->
 
 ## Optimization Methods
+
 ### Gradient Descent
-### Mini-Batch Gradient Descent
-### ADAM
-### RMSProp
+
+Gradient Descent or Batch Gradient Descent is a way to minimize the objective (cost) function $$J(\theta)$$ 
+parameterized by model's parameters $$θ ∈ \mathbb{R}^d$$ by updating the parameters in the opposite direction
+of the gradient of the objective function $$\Delta_{\theta}J(\theta)$$ w.r.t to the parameters for the entire dataset.
+
+Parameter update rule can be written as:
+
+$$θ = θ - η ⋅ \Delta_{\theta} J(\theta)$$
+
+Where $\eta$ is the learning rate determining the size of the step we take to reach a (local) minimum. Gradient Descent method is slow and intractable for calculating all the gradients of training examples before making one update.
+
+#### Stochastic Gradient Descent
+
+Stochastic Gradient Descent (SGD) resolves it by performing a parameter update for each training example $$(x^{(i)},y^{(i)})$$
+
+$$θ = θ - η ⋅ \Delta_{\theta} J(\theta, x^{(i)}, y^{(i)})$$
+
+Updating parameters for each training examples makes it faster, but with higher variance, therefore SGD can overshoot the exact covergence to the global minimum.
+
+#### Mini-Batch Gradient Descent
+
+Mini-Batch resolves the high variance problem with SGD by performing update on parameters on every mini-batch of $n$ training examples.
+
+$$θ = θ - η ⋅ \Delta_{\theta} J(\theta, x^{(i:i+n)}, y^{(i:i+n)})$$
+
+Mini-batch can be of range 50-256.
+
+### Momentum
+
+Momentum resolves the slow convergence to global minimum problem with SGD by adding a fraction $\gamma$ of the previous update vector to the current one. The momentum term $γ$ is set to 0.9 or similar value.
+
+The equation used to update parameter with Momentum method is as follows:
+
+$$v_t = γ v_{t-1} + η ⋅ \Delta_{\theta} J(\theta)$$
+
+$$ θ = θ - v_t$$
+
+Here, $v_t$ is current update vector, $v_{t-1}$ is the previous vector, $\theta$ is the parameters we are optimizing for, $\eta$ is the learning rate, $\Delta_{\theta}J(\theta)$ is gradient of objective function $J(\theta)$ w.r.t. $\theta$
+
+Momentum, thus, helps to increase the step size in dimensions where the gradient is consistently pointing in the same direction (accelerating towards convergence), and reduces the step size in dimensions where the gradient frequently changes directions.
+
+### Nesterov Accelerated Gradient
+Nesterov Accelerated Gradient (NAG) is further improvement on Momentum method. It gives an approximation of the next position of parameters by computing $θ - γ v_{t-1}$. We can then calculate the gradient not w.r.t to our current parameters, but w.r.t to the approximate future position of our parameters as follows:
+
+$$v_t = γ v_{t-1} + η \Delta_{\theta} ⋅ J(θ - γ v_{t-1})$$
+
+$$θ = θ - v_t$$
+
+The momentum term $\gamma$ again can be set to 0.9 or similar value.
+
 ### AdaGrad
+
+### ADAM
+
+### RMSProp
 ### Adadelta
-### Nesterov Acc. Gradient (NAG)
+
 ### L-BFGS
 
 ## Loss Functions
 
 ## References
+
 - Apicella, A., Donnarumma, F., Isgrò, F. and Prevete, R., 2021. A survey on modern trainable activation functions. _Neural Networks_, 138, pp.14-32.
 - Hendrycks, D. and Gimpel, K., 2016. Gaussian error linear units (gelus). _arXiv preprint arXiv:1606.08415_.
 - Ramachandran, P., Zoph, B. and Le, Q.V., 2017. Searching for activation functions. _arXiv preprint arXiv:1710.05941_.

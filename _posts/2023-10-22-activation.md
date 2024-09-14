@@ -230,11 +230,49 @@ $$θ = θ - v_t$$
 The momentum term $\gamma$ again can be set to 0.9 or similar value.
 
 ### AdaGrad
+In AdaGrad method, we adapt the learning rate to the parameters, performing larger updates from infrequent parameters, and smaller updates for frequent ones. This is achieved by introducing per-parameter learning rate for each time step. The update rule is as follows:
+
+$$\theta_{(t+1),i} =  \theta_{t,i} - \frac{\eta}{\sqrt{G_{t,ii} + \epsilon}} ⋅ g_{t,i}$$
+
+where,
+
+$g_{t,i}$ is the gradient of the objective function w.r.t. the parameters $\theta_{i}$ at time step $t$ i.e, $g_{t,i} = \Delta_{\theta_{t}} J(\theta_{t,i})$.
+
+$\eta$ is the initial learning rate,
+
+$\epsilon$ is the smooting term to avoid division by zero (usually on the order of 1e-8)
+
+$G_t ∈ \mathbb{R}^{d× d}$ is the diagonal matrix each diagonal element $i,i$ is the sum of squares of gradients w.r.t $\theta_{i}$ across all previous time step. 
+
+If $G_{t,ii}$ is smaller, parameters had not had many updates, and learning rate can stay relatively larger, but when $G_{t,ii}$ gets large, learning rate becomes smaller - slowing down updates on that parameters.
+
+We can further vectorise AdaGrad as following, instead of treating for each parameter.
+
+$$\theta_{t+1} = \theta_{t} - \frac{\eta}{\sqrt{G_{t} +\epsilon}} ⊙ g_{t}$$ 
+
+AdaGrad is highly suitable for modelling with sparse data, and learning rate tuning is not necessary, and negative aspect of AdaGrad is that it can shrink learning rate over time, for accumulating positive terms in the denominator of eq(25) and eq(26).
+
+### Adadelta
+AdaDelta removes drawbacks in AdaGrad i.e, (1) need to select global learning rate at the beginning, and (2) its continual decay over time.
+
+It can be achieved by restricting the window of past squared gradients at some $w$, however to make it more efficient, the sum of gradients is recursively defined as a decaying average of all past squared gradients. If at any given time $t$, this running average is $\mathbb{E}[g^2]_t$, then we can calculate it as:
+
+$$\mathbb{E}[g^2]_t = ρ \mathbb{E}[g^2]_{t-1} + (1-\rho)g^2_t$$
+
+here, $\rho$ is a decay constant similar to momentum $\gamma$ and can be set to 0.9 or similar value.
+
+The parameter update vector of Adadelta now will take the same form of Adagrad in eq$(26)$ in which we will replace diagonal matrix $G_t$ with the decaying average of past squared gradients $\mathbb{E}[g^2]_t$. It is expressed as:
+
+$$ Δ \theta_{t} = -\frac{\eta}{\sqrt{\mathbb{E}[g^2]_t + \epsilon}}⋅ g_t$$
+
+As the denominator is just the root mean squared (RMS) error criterion of the gradient, we can further improve last eq$(28)$ as: 
+
+$$ Δ \theta_{t} = -\frac{\eta}{\text{RMS}[g]_t}⋅ g_t$$
+
 
 ### ADAM
 
 ### RMSProp
-### Adadelta
 
 ### L-BFGS
 
@@ -244,4 +282,6 @@ The momentum term $\gamma$ again can be set to 0.9 or similar value.
 
 - Apicella, A., Donnarumma, F., Isgrò, F. and Prevete, R., 2021. A survey on modern trainable activation functions. _Neural Networks_, 138, pp.14-32.
 - Hendrycks, D. and Gimpel, K., 2016. Gaussian error linear units (gelus). _arXiv preprint arXiv:1606.08415_.
+- Hinton, G., Srivastava, N. and Swersky, K., 2012. Neural networks for machine learning lecture 6a overview of mini-batch gradient descent. _Cited on_, 14(8), p.2.
 - Ramachandran, P., Zoph, B. and Le, Q.V., 2017. Searching for activation functions. _arXiv preprint arXiv:1710.05941_.
+- Zeiler, M.D., 2012. ADADELTA: an adaptive learning rate method. _arXiv preprint arXiv:1212.5701_.

@@ -322,9 +322,23 @@ Here, α is the stepsize, can be used at 0.001, $\epsilon$ is correction term wi
 
 ### Adamax
 
-Adamax is further improvement on ADAM as the $v_t$ factor in the ADAM update rule scales the gradient inversely proportional to the $L^2$ norm of the past gradient at $v_{t-1}$ and current gradient at $v_t$
+Adamax is further improvement on ADAM as the $v_t$ factor in the update rule scales the gradient inversely proportional to the $L^2$ norm of the past gradient at $v_{t-1}$ and current gradient at $v_t$.
 
+We can, however generalize the $L^2$ norm based update rule to a $L^P$ norm based update rule, and as $L → ∞$ algorithm stabilies, so we can improve on ADAM as below:
 
+$$v_t = \beta^p_2 v_{t-1} + (1 - \beta^p_2)\lvert g_t \rvert^p$$
+
+$$\qquad = (1 - \beta^p_2) \sum_{i=1}^t \beta^{p(t-i)}_2 ⋅ \lvert g_i \rvert^p$$
+
+For distinction, we use, $u_t$ for the second moment in Adamax, and ensure update reflect largest of past accumulated gradient or current gradient by taking maximum value of them as follows:
+
+$$u_t = \text{max}(\beta_2 ⋅ u_{t-1}, \lvert g_t \rvert) $$
+
+Thus, we can write the update rule for Adamax as given below:
+
+$$θ_t = θ_{t-1} - \left(\frac{\alpha}{1 - \beta^t_1}\right) ⋅ \frac{m_t}{u_t}$$
+
+Here, $\left(\frac{\alpha}{1 - \beta^t_1}\right)$ is the learning rate with the bias-corrected term for the first moment. Good values for $α$ is 0.002, $\beta_1 = 0.9$ and $β_2 = 0.999$
 
 ### Adafactor
 
@@ -343,6 +357,8 @@ Adamax is further improvement on ADAM as the $v_t$ factor in the ADAM update rul
 - Hinton, G., Srivastava, N. and Swersky, K., 2012. Neural networks for machine learning lecture 6a overview of mini-batch gradient descent. _Cited on_, 14(8), p.2.
 - Kingma, D.P., 2014. Adam: A method for stochastic optimization. _arXiv preprint arXiv:1412.6980_.
 - Ramachandran, P., Zoph, B. and Le, Q.V., 2017. Searching for activation functions. _arXiv preprint arXiv:1710.05941_.
+- Reddi, S.J., Kale, S. and Kumar, S., 2019. On the convergence of adam and beyond. _arXiv preprint arXiv:1904.09237_.
 - Ruder, S., 2016. An overview of gradient descent optimization algorithms. _arXiv preprint arXiv:1609.04747_.
+- Shazeer, N. and Stern, M., 2018, July. Adafactor: Adaptive learning rates with sublinear memory cost. In _International Conference on Machine Learning_ (pp. 4596-4604). PMLR.
 - Wang, Q., Ma, Y., Zhao, K. and Tian, Y., 2020. A comprehensive survey of loss functions in machine learning. _Annals of Data Science_, pp.1-26.
 - Zeiler, M.D., 2012. ADADELTA: an adaptive learning rate method. _arXiv preprint arXiv:1212.5701_.

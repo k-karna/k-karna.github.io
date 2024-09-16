@@ -300,6 +300,40 @@ RMSProp, afterwards, does not track the running average of squared parameters up
 
 ### ADAM
 
+Adaptive Moment Estimation (ADAM) estimates the first moment (mean) of the past gradient similar to Momentum, and second moment (uncentered variance) of the past squared gradients similar to Adadelta/RMSProp.
+
+First moment is represented by $m_t$ and second by $v_t$ where the hyper-parameters $$\beta_1, \beta_2 ∈ [0,1)$$ control the exponential decay rates of these moving averages.
+
+$$m_t = β_1 m_{t-1} + (1 - β_1)⋅ g_t$$
+
+$$v_t = β_2 m_{t-1} + (1 - β_2)⋅ g^2_t$$
+
+However, both $m_t$ and $v_t$ are biased towards zero for being initialised as 0. So, we counter it by bias-correct measure as mentioned below:
+
+$$\hat{m_t} = \frac{m_t}{1 - \beta^t_1}$$
+
+$$\hat{v_t} = \frac{v_t}{1 -\beta^t_2}$$
+
+Then, we can write final update for the ADAM method as following:
+
+$$\theta_t = \theta_{t-1} - α ⋅ \frac{\hat{m_t}}{\sqrt{\hat{v_t} + \epsilon}}$$
+
+Here, α is the stepsize, can be used at 0.001, $\epsilon$ is correction term with value $$\text{1e-8}$$, $\beta_1 = 0.9$ and $\beta_2 = 0.999$
+
+### Adamax
+
+Adamax is further improvement on ADAM as the $v_t$ factor in the ADAM update rule scales the gradient inversely proportional to the $L^2$ norm of the past gradient at $v_{t-1}$ and current gradient at $v_t$
+
+
+
+### Adafactor
+
+### AMSGrad
+
+### Nadam
+
+### LION
+
 ## Loss Functions
 
 ## References
@@ -307,6 +341,7 @@ RMSProp, afterwards, does not track the running average of squared parameters up
 - Apicella, A., Donnarumma, F., Isgrò, F. and Prevete, R., 2021. A survey on modern trainable activation functions. _Neural Networks_, 138, pp.14-32.
 - Hendrycks, D. and Gimpel, K., 2016. Gaussian error linear units (gelus). _arXiv preprint arXiv:1606.08415_.
 - Hinton, G., Srivastava, N. and Swersky, K., 2012. Neural networks for machine learning lecture 6a overview of mini-batch gradient descent. _Cited on_, 14(8), p.2.
+- Kingma, D.P., 2014. Adam: A method for stochastic optimization. _arXiv preprint arXiv:1412.6980_.
 - Ramachandran, P., Zoph, B. and Le, Q.V., 2017. Searching for activation functions. _arXiv preprint arXiv:1710.05941_.
 - Ruder, S., 2016. An overview of gradient descent optimization algorithms. _arXiv preprint arXiv:1609.04747_.
 - Wang, Q., Ma, Y., Zhao, K. and Tian, Y., 2020. A comprehensive survey of loss functions in machine learning. _Annals of Data Science_, pp.1-26.

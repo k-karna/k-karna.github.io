@@ -342,6 +342,45 @@ Here, $\left(\frac{\alpha}{1 - \beta^t_1}\right)$ is the learning rate with the 
 
 ### Adafactor
 
+Adafactor further improving on ADAM, reducing computation cost by tracking moving averages of rows and column sum of squared gradients for matrix-valued variables, instead of maintaining $V ∈ \mathbb{R}^{n× m}$ of squared gradients. This reduces memory cost to $n + m$ instead of $n × m$.
+
+We split second-moment into row-wise and column-wise components as:
+
+$$ R_t = \hat{\beta}_{2t}R_{t-1} + (1 - \hat{\beta}_{2t})(G^2_t + \epsilon_1 1_n 1^T_m)$$
+
+$$ C_t = \hat{\beta}_{2t}C_{t-1} + (1 - \hat{\beta}_{2t})1^T_n(G^2_t + \epsilon_1 1_n 1^T_m)$$
+
+Here, $R_t$ is a vector of size $n$ for row-wise second moment $C_t$ is a vector of size $m$ for column-wise second moment. $$G^2_t$$ is squared gradient i.e, $$G^2_t = (Δ f_t (X_{t-1}))^2$$. $\epsilon_1$ is regularizing constant to avoid 0, and suggested $\epsilon_1 = 10^{-30}$ and $\hat{\beta}_{2t} = 1 - t^{-0.8}$
+
+Next, we deduce low-ranking approximation for second moment as:
+
+$$\hat{V}_t = \frac{R_t C_t}{1^T_n R_n}$$
+
+Adafactor also proposed __Gradient Clipping__
+
+One problem with ADAM optimizer is that it fails to convergence in fast-decay of squared gradients, and becomes unstable with slow decay. We measure this by calculating root mean square (RMS) over all parameters $x$ in weight matrix / vector for a given time-step $t$ of unscaled parameter update i.e.,
+
+$$U_{t} = -\frac{G_{t}}{\sqrt{\hat{V}_{t}}}$$
+
+For clarity, it is called RMS and can also be expressed as:
+
+$$ \text{RMS}(U_t) = \text{RMS}_{x∈X} (u_{xt}) = \sqrt{\text{Mean}_{x∈X}\left(\frac{(G_t)^2}{\hat{V}_{t}}\right)}$$
+
+- If $\text{RMS}(U_t) \gt 1$. The updates are too large, and can lead to instability
+- If $\text{RMS}(U_t) \lt 1$. The updates are too small, and can lead to non-convergence
+
+__Gradient Clipping__ with threshold $d$ is introduced to resolve this problem scaling down on update of weight vector/matrix. Hence, we can write clipped unscaled update $\hat{U}_t$ as :
+
+$$ \hat{U}_t = \frac{U_t}{\text{max}(1, RMS(U_t)/d)}$$
+
+Adafactor uses __relative step size__ over absolute step size. We get it by multiplying with the scale of parameters i.e, RMS of its component from previous time step. It is also lower-bounded by small $\epsilon_2$ to escape 0. We can express this as:
+
+$$\alpha_t = \text{max}(\epsilon_2, \text{RMS}(X_{t-1}))⋅ \rho_t$$
+
+Here, proposed hyper-parameter for $d = 1$ in eq(49) and for eq(50)$\rho_t = \text{min}\left(10^{-2},\frac{1}{\sqrt{t}}\right)$, $\epsilon_2 = 10^{-3}$. With all the values obtained above, we can finally express our update rule for __AdaFactor__ as:
+
+$$X_t = X_{t-1} - \alpha_t \hat{U}_t$$
+
 ### AMSGrad
 
 ### Nadam

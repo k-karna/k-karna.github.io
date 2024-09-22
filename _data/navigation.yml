@@ -69,7 +69,7 @@ docs-en:
   
   - title:      Self Supervised Learning
     children:
-      - title:  SSL01 - Self-Supervised Learning - CPC, Deep InfoMax, SimCLR
+      - title:  SSL01 - Self-Supervised Learning - CPC, CMC, SimCLR
         url:    /2023/05/13/sl.html
       - title:  SSL02 - Self-Supervised Learning - MoCo, BYOL, SwAV, SimSiam
         url:    /2023/12/28/sslmoco.html

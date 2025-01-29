@@ -30,10 +30,10 @@ key: page-about
 
 I am a graduate from **Northumbria University**, UK with **MSc Advanced Computer Science**.
 
-My area of interest lies in the field of Artificial Intelligence in general, and Deep Learning and Reinforcement Learning in particular. However, many of my chosen projects and the dissertation at University were focussed on applied machine learning, and NLP.
+Complex derivations and intuitive ideas in research methods were certainly a great inspiration to delve deeper into each concept of AI, to the level of atom. I, therefore, have improved heavily on my mathematical ability(statistics too) and it has helped me further study ``Computer Vision`` & ``Algorithms and Systems for Autonomous Vehicles`` from RGU and Umea University, alongside autodidactic Reinforcement Learning, Self-Supervised Learning, Uncertainty Quantification, etc.
 
-Currently, I'm living in *doldrum* and looking for a Research / PhD position.
+However, no research / PhD position secured yet to actually start working.
 
 Among other worldly things :
 
-I'm a huge fan of France24, DW News New channel, and DW Documentary (religiously watch F24 Debate with the host François Picard). Loves reading books - currently reading *In the Name of Rome*
+I'm a huge fan of France24, DW News New channel, and DW Documentary (religiously watch F24 Debate with the host François Picard). Loves reading books - although it appears now unprincipled whenever I pick a literature book instead of a literature to review.

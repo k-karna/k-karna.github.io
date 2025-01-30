@@ -24,11 +24,11 @@ titles:
 key: page-about
 ---
 
-#### Hello there! I'm **Konark Karna**.
+#### Hello there! 
 
-I am a graduate from **Northumbria University**, UK with **MSc Advanced Computer Science**.
+I'm **Konark Karna**. I graduated from **Northumbria University**, UK with **MSc Advanced Computer Science**.
 
-Complex derivations and intuitive ideas in research methods were certainly a great inspiration to delve deeper into each concept of AI, to the level of atom. I, therefore, have improved heavily on my mathematical ability(statistics too) and it has helped me further study ``Computer Vision`` & ``Algorithms and Systems for Autonomous Vehicles`` from RGU and Umea University, alongside autodidactic Reinforcement Learning, Self-Supervised Learning, Uncertainty Quantification, etc.
+Intuitive derivations and ingenious ideas in research methods were certainly a great inspiration to delve deeper into each concept of AI, to the level of atom. I, therefore, have improved heavily on my mathematical ability(statistics too) and it has helped me further study ``Computer Vision`` & ``Algorithms and Systems for Autonomous Vehicles`` from RGU and Umea University, alongside autodidactic Reinforcement Learning, Self-Supervised Learning, Uncertainty Quantification, etc.
 
 However, no research / PhD position secured yet to actually start working.
 

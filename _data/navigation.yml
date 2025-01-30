@@ -23,24 +23,7 @@ header:
     url: /resume.html
   - title: BOOKSHELF
     url: /books.html
- 
-  # - titles:
-  #     # @start locale config
-  #     en      : &EN       Archive
-  #     en-GB   : *EN
-  #     tr      : &TR       Arşivdekiler
-  #     # @end locale config
-  #   url: /archive.html
-    
 docs-en:
-  # - title:      LLMs
-  #   children:
-  #     - title:  LLM01 - ELECTRA
-  #       url:    /2023/10/22/electra.html
-  #     - title:  LLM02 - ROBERTa
-  #       url:    /2023/10/22/roberta.html
-
-   
   - title:       PhD Research Proposal
     children:
       - title:  DR01 - To Advance HMI

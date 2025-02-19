@@ -45,6 +45,7 @@ $\rightarrow$ Fun Fact : Once scored __All India Rank 721__ in National Science 
 
 | <small>Specialization</small> | <small>Offering University</small> | <small>Duration</small> | <small>Certificate</small> |
 | --------------------- | ------------ | ----------- | ------------ |
+|<small>__Applied Kalman Filtering Specialization__</small>| <small>University of Colorado System </small>| <small>82 Hours</small> | <small>[Link](https://coursera.org/verify/specialization/C3FBGSOAYFB7)</small>|
 | <small>__Explainable AI (XAI) Specialization__</small> | <small>Duke University</small> | <small>33 Hours</small> | <small>[Link](https://www.coursera.org/account/accomplishments/specialization/RGLN1CKL6YG1)</small> |
 | <small>__Mathworks Computer Vision Engineer Professional Certificate__</small> | <small>Mathworks</small> | <small>98 Hours</small> |<small> [Link](https://coursera.org/verify/professional-cert/B5R7KCVGZQ0P)</small> |
 | <small>__Tensorflow 2 for Deep Learning Specialization__</small> | <small>Imperial College London</small> | <small>105 Hours</small> | <small>[Link](https://coursera.org/verify/specialization/BQFLTG3J2DU8)</small>|

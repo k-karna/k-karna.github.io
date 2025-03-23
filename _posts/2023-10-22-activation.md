@@ -100,7 +100,10 @@ x,  & \text{if $x \ge 0$} \\
 \alpha ⋅ x, & \text{otherwise}
 \end{cases}$$
 
-It is not computationally expensive to ReLU or Leaky-ReLU and slightly improves on __vanishing gradient__
+It is not computationally expensive to ReLU or Leaky-ReLU and slightly improves on __vanishing gradient__. With, PyTorch default of ``alpha = 0.25`` for $\text{PReLU}$, we have below given illustration.
+
+![ReLU, Leaky-Relu, PReLU](/assets/img/relu_functions.png)
+
 
 ### Exponential Linear Units (ELU), PELU, SELU
 
@@ -139,11 +142,6 @@ x,  & \text{if $x \ge 0$} \\
 $$
 
 Here,  $λ ≈ 1.05070098$, and $α ≈ 1.67326324$. SELU is effective when it comes to covariate shift, and vanishing / exploding gradient problem for having __self-normalizing__ property. By self-normalizing, we mean if the SELU inputs follows a Gaussian distribution with mean and variance around $0$ and $1$, respectively, the mean and variance of SELU are also around $0$ and $1$.
-
-```
-def selu(x, alpha = 1.67, lmbda = 1.05):
-    return lmbda * jnp.where(x>0, x, alpha * jnp.exp(x) - alpha)
-```
 
 ### SiLU
 

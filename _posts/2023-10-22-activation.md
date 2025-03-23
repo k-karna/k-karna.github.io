@@ -19,7 +19,33 @@ Major problem with sigmoid is that, it binds all inputs between $0$ and $1$, whe
 
 As a solution with Sigmoid, we have a __Hard-Sigmoid__ which introduce linear behavior around $0$ to allow gradient flow easily. It can be defined as:
 
-$$\text{Hard-Sigmoid} = \text{max}(\text{min}(\sigma, 1),0)$$
+$$
+\text{Hard-Sigmoid}(x) =
+\begin{cases}
+0,  & \text{if $x \lt -2$} \\
+\frac{1}{4}x + \frac{1}{2}, &\text{if -2 $\le$ x $\le$ 2} \\
+1, & \text{if x $\gt$ 2}
+\end{cases}$$
+
+![Sigmoid-HardSigmoid](/assets/img/sigmoid.png)
+
+### TanH, Hard-TanH
+
+Hyperbolic Tangent (TanH) is similar to Sigmoid, continuous, bounded, differentiable and defined as:
+
+$$ \text{tanh} = \frac{e^{x} - e^{-x}}{e^{x} + e^{-x}}$$
+
+It has improved range of output i.e., between $-1$ to $1$. However, problem of large change of inputs leading to smaller change in output is not resolved, even with __Hard-Tanh__ which can be expressed as:
+
+$$
+\text{Hard-TanH}(x) =
+\begin{cases}
+-1,  & \text{if $x \lt -1$} \\
+x, &\text{if -1 $\le$ x $\le$ 1} \\
+1, & \text{if x $\gt$ 1}
+\end{cases}$$
+
+![Tan-H](/assets/img/tanh.png)
 
 ### SoftSign
 
@@ -29,15 +55,16 @@ $$ \text{SoftSign}(x) = \frac{x}{\lvert x \rvert + 1} $$
 
 If input is positive, SoftSign bind output between $0$ and $1$. However, it binds between $-1$ and $0$ for negative inputs.
 
-### TanH, Hard-TanH
+### Softplus
 
-Hyperbolic Tangent (TanH) is similar to Sigmoid, continuous, bounded, differentiable and defined as:
+Another activation function similar to ReLU is __softplus__ It is smooth approximation of ReLU function and defined as:
 
-$$ \text{tanh} = \frac{1 - e^{-x}}{1 + e^{x}}$$
+$$\text{softplus}(x) = \log(1 + \text{exp}(x))$$
 
-It has improved range of output i.e., between $-1$ to $1$. However, problem of large change of inputs leading to smaller change in output is not resolved, even with __Hard-Tanh__ which can be expressed as:
+This was proposed to outperform ReLU, however results are more or less similar, with softplus being computationally costly.
 
-$$\text{Hard-tanH} = \text{max}(\text{min}(\text{tanh}, 1),-1)$$
+![Soft-Plus](/assets/img/softy.png)
+
 
 ### ReLU
 
@@ -74,14 +101,6 @@ x,  & \text{if $x \ge 0$} \\
 \end{cases}$$
 
 It is not computationally expensive to ReLU or Leaky-ReLU and slightly improves on __vanishing gradient__
-
-### Softplus
-
-Another activation function similar to ReLU is __softplus__ It is smooth approximation of ReLU function and defined as:
-
-$$\text{softplus}(x) = \log(1 + \text{exp}(x))$$
-
-This was proposed to outperform ReLU, however results are more or less similar, with softplus being computationally costly.
 
 ### Exponential Linear Units (ELU), PELU, SELU
 

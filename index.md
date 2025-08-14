@@ -25,13 +25,11 @@ titles:
   # @end locale config
 key: page-about
 ---
-
 ##### Hello there! 
 
 I'm Konark Karna. I graduated from __Northumbria University__, UK with __MSc Advanced Computer Science__.
 
 Intuitive derivations and ingenious ideas in research methods have greatly inspired me to delve deeper into mathematics to understand each concept of AI at its most fundamental level. This has further emboldened me to study ``Computer Vision``, ``Statistics`` & ``Algorithms and Systems for Autonomous Vehicles`` from __RGU__, __Strathclyde__, and __Umeå University__, alongside autodidactic Reinforcement Learning, Self-Supervised Learning, Uncertainty Quantification, etc. However, no research / PhD position is secured yet to actually start working.
 
-_Among other worldly things :_
-I'm a huge fan of France24, DW news channel, & DW Documentary. Loves reading books too - although it increasingly 
-appears unprincipled now to read a literature book over literature review.
+_Among other worldly things :_<br>
+I'm a huge fan of France24, DW news channel, & DW Documentary. Loves reading books too - although it increasingly appears unprincipled now to read a literature book over literature review.

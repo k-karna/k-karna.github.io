@@ -17,7 +17,7 @@ header:
   #     tr      : &TR       Hakkında
   #     # @end locale config
   #   url: /about.html
-  - title: AI NOTEBOOK
+  - title: ML NOTEBOOK
     url: /notes.html
   - title: RESUME
     url: /resume.html
@@ -26,6 +26,8 @@ header:
 docs-en:
   - title:       PhD Research Proposal
     children:
+      - title:   DR00 - Collaborative multimodal perception for automated vehicles
+        url:    /Konark_Research_Proposal.pdf
       - title:  DR01 - To Advance HMI
         url:    /2023/05/30/rp1.html
       - title:  DR02 - To Improve Reasoning of LLMs

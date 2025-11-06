@@ -33,6 +33,7 @@ key: page-about
 
 ### Literature (& non-fictions)
 
+- __Thinking, Fast and Slow__ -- Daniel Kahneman
 - __Ashoka - Search of India's Lost Emperor__-- Charles Allen
 - __When We Were Orphans__ -- Kazuo Ishiguro
 - __GENGHIS KHAN and the making of Modern World__ -- Jack Weatherford

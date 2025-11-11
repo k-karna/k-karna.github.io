@@ -1,13 +1,34 @@
 ---
 layout: article
-title: N-Step Bootstrapping
+title: Q-Learning, Expected SARSA, and n-step Bootstrapping
 tags: Richard_Sutton's_Reinforcement_Learning Reinforcement_Learning
-date: 2022-05-03
+
+date: 2022-04-27
 sidebar:
   nav: "docs-en"
 mathjax: true
 mathjax_autoNumber: true
 ---
+
+## Q-Learning : Off-Policy TD Control
+
+Q-Learning is defined by:
+
+$$Q(S_{t},A_{t}) ← Q(S_{t},A_{t}) + α \left[ R_{t+1} + γ  \text{max}_{a} (S_{t+1},a) - Q(S_{t},A_{t})\right]$$
+
+Here, the learned action-value function, $$Q$$, directly approximates the optimal action-value $$q_{⋆}$$, independent of the policy being followed. The policy still has an effect as it determines which state-action pairs are visited and updated. However, for correct convergence it is required that all pairs continue to be updated.
+
+Therefore, as each state-action pairs needs to be visited and updated, independent of the choice of policy being followed, this algorithm enable early convergence.
+
+## Expected SARSA
+
+It follows the schema of _Q-Learning_, but with the _update rule_. Instead of using maximum over state-action pair, it uses expected value, taking into account how likely each action is under the current policy.
+
+$$Q(S_{t},A_{t}) ← Q(S_{t},A_{t}) + α \left[R_{t+1} + γ \mathbb{E}_{\pi} \left[Q(S_{t+1},A_{t+1}) \mid S_{t+1}\right] -Q(S_{t},A_{t})\right]$$
+
+$$ ← Q(S_{t},A_{t}) + α \left[R_{t+1} + γ \sum\limits_{a} π (a \mid S_{t+1}) Q(S_{t+1},a) - Q(S_{t},A_{t})\right]$$
+
+Expected SARSA shows significant improvement over SARSA over a wide range of values over for the step-size parameter $$\alpha$$. Expected SARSA has another advantage of having lower variance than seen in SARSA due to random selection of $$A_{t+1}$$
 
 
 When using one-step $$TD$$ or $$TD(0)$$, the time step determines both how frequently the action can be changed and the time interval over which bootstrapping is performed.

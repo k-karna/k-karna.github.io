@@ -17,7 +17,7 @@ header:
   #     tr      : &TR       Hakkında
   #     # @end locale config
   #   url: /about.html
-  - title: ML NOTEBOOK
+  - title: AI NOTEBOOK
     url: /notes.html
   - title: RESUME
     url: /resume.html
@@ -59,11 +59,11 @@ docs-en:
         url:    /2023/05/13/sl.html
       - title:  SSL02 - Self-Supervised Learning - MoCo, BYOL, SwAV, SimSiam
         url:    /2023/12/28/sslmoco.html
-  
-  - title:      Federated Learning 
+
+  - title:      Imitation Learning
     children:
-      - title:  FL01 - Federated Learning (FedAvg)
-        url:    /2023/05/24/fdl.html
+      - title:  IL01 - Imitation Learning - BC, DAgger, GAIL, AIRL, SQIL
+        url:    /2025/11/11/imitation.html
 
   - title:      Computer Vision
     children:
@@ -84,23 +84,19 @@ docs-en:
 
   - title:      Reinforcement Learning
     children:
-      - title:  RL00 - Markov Decision Process (MDP)
+      - title:  RL00 - Markov Decision Process (MDP) and Bellman Optimality Equation
         url:    /2022/04/30/mdp.html
-      - title:  RL01 - Policies and Value Function
-        url:    /2022/04/30/polval.html
-      - title:  RL02 - Monte Carlo Methods and Control
+      - title:  RL01 - Monte Carlo Methods and Control
         url:    /2022/05/03/mc.html
-      - title:  RL03 - Off-Policy via Importance Sampling
+      - title:  RL02 - Off-Policy via Importance Sampling
         url:    /2022/04/30/off.html
-      - title:  RL04 - TD Learning
+      - title:  RL03 - TD Learning and SARSA
         url:    /2022/04/27/td.html
-      - title:  RL05 - SARSA and Q-Learning
-        url:    /2022/04/27/sarsaq.html
-      - title:  RL06 - n-step Bootstrapping
-        url:    /2022/05/03/nstep.html
-      - title:  RL07 - Deep Q-Learning and Double Q-Learning
+      - title:  RL04 - Q-Learning, Expected SARSA, and n-step Bootstrapping
+        url:    /2022/04/27/qlearning.html
+      - title:  RL05 - Deep Q-Learning and Double Q-Learning
         url:    /2022/12/12/deepq.html
-      - title:  RL08 - Policy Gradient Methods & REINFORCE
+      - title:  RL06 - Policy Gradient Methods & REINFORCE
         url:    /2022/12/14/pgrad.html
 
   - title:      Statistics Essentials
@@ -111,3 +107,8 @@ docs-en:
         url:    /2023/04/05/stat1.html
       - title:  ML03 - Statistical Tests
         url:    /2023/04/05/stat2.html
+  
+  - title:      Federated Learning 
+    children:
+      - title:  FL01 - Federated Learning (FedAvg)
+        url:    /2023/05/24/fdl.html

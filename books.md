@@ -33,6 +33,7 @@ key: page-about
 
 ### Literature (& non-fictions)
 
+- __The Selfish Gene__ -- Richard Dawkins
 - __Thinking, Fast and Slow__ -- Daniel Kahneman
 - __Ashoka - Search of India's Lost Emperor__-- Charles Allen
 - __When We Were Orphans__ -- Kazuo Ishiguro

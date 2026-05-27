@@ -33,6 +33,7 @@ key: page-about
 
 ### Literature (& non-fictions)
 
+- __Moral Ambition__ -- Rutger Bregman
 - __The Selfish Gene__ -- Richard Dawkins
 - __Thinking, Fast and Slow__ -- Daniel Kahneman
 - __Ashoka - Search of India's Lost Emperor__-- Charles Allen

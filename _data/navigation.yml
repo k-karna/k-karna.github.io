@@ -54,6 +54,8 @@ docs-en:
         url:    /2022/07/14/autoen.html
       - title:  DL08 - ViT & its variants 
         url:    /2026/06/04/vit.html
+      - title:  DL09 - Data Augmentation Methods 
+        url:    /2026/06/10/aug.html
   
   - title:      Self Supervised Learning
     children:

@@ -8,9 +8,11 @@ mathjax_autoNumber: true
 ---
 
 ## Activation Functions
+
 In its simplest form, the neuron output of each layer is computed as: $a_{n+1} = w^T z_n + b_n$ where $w_n$ and $b_n$ are weight and bias parameters at layer $n$, respectively, and $z_n$ is neuron output of previous layer $n_1$ computed by a differentiable non-linear function $f(\cdot):z_n = f(a_n)$. This fixed non-linear function is known as __activation function__ (Apicella _et al.,_ 2021).
 
 ### Sigmoid, Hard-Sigmoid
+
 The most common activation function is __Sigmoid__, also known as logistic. It is a bounded differentiable real-function defined as:
 
 $$\text{Sigmoid} \quad or \quad σ = \frac{1}{1 + e^{-x}}$$
@@ -27,6 +29,14 @@ $$
 1, & \text{if x $\gt$ 2}
 \end{cases}$$
 
+```
+def sigmoid(x):
+    return 1 / (1 + np.exp(-1))
+
+def hard_sigmoid(x):
+    #Clips at 0 for being at x=-2, and 1 for being at x=2
+    return np.clip(0.25 * x + 0.5, 0, 1)
+```
 ![Sigmoid-HardSigmoid](/assets/img/sigmoid.png)
 
 ### TanH, Hard-TanH
@@ -45,6 +55,15 @@ x, &\text{if -1 $\le$ x $\le$ 1} \\
 1, & \text{if x $\gt$ 1}
 \end{cases}$$
 
+```
+def tanh(x):
+    return np.tanh(x)
+
+def hard_tanh(x):
+    #clips at -1 for being at x=-1, and 1 for being at x=1
+    return np.clip(x, -1, 1)
+```
+
 ![Tan-H](/assets/img/tanh.png)
 
 ### SoftSign
@@ -54,6 +73,11 @@ Softsign activation function is similar to Sigmoid (having "S"-shaped curve). It
 $$ \text{SoftSign}(x) = \frac{x}{\lvert x \rvert + 1} $$
 
 If input is positive, SoftSign bind output between $0$ and $1$. However, it binds between $-1$ and $0$ for negative inputs.
+
+``` 
+def softsign(x):
+    return x / (np.abs(x)+1)
+```
 
 ### Softplus
 
@@ -65,6 +89,11 @@ This was proposed to outperform ReLU, however results are more or less similar, 
 
 ![Soft-Plus](/assets/img/softy.png)
 
+``` 
+def softplus(x):
+    # log(1 + exp(x)) is expressed using log1p for numerical stability
+    return np.log1p(np.exp(x))
+```
 
 ### ReLU
 
@@ -72,7 +101,12 @@ Rectified Linear Unit (ReLU) is continuous, non-bounded and unlike Sigmoid and T
 
 $$f(x) = \text{max}(0,x)$$
 
-It is not exponential, so computationally cheap, and __alleviates the vanishing gradient problem__ for being not bounded in at least one direction. However, as negative inputs to ReLU evaluates to $0$, it start to create a problem to __dead neuron__
+It is not exponential, so computationally cheap, and __alleviates the vanishing gradient problem__ for being not bounded in at least one direction. However, as negative inputs to ReLU evaluates to $0$, it start to create a problem to __dead neuron__.
+
+```
+def relu(x):
+    return np.maximum(0,x)
+```
 
 ### Leaky-ReLU, PReLU
 
@@ -87,6 +121,11 @@ x,  & \text{if $x \ge 0$} \\
 0.01 ⋅ x, & \text{otherwise}
 \end{cases}$$
 
+```
+def leaky_relu(x):
+    return np.where(x >= 0, x, 0.01*x)
+```
+
 However, it does not bring significant improvement, rather possibility of __vanishing gradient problem__ coming back.
 
 __Parametric ReLU (PReLU)__:
@@ -100,14 +139,18 @@ x,  & \text{if $x \ge 0$} \\
 \alpha ⋅ x, & \text{otherwise}
 \end{cases}$$
 
+```
+def prelu(x, alpha = 0.25):
+    return np.where(x >= 0, x, alpha * x)
+```
+
 It is not computationally expensive to ReLU or Leaky-ReLU and slightly improves on __vanishing gradient__. With, PyTorch default of ``alpha = 0.25`` for $\text{PReLU}$, we have below given illustration.
 
 ![ReLU, Leaky-Relu, PReLU](/assets/img/relu_functions.png)
 
-
 ### Exponential Linear Units (ELU), PELU, SELU
 
-It is another method similar to ReLU (or parametric ReLU). It can be defined as: 
+It is another method similar to ReLU (or parametric ReLU). It can be defined as:
 
 $$
 \text{ELU}(x) =
@@ -115,6 +158,11 @@ $$
 x,  & \text{if $x \ge 0$} \\
 \alpha ⋅ (\text{exp}(x) -1), & \text{otherwise}
 \end{cases}$$
+
+```
+def elu(x, alpha=1.0):
+    return np.where(x >= 0, x, alpha * (np.exp(x) -1))
+```
 
 With the additional parameter $\alpha$ controlling the values for negative inputs, ELU allows faster learning as values given by ELU units push the mean of activation closer to $0$.
 
@@ -128,6 +176,11 @@ $$
 \frac{\beta}{\gamma}x,  & \text{if $x \ge 0$} \\
 \beta ⋅ (\text{exp}(\frac{x}{\gamma}) -1), & \text{otherwise}
 \end{cases}$$
+
+``` 
+def pelu(x, beta=1.0, gamma=1.0)
+    return np.where(x >= 0, (beta / gamma)*x, beta *(np.exp(x) / gamma) -1)
+```
 
 __Scaled Exponential Linear Units (SELU)__
 
@@ -143,6 +196,13 @@ $$
 
 Here,  $λ ≈ 1.05070098$, and $α ≈ 1.67326324$. SELU is effective when it comes to covariate shift, and vanishing / exploding gradient problem for having __self-normalizing__ property. By self-normalizing, we mean if the SELU inputs follows a Gaussian distribution with mean and variance around $0$ and $1$, respectively, the mean and variance of SELU are also around $0$ and $1$.
 
+```
+def selu(x):
+    alpha = 1.67326324
+    lambda = 1.05070098
+    return lambda * np.where(x >= 0, x, alpha * (np.exp(x) -1))
+```
+
 ### SiLU
 
 __Sigmoid-weighted Linear Units (SiLU)__
@@ -150,6 +210,11 @@ __Sigmoid-weighted Linear Units (SiLU)__
 SiLU is sigmoid function weighted by its inputs, so can be expressed as:
 
 $$ \text{SiLU}(x) = x ⋅ \text{sigmoid}(x)$$
+
+```
+def silu(x):
+    return x * sigmoid(x)
+```
 
 ### Swish Activation, E-Swish
 
@@ -159,12 +224,21 @@ $$ \text{Swish}(x) = x ⋅ \text{Sigmoid}{β ⋅ x}$$
 
 They key thing with Swish is when trainable parameter $\beta$ approaches $\infty$, it behaves like ReLU, and when $β = 1$, it is similar to SiLU. (Ramchandran, Zoph & Le, 2017)
 
+```
+def swish(x, beta = 1.0):
+    return x * sigmoid(beta * x)
+```
+
 __E-Swish__
 
 E-Swish is similar to SiLU, but with additional parameter that needs to be tuned by user. It can be written as:
 
 $$ \text{E-Swish}_{\gamma}(x) = γ  x ⋅ \text{sigmoid}(x)$$
 
+```
+def eswish(x, gamma =1.0):
+    return gamma * x * sigmoid(x)
+```
 
 ### Mish Activation
 
@@ -173,6 +247,11 @@ Mish is similar to Swish, smooth, continuous, non-monotonic, unbounded above and
 $$ \text{Mish}(x) = x \text{tanh}(\text{softplus}(x))$$
 
 It is effectively solving dead neuron and vanishing gadient problem, and usually outperform Swish, and ReLU.
+
+```
+def mish(x):
+    return x * np.tanh(softplus(x))
+```
 
 ### Gaussian Error Linear Units (GELU)
 
@@ -186,12 +265,10 @@ $$\text{GELU}(x) = x ⋅ \frac{1}{2}\left[1 + \text{erf}(x / \sqrt{2}) \right]$$
 
 GELU can be approximated with $0.5\,x(1 + \text{tanh}[\sqrt{\frac{2}{\pi}}(x + 0.044715x^3)])$ (Hendrycks & Gimpel, 2016)
 
-
-<!-- ### Softmax
-
-Softmax activation function is used in the final layer of network for multi-class classification tasks. It maps output as a probability distribution in the range of $[0,1]$ and sum of each outcome is equal to $1$. Given a input vector $\overrightarrow z $ with $K$ classes, softmax can be defined as:
-
-$$\text{softmax}(\overrightarrow z) = \frac{e^{z_{i}}}{\sum_{j =1}^K e^{z_{i}}} $$ -->
+```
+def gelu(x):
+    return 0.5 * x * (1 + np.tanh(np.sqrt(2 / np.pi) * (x + 0.044715 * x ** 3)))
+```
 
 ## Optimization Methods
 
@@ -399,10 +476,6 @@ Here, proposed hyper-parameter for $d = 1$ in eq(49) and for eq(50)$\rho_t = \te
 $$X_t = X_{t-1} - \alpha_t \hat{U}_t$$
 
 ### AMSGrad
-
-### Nadam
-
-### LION
 
 ## Loss Functions
 
